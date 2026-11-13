@@ -1,0 +1,4 @@
+# Website masih dalam tahap pengembangan.
+# Hapus file ini (atau ubah menjadi "Allow: /") saat siap diindeks mesin pencari.
+User-agent: *
+Disallow: /
