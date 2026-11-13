@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/*
+ * Animasi didaftarkan lewat @theme agar class-nya ikut berada di layer
+ * "utilities" Tailwind. Sebelumnya `.animate-fade-up` ditulis sebagai CSS
+ * biasa (unlayered) sehingga shorthand `animation` menimpa utility
+ * `[animation-delay:...]` dan semua elemen beranimasi bersamaan.
+ */
+@theme {
+  --animate-marquee: marquee 20s linear infinite;
+  --animate-fade-up: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animasi Marquee (Teks Berjalan) */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-33.3333%);
+  }
+}
+
+/* Animasi Masuk (Fade Up) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textReveal {
+  from {
+    opacity: 0;
+    transform: translateY(110%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animasi untuk elemen yang muncul saat di-scroll */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mengaktifkan Smooth Scrolling secara global */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Samakan dengan tinggi header sticky agar tidak ada sisa section di atas */
+    scroll-padding-top: 5.5rem;
+    /* Cegah halaman ikut bergeser ke kiri/kanan di perangkat sentuh */
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+  }
+
+  /* Jaring pengaman: tidak ada gambar yang boleh melebar melewati layar */
+  img {
+    max-width: 100%;
+  }
+}
+
+/* Tahan semua animasi selama preloader masih menutup layar */
+.is-loading * {
+  animation-play-state: paused !important;
+}
+
+/* --- Scroll Reveal --- */
+[data-reveal] {
+  opacity: 0;
+}
+
+[data-reveal].is-visible {
+  animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+/* --- Aksesibilitas: hormati preferensi "kurangi gerakan" --- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [class*="animate-"] {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
