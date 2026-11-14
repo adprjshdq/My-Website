@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Expertise from './components/Expertise';
 import Journey from './components/Journey';
 import Contact from './components/Contact';
+import BackToTop from './components/BackToTop';
 import Preloader from './components/Preloader';
 import useScrollReveal from './hooks/useScrollReveal';
 
@@ -42,6 +43,7 @@ function App() {
         <Expertise />
         <Journey />
         <Contact />
+        <BackToTop />
       </div>
 
       {loading && <Preloader onReveal={handleReveal} onComplete={handleComplete} />}
