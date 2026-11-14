@@ -50,7 +50,7 @@ export default function Contact() {
 
                     <div className="space-y-6">
                         <div>
-                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">EMAIL</span>
+                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">DIRECT EMAIL</span>
                             <a
                                 href="mailto:shidqiadipraja@gmail.com"
                                 className="text-xl md:text-2xl font-semibold hover:text-[#bef264] transition underline underline-offset-4"
@@ -60,9 +60,9 @@ export default function Contact() {
                         </div>
 
                         <div>
-                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">LOKASI</span>
+                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">CURRENT BASE</span>
                             <p className="text-lg font-light text-neutral-300">
-                                Tasikmalaya, Jawa Barat, Indonesia
+                                TASIKMALAYA, JAWA BARAT, INDONESIA
                             </p>
                         </div>
 

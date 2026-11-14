@@ -8,13 +8,11 @@ export default function MarqueeSkills() {
         "•",
         "TAILWIND CSS",
         "•",
-        "MYSQL",
+        "NODE.JS",
         "•",
         "LARAVEL",
         "•",
-        "JAVASCRIPT",
-        "•",
-        "FULLSTACK ENTHUSIAST",
+        "MYSQL",
         "•",
     ];
 

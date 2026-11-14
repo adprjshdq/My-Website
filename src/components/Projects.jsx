@@ -25,7 +25,7 @@ export default function Projects() {
             category: "Frontend & UI Design",
             description: "Website portofolio interaktif bergaya editorial minimalis untuk menampilkan profil, keahlian teknis, dan rekam jejak proyek pengembangan web.",
             tech: ["React.js", "Tailwind CSS", "Vite"],
-            githubLink: "#",
+            githubLink: "https://github.com/adprjshdq/My-Website.git",
             liveLink: "#",
         },
         {
@@ -113,7 +113,7 @@ export default function Projects() {
                             {project.tech.map((item, techIndex) => (
                                 <span
                                     key={techIndex}
-                                    className="text-[11px] font-mono px-3 py-1 rounded-full bg-neutral-200/80 text-neutral-800 group-hover:bg-neutral-800 group-hover:text-neutral-200 transition"
+                                    className="text-[11px] font-mono px-3 py-1 rounded-full bg-[#bef264] text-neutral-800 group-hover:bg-neutral-800 group-hover:text-neutral-200 transition"
                                 >
                                     {item}
                                 </span>

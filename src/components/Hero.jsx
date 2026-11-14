@@ -43,19 +43,13 @@ export default function Hero() {
                         href="#projects"
                         className="bg-[#bef264] text-neutral-900 px-6 py-3.5 rounded-full text-xs font-semibold tracking-wider hover:bg-[#accb52] transition shadow-md flex items-center gap-2 hover:scale-105"
                     >
-                        VIEW SELECTED WORK <span>↓</span>
+                        VIEW PROJECTS <span>↓</span>
                     </a>
                     <a
                         href="#contact"
                         className="border border-neutral-400 text-neutral-900 px-6 py-3.5 rounded-full text-xs font-semibold tracking-wider hover:bg-neutral-200/60 transition hover:scale-105"
                     >
                         CONTACT ME
-                    </a>
-                    <a
-                        href="#contact"
-                        className="border border-neutral-400 text-neutral-900 px-6 py-3.5 rounded-full text-xs font-semibold tracking-wider hover:bg-neutral-200/60 transition hover:scale-105"
-                    >
-                        DOWNLOAD CV
                     </a>
                 </div>
             </div>

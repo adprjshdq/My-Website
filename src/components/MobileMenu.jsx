@@ -150,7 +150,7 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                         type="button"
                         onClick={onClose}
                         aria-label="Tutup menu"
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-[#f4f3ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40"
+                        className="bg-[#bef264] inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-[#f4f3ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40"
                     >
                         <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                             <path d="M6 6l12 12M18 6L6 18" />

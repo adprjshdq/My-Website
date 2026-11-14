@@ -50,7 +50,7 @@ export default function Preloader({ onReveal, onComplete }) {
             {/* Baris Atas */}
             <div className="flex justify-between items-center font-mono text-[11px] tracking-widest text-neutral-400 uppercase">
                 <span>ADIPRAJA</span>
-                <span>PORTFOLIO • 2026</span>
+                <span>PORTOFOLIO • 2026</span>
             </div>
 
             {/* Bagian Tengah: Teks & Progress Bar */}
