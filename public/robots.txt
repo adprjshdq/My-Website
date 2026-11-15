@@ -1,4 +1,4 @@
-# Website masih dalam tahap pengembangan.
-# Hapus file ini (atau ubah menjadi "Allow: /") saat siap diindeks mesin pencari.
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://adiprajashdq.vercel.app/sitemap.xml

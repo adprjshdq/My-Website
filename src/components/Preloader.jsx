@@ -27,13 +27,13 @@ export default function Preloader({ onReveal, onComplete }) {
                         if (onRevealRef.current) onRevealRef.current();
                         completeTimer = setTimeout(() => {
                             if (onCompleteRef.current) onCompleteRef.current();
-                        }, 750); // Lama animasi tirai naik
-                    }, 300);
+                        }, 700); // Lama animasi tirai naik
+                    }, 120);
                     return 100;
                 }
-                return prev + 2; // Kecepatan naik angka persentase
+                return prev + 5; // Kecepatan naik angka persentase
             });
-        }, 25);
+        }, 30);
 
         return () => {
             clearInterval(timer);
@@ -44,7 +44,7 @@ export default function Preloader({ onReveal, onComplete }) {
 
     return (
         <div
-            className={`fixed inset-0 z-50 bg-[#141414] text-white flex flex-col justify-between p-8 md:p-14 transition-transform duration-700 ease-in-out ${isHiding ? '-translate-y-full' : 'translate-y-0'
+            className={`fixed inset-0 z-50 bg-ink text-white flex flex-col justify-between p-8 md:p-14 transition-transform duration-700 ease-in-out ${isHiding ? '-translate-y-full' : 'translate-y-0'
                 }`}
         >
             {/* Baris Atas */}
@@ -55,13 +55,13 @@ export default function Preloader({ onReveal, onComplete }) {
 
             {/* Bagian Tengah: Teks & Progress Bar */}
             <div className="max-w-xl w-full">
-                <span className="font-mono text-xs tracking-widest text-[#bef264] block mb-2"> // INITIALIZING </span>
-                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight uppercase mb-6">LOADING<span className="text-[#bef264]">...</span></h2>
+                <span className="font-mono text-xs tracking-widest text-lime block mb-2"> // INITIALIZING </span>
+                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight uppercase mb-6">LOADING<span className="text-lime">...</span></h2>
 
                 {/* Garis Progress Bar */}
                 <div className="w-full h-[2px] bg-neutral-800 overflow-hidden">
                     <div
-                        className="h-full bg-[#bef264] transition-all duration-100 ease-out"
+                        className="h-full bg-lime transition-all duration-100 ease-out"
                         style={{ width: `${progress}%` }}
                     />
                 </div>
@@ -72,7 +72,7 @@ export default function Preloader({ onReveal, onComplete }) {
                 <span className="font-mono text-[11px] tracking-widest text-neutral-500 uppercase">
                     SYSTEM LOGIC & EXPERIENCES
                 </span>
-                <span className="font-mono text-3xl md:text-5xl font-bold text-[#bef264]">
+                <span className="font-mono text-3xl md:text-5xl font-bold text-lime">
                     {progress}%
                 </span>
             </div>

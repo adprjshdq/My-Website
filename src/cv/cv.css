@@ -1,0 +1,42 @@
+/* Aturan khusus halaman /cv/ — terutama untuk hasil cetak/PDF. */
+
+@page {
+  size: A4;
+  margin: 12mm 14mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  /* Toolbar, petunjuk, dan tombol tidak ikut tercetak. */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Lembar mengikuti ukuran kertas: tanpa bayangan dan tanpa padding ganda. */
+  .cv-sheet {
+    width: auto !important;
+    max-width: none !important;
+    /* Tinggi area cetak A4 (297mm) dikurangi margin @page atas+bawah (24mm). */
+    min-height: 270mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Jangan memotong satu entri di tengah halaman. */
+  .avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Aksen lime tetap tercetak (butuh "Background graphics" aktif di dialog). */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

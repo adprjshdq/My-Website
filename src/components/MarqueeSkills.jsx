@@ -22,7 +22,7 @@ export default function MarqueeSkills() {
             <div className="flex w-max animate-marquee space-x-8 pr-8 text-sm md:text-base font-mono tracking-widest uppercase">
                 {/* Kita duplikat array-nya agar efek berjalannya mulus tanpa jeda */}
                 {[...skills, ...skills, ...skills].map((skill, index) => (
-                    <span key={index} className="inline-block hover:text-[#bef264] transition cursor-default">
+                    <span key={index} className="inline-block hover:text-lime transition cursor-default">
                         {skill}
                     </span>
                 ))}

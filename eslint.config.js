@@ -18,4 +18,15 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
+  {
+    // Skrip Node (mis. generator CV PDF) butuh global process/fs, bukan browser.
+    files: ['scripts/**/*.{js,jsx}'],
+    languageOptions: {
+      globals: globals.node,
+    },
+    rules: {
+      // Skrip ini bukan bagian dari modul yang di-refresh saat dev.
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])

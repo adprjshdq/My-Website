@@ -133,7 +133,7 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                 aria-modal="true"
                 aria-label="Menu navigasi"
                 tabIndex={-1}
-                className={`absolute right-0 top-0 flex h-full w-[min(20rem,85vw)] flex-col bg-[#f4f3ef] shadow-2xl outline-none transition-transform duration-300 ease-out motion-reduce:transition-none ${open ? 'translate-x-0' : 'translate-x-full'
+                className={`absolute right-0 top-0 flex h-full w-[min(20rem,85vw)] flex-col bg-cream shadow-2xl outline-none transition-transform duration-300 ease-out motion-reduce:transition-none ${open ? 'translate-x-0' : 'translate-x-full'
                     }`}
             >
                 <div className="flex items-center justify-between border-b border-neutral-300 px-6 py-5">
@@ -150,7 +150,7 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                         type="button"
                         onClick={onClose}
                         aria-label="Tutup menu"
-                        className="bg-[#bef264] inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-[#f4f3ef] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40"
+                        className="bg-lime inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40"
                     >
                         <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                             <path d="M6 6l12 12M18 6L6 18" />
@@ -172,7 +172,7 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                                         href={`#${sectionId}`}
                                         onClick={(event) => handleNavigate(event, sectionId)}
                                         aria-current={isActive ? 'location' : undefined}
-                                        className="group flex items-center gap-4 border-b border-neutral-300/80 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-4 focus-visible:ring-offset-[#f4f3ef]"
+                                        className="group flex items-center gap-4 border-b border-neutral-300/80 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-4 focus-visible:ring-offset-cream"
                                     >
                                         <span className={`font-mono text-[10px] tracking-widest ${isActive ? 'text-neutral-900' : 'text-neutral-400'}`}>
                                             0{index + 1}
@@ -186,7 +186,7 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                                         <span
                                             aria-hidden="true"
                                             className={`ml-auto h-2.5 w-2.5 rounded-full transition-all duration-300 motion-reduce:transition-none ${isActive
-                                                    ? 'scale-100 bg-[#bef264] shadow-[0_0_0_1px_rgba(20,20,20,0.3)]'
+                                                    ? 'scale-100 bg-lime shadow-[0_0_0_1px_rgba(20,20,20,0.3)]'
                                                     : 'scale-0 bg-transparent'
                                                 }`}
                                         />
@@ -202,7 +202,7 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                         href="#contact"
                         onClick={(event) => handleNavigate(event, 'contact')}
                         aria-current={isContact ? 'location' : undefined}
-                        className={`flex items-center justify-between rounded-full bg-[#bef264] px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-black transition-colors hover:bg-[#accb52] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 ${isContact ? 'ring-2 ring-neutral-900/30 ring-offset-2 ring-offset-[#f4f3ef]' : ''
+                        className={`flex items-center justify-between rounded-full bg-lime px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-black transition-colors hover:bg-lime-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 ${isContact ? 'ring-2 ring-neutral-900/30 ring-offset-2 ring-offset-cream' : ''
                             }`}
                     >
                         LET'S TALK

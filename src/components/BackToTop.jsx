@@ -3,15 +3,13 @@ import { useEffect, useRef, useState } from 'react';
 /**
  * Tombol "kembali ke atas".
  *
- * Baru muncul setelah pengunjung melewati sekitar satu layar, supaya tidak
- * mengganggu saat masih membaca bagian atas halaman. Nilai tampil ditulis
- * lewat ref agar listener scroll tidak perlu di-render ulang tiap frame.
+ * Muncul setelah pengunjung melewati sekitar satu layar. Saat section kontak
+ * atau footer mulai terlihat, tombol disembunyikan: halaman sudah berada di
+ * ujung bawah, dan di layar kecil tombol ini menutupi input form.
  */
 export default function BackToTop() {
     const [visible, setVisible] = useState(false);
-    const [onDark, setOnDark] = useState(false);
     const visibleRef = useRef(false);
-    const onDarkRef = useRef(false);
 
     useEffect(() => {
         let frame = 0;
@@ -21,20 +19,13 @@ export default function BackToTop() {
             frame = 0;
             // Ambang batas: minimal 480px, atau 80% tinggi layar di HP.
             const threshold = Math.max(480, window.innerHeight * 0.8);
-            const next = window.scrollY > threshold;
+            // Footer dianggap sudah terlihat bila menutupi 120px terbawah layar.
+            const nearFooter = !!footer && footer.getBoundingClientRect().top <= window.innerHeight - 120;
+            const next = window.scrollY > threshold && !nearFooter;
 
             if (next !== visibleRef.current) {
                 visibleRef.current = next;
                 setVisible(next);
-            }
-
-            // Saat area kontak (latar gelap) mulai menutupi posisi tombol,
-            // warna tombol dibalik agar tetap terlihat.
-            const dark = !!footer && footer.getBoundingClientRect().top <= window.innerHeight - 72;
-
-            if (dark !== onDarkRef.current) {
-                onDarkRef.current = dark;
-                setOnDark(dark);
             }
         };
 
@@ -69,10 +60,8 @@ export default function BackToTop() {
             onClick={handleClick}
             inert={!visible}
             aria-label="Kembali ke atas"
-            className={`group fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full shadow-lg ring-1 transition-all duration-300 motion-reduce:transition-none md:bottom-8 md:right-8 md:h-12 md:w-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#bef264] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f4f3ef] ${onDark
-                    ? 'bg-[#bef264] text-neutral-900 ring-neutral-900/10 hover:bg-[#f4f3ef]'
-                    : 'bg-neutral-900 text-[#f4f3ef] ring-[#f4f3ef]/25 hover:bg-[#bef264] hover:text-neutral-900'
-                } ${visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'}`}
+            className={`group fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full bg-neutral-900 text-cream shadow-lg ring-1 ring-cream/25 transition-all duration-300 hover:bg-lime hover:text-neutral-900 motion-reduce:transition-none md:bottom-8 md:right-8 md:h-12 md:w-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
+                }`}
         >
             <svg
                 aria-hidden="true"

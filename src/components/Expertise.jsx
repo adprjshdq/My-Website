@@ -5,13 +5,13 @@ export default function Expertise() {
             number: "01",
             title: "Frontend Development",
             description: "Membangun antarmuka web yang interaktif, responsif, dan mengutamakan pengalaman pengguna (UI/UX) yang bersih.",
-            skills: ["HTML5, CSS3, JavaScript", "React,js", "Tailwind CSS", "Vite"]
+            skills: ["HTML5, CSS3, JavaScript", "React.js", "Tailwind CSS", "Vite"]
         },
         {
             number: "02",
             title: "Backend Development",
             description: "Merancang arsitektur sisi server, pengelolaan basis data, dan pengembangan logika aplikasi yang aman serta terstruktur.",
-            skills: ["Node.js", "Laravel Framework", "Php", "MySQL", "RESTful APIs"]
+            skills: ["Node.js", "Laravel Framework", "PHP", "MySQL", "RESTful APIs"]
         },
         {
             number: "03",
@@ -30,7 +30,7 @@ export default function Expertise() {
             // 03. TECHNICAL SKILLS
                     </span>
                     <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">
-                        My Technical <br></br><span className="text-[#bef264] text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">Expertise.</span>
+                        My Technical <br></br><span className="text-lime text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">Expertise.</span>
                     </h2>
                 </div>
                 <p data-reveal style={{ '--reveal-delay': '100ms' }} className="text-neutral-600 text-sm md:text-base max-w-md font-light">
@@ -45,7 +45,7 @@ export default function Expertise() {
                         key={index}
                         data-reveal
                         style={{ '--reveal-delay': `${index * 90}ms` }}
-                        className="bg-[#eae8e1] p-6 md:p-8 rounded-2xl border border-neutral-300 flex flex-col justify-between hover:border-neutral-900 transition-all duration-300"
+                        className="bg-sand p-6 md:p-8 rounded-2xl border border-neutral-300 flex flex-col justify-between hover:border-neutral-900 transition-all duration-300"
                     >
                         <div>
                             <span className="text-xs font-mono text-neutral-400 block mb-4">
@@ -68,7 +68,7 @@ export default function Expertise() {
                                 {item.skills.map((skill, sIndex) => (
                                     <span
                                         key={sIndex}
-                                        className="text-xs font-mono px-2.5 py-1 bg-[#bef264] text-neutral-800 rounded-md border border-neutral-200"
+                                        className="text-xs font-mono px-2.5 py-1 bg-lime text-neutral-800 rounded-md border border-neutral-200"
                                     >
                                         {skill}
                                     </span>
