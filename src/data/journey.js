@@ -2,7 +2,7 @@ export const milestones = [
     {
         period: '2024 – Sekarang',
         kind: 'Pendidikan',
-        role: 'S1 Teknik Informatika',
+        role: 'Teknik Informatika',
         organization: 'Universitas Perjuangan Tasikmalaya',
         description: 'Menempuh studi dengan fokus rekayasa perangkat lunak, struktur data, dan pengembangan web',
     },
