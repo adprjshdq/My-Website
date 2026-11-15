@@ -1,12 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-/**
- * Menentukan section mana yang sedang aktif di navbar.
- *
- * Section dianggap aktif bila bagian atasnya sudah melewati batas bawah
- * header sticky. Section terakhir yang memenuhi syarat itulah yang dipakai,
- * sehingga tidak ada kedipan saat dua section berpotongan di dekat batas.
- */
+/* Menentukan section mana yang sedang aktif di navbar. */
+
 export default function useActiveSection(ids = []) {
     const [active, setActive] = useState('');
     const activeRef = useRef('');

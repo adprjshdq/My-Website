@@ -29,7 +29,7 @@ export default function About() {
                     </p>
 
                     <p data-reveal style={{ '--reveal-delay': '160ms' }}>
-                        Sebagai mahasiswa Teknik Informatika yang sedang mendalami jalur full-stack, saya aktif mengeksplorasi ekosistem <span className="font-semibold text-neutral-900">React.js, Laravel, dan Tailwind CSS</span> Melalui berbagai proyek akademik maupun mandiri, saya terbiasa merancang aplikasi web dari tahap konsep dasar hingga fungsional.
+                        Sebagai mahasiswa Teknik Informatika yang sedang mendalami jalur full-stack, saya aktif mengeksplorasi ekosistem <span className="font-semibold text-neutral-900">React, Laravel, dan Tailwind CSS</span> Melalui berbagai proyek akademik maupun mandiri, saya terbiasa merancang aplikasi web dari tahap konsep dasar hingga fungsional.
                     </p>
 
                     {/* Kartu Info Singkat / Poin Keunggulan */}

@@ -147,7 +147,7 @@ export default function Contact() {
 
                         {/* Notifikasi Status Pengiriman */}
                         {status && (
-                            <p className="text-xs font-mono text-center text-cyan-400 pt-2">
+                            <p className="text-xs font-mono text-center text-white pt-2">
                                 {status}
                             </p>
                         )}

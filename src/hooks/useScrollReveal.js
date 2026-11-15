@@ -1,14 +1,6 @@
 import { useEffect } from 'react';
 
-/**
- * Menambahkan class `is-visible` ke setiap elemen `[data-reveal]` saat
- * elemen tersebut masuk ke viewport.
- *
- * `enabled` dipakai agar observer baru aktif setelah preloader selesai,
- * sehingga section di layar pertama tidak "habis" beranimasi di balik tirai.
- *
- * Jeda antar elemen diatur lewat CSS variable `--reveal-delay`.
- */
+/* Menambahkan class `is-visible` ke setiap elemen `[data-reveal]` saat elemen tersebut masuk ke viewport. Jeda antar elemen diatur lewat CSS variable `--reveal-delay'.*/
 export default function useScrollReveal(enabled = true) {
     useEffect(() => {
         if (!enabled) return undefined;

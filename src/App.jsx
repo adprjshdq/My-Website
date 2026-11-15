@@ -27,7 +27,7 @@ function App() {
     };
   }, [loading]);
 
-  // Aktifkan animasi saat di-scroll setelah preloader selesai
+  // animasi saat di-scroll
   useScrollReveal(revealed);
 
   return (
@@ -45,7 +45,6 @@ function App() {
         <Contact />
         <BackToTop />
       </div>
-
       {loading && <Preloader onReveal={handleReveal} onComplete={handleComplete} />}
     </>
   );

@@ -44,12 +44,8 @@ export default function Projects() {
             {/* Header Bagian Projects */}
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
                 <div data-reveal>
-                    <span className="text-xs font-mono tracking-widest uppercase text-neutral-500">
-            // 02. SELECTED WORK
-                    </span>
-                    <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">
-                        This Is My <span className='block text-[#bef264] text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2'>Projects.</span>
-                    </h2>
+                    <span className="text-xs font-mono tracking-widest uppercase text-neutral-500"> // 02. SELECTED WORK </span>
+                    <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2"> This Is My <span className='block text-[#bef264] text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2'>Projects.</span></h2>
                 </div>
                 <p data-reveal style={{ '--reveal-delay': '100ms' }} className="text-neutral-600 text-sm md:text-base max-w-md font-light">
                     Kumpulan proyek pilihan yang saya bangun selama mendalami pengembangan web full-stack maupun proyek akademik.
@@ -63,8 +59,7 @@ export default function Projects() {
                         key={project.id}
                         data-reveal
                         style={{ '--reveal-delay': `${index * 90}ms` }}
-                        className="group bg-[#eae8e1] hover:bg-neutral-900 text-neutral-900 hover:text-neutral-100 p-6 md:p-8 rounded-2xl border border-neutral-300 hover:border-neutral-800 transition-all duration-300 flex flex-col justify-between"
-                    >
+                        className="group bg-[#eae8e1] hover:bg-neutral-900 text-neutral-900 hover:text-neutral-100 p-6 md:p-8 rounded-2xl border border-neutral-300 hover:border-neutral-800 transition-all duration-300 flex flex-col justify-between">
                         <div>
                             {/* Nomor Urut & Kategori */}
                             <div className="flex items-center justify-between text-xs font-mono mb-6">

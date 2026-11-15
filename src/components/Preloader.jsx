@@ -55,12 +55,8 @@ export default function Preloader({ onReveal, onComplete }) {
 
             {/* Bagian Tengah: Teks & Progress Bar */}
             <div className="max-w-xl w-full">
-                <span className="font-mono text-xs tracking-widest text-[#bef264] block mb-2">
-          // INITIALIZING
-                </span>
-                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight uppercase mb-6">
-                    LOADING<span className="text-[#bef264]">...</span>
-                </h2>
+                <span className="font-mono text-xs tracking-widest text-[#bef264] block mb-2"> // INITIALIZING </span>
+                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight uppercase mb-6">LOADING<span className="text-[#bef264]">...</span></h2>
 
                 {/* Garis Progress Bar */}
                 <div className="w-full h-[2px] bg-neutral-800 overflow-hidden">
