@@ -19,14 +19,21 @@ export default defineConfig([
     },
   },
   {
-    // Skrip Node (mis. generator CV PDF) butuh global process/fs, bukan browser.
-    files: ['scripts/**/*.{js,jsx}'],
+    // Skrip Node (generator CV PDF, plugin Vite) butuh global process/fs.
+    files: ['scripts/**/*.{js,jsx}', 'vite.config.js'],
     languageOptions: {
       globals: globals.node,
     },
     rules: {
       // Skrip ini bukan bagian dari modul yang di-refresh saat dev.
       'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
+    // Serverless function Vercel berjalan di Node, bukan browser.
+    files: ['api/**/*.js'],
+    languageOptions: {
+      globals: globals.node,
     },
   },
 ])

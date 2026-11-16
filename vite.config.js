@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { assistantApi } from './scripts/vite-plugin-assistant-api.js'
 
 /**
  * Saat `npm run dev`, PDF CV dibuat ulang setiap kali isi CV atau skrip
@@ -45,18 +46,20 @@ function cvPdfWatcher() {
   }
 }
 
-export default defineConfig({
-  plugins: [react(), tailwindcss(), cvPdfWatcher()],
-  resolve: {
-    dedupe: ['react', 'react-dom'],
-  },
-  build: {
-    rollupOptions: {
-      // Dua halaman: portofolio (/) dan CV (/cv/) yang siap dicetak ke PDF.
-      input: {
-        main: fileURLToPath(new URL('./index.html', import.meta.url)),
-        cv: fileURLToPath(new URL('./cv/index.html', import.meta.url)),
+export default defineConfig(() => {
+  return {
+    plugins: [react(), tailwindcss(), cvPdfWatcher(), assistantApi()],
+    resolve: {
+      dedupe: ['react', 'react-dom'],
+    },
+    build: {
+      rollupOptions: {
+        // Dua halaman: portofolio (/) dan CV (/cv/) yang siap dicetak ke PDF.
+        input: {
+          main: fileURLToPath(new URL('./index.html', import.meta.url)),
+          cv: fileURLToPath(new URL('./cv/index.html', import.meta.url)),
+        },
       },
     },
-  },
+  }
 })

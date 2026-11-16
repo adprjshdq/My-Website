@@ -9,7 +9,17 @@ import { useEffect, useRef, useState } from 'react';
  */
 export default function BackToTop() {
     const [visible, setVisible] = useState(false);
+    const [assistantOpen, setAssistantOpen] = useState(false);
     const visibleRef = useRef(false);
+
+    // Saat panel asisten terbuka, tombol ini disembunyikan agar tidak tertimbun
+    // panel dan tidak bisa dijangkau Tab di belakangnya.
+    useEffect(() => {
+        const onAssistantVisibility = (event) => setAssistantOpen(Boolean(event.detail));
+
+        window.addEventListener('assistant:visibility', onAssistantVisibility);
+        return () => window.removeEventListener('assistant:visibility', onAssistantVisibility);
+    }, []);
 
     useEffect(() => {
         let frame = 0;
@@ -54,13 +64,15 @@ export default function BackToTop() {
         document.querySelector('header a[href="#"]')?.focus({ preventScroll: true });
     };
 
+    const shown = visible && !assistantOpen;
+
     return (
         <button
             type="button"
             onClick={handleClick}
-            inert={!visible}
+            inert={!shown}
             aria-label="Kembali ke atas"
-            className={`group fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full bg-neutral-900 text-cream shadow-lg ring-1 ring-cream/25 transition-all duration-300 hover:bg-lime hover:text-neutral-900 motion-reduce:transition-none md:bottom-8 md:right-8 md:h-12 md:w-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
+            className={`group fixed bottom-24 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full bg-neutral-900 text-cream shadow-lg ring-1 ring-cream/25 transition-all duration-300 hover:bg-lime hover:text-neutral-900 motion-reduce:transition-none md:bottom-28 md:right-8 md:h-12 md:w-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${shown ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
                 }`}
         >
             <svg

@@ -13,6 +13,7 @@ Personal portfolio website untuk menampilkan profil, keahlian teknis, proyek, da
 - Responsif mobile-first, termasuk penanganan `prefers-reduced-motion`.
 - Form kontak fungsional lewat Web3Forms (tanpa backend sendiri).
 - Halaman CV `/cv/` berbasis React dengan tata letak A4, tombol cetak/simpan PDF, dan tautan unduh PDF.
+- **Asisten AI** mengambang untuk menjawab pertanyaan seputar profil, proyek, keahlian, dan kontak — dibatasi pada data portofolio.
 - Halaman 404 khusus (`public/404.html`) untuk URL yang tidak dikenal.
 
 ## Teknologi
@@ -23,6 +24,7 @@ Personal portfolio website untuk menampilkan profil, keahlian teknis, proyek, da
 | Build | Vite 8, `@tailwindcss/vite` |
 | Lint | ESLint 10 + plugin React Hooks / Refresh |
 | PDF CV | `@react-pdf/renderer` + `tsx` (dev) — generate `public/cv/*.pdf` dari data CV |
+| Asisten AI | Google Gemini (`gemini-3.5-flash`) lewat Vercel Function `api/chat.js` |
 
 ## Palet warna
 
@@ -42,14 +44,18 @@ memakai nama seperti `bg-cream` atau `text-lime` — bukan kode hex yang terseba
 ## Struktur singkat
 
 ```
+api/
+  chat.js       # endpoint POST /api/chat (Vercel Function)
+  _chat.js      # validasi, rate limit, pemanggilan Gemini, system prompt
 cv/
   index.html    # entry halaman CV (Vite multi-page), disajikan di /cv/
 scripts/
   generate-cv-pdf.jsx  # membuat PDF CV dari src/data/cv.js
+  vite-plugin-assistant-api.js  # menjalankan /api/chat saat npm run dev
 src/
-  components/   # Navbar, Hero, Projects, CaseStudyModal, Expertise, Journey, Contact, dll
+  components/   # Navbar, Hero, Projects, CaseStudyModal, Expertise, Journey, Contact, Assistant, dll
   cv/           # CvPage.jsx + main.jsx + cv.css (aturan cetak A4)
-  data/         # projects.js (kartu + studi kasus), journey.js (timeline), cv.js (isi CV)
+  data/         # projectsCore.js (teks proyek), projects.js (+gambar), journey.js, cv.js, knowledge.js
   hooks/        # useScrollReveal, useActiveSection
   assets/       # gambar yang di-import lewat bundler (projects/ untuk pratinjau proyek)
   index.css     # Tailwind + keyframes + scroll reveal + pengaman overflow
@@ -78,8 +84,8 @@ public/
 
 ### Menambah atau memperbarui proyek
 
-1. Simpan screenshot 1440×900 di `src/assets/projects/` lalu import di `src/data/projects.js`.
-2. Isi `title`, `summary`, `tech`, `role`, `year`, `sections`, dan `features`.
+1. Simpan screenshot 1440×900 di `src/assets/projects/` lalu daftarkan gambarnya di objek `covers` pada `src/data/projects.js`.
+2. Isi teksnya (`title`, `summary`, `tech`, `role`, `year`, `sections`, `features`) di `src/data/projectsCore.js`.
 3. Bila gambar masih mockup (bukan screenshot asli), isi `imageNote: 'Mockup UI'` agar pengunjung tahu.
 4. Set `live: null` bila belum ada demo publik.
 
@@ -115,12 +121,58 @@ Urutan entri ada di `src/data/journey.js`. Riwayat SD/SMP sengaja tidak ditampil
 Tambahkan organisasi, kepanitiaan, atau sertifikasi sebagai objek baru dengan `kind` yang
 sesuai, supaya section ini tidak berhenti pada riwayat pendidikan saja.
 
+## Asisten AI
+
+Widget **Tanya AI** di kanan bawah menjawab pertanyaan pengunjung tentang isi portofolio.
+Jawabannya dibatasi pada knowledge base di `src/data/knowledge.js`, yang dirangkai otomatis
+dari `cv.js`, `journey.js`, dan `projectsCore.js` — jadi isi proyek tidak perlu disalin dua kali.
+
+### Setup
+
+1. Buat API key gratis di [Google AI Studio](https://aistudio.google.com/apikey).
+2. Lokal: salin `.env.example` menjadi `.env.local`, lalu isi `GEMINI_API_KEY`.
+3. Vercel: **Project → Settings → Environment Variables**, tambahkan `GEMINI_API_KEY`
+   untuk Production (dan Preview bila perlu), lalu redeploy.
+4. Tanpa key, widget tetap tampil dan menjawab dengan pesan "asisten belum aktif" —
+   situs tidak error.
+
+Opsional: isi `GEMINI_MODEL` untuk mengganti model (default `gemini-3.5-flash`).
+
+### Cara kerja
+
+- `src/components/Assistant.jsx` mengirim maksimal 10 pesan terakhir ke `POST /api/chat`.
+- `api/chat.js` adalah Vercel Function; API key hanya dibaca di server dan tidak pernah
+  masuk ke bundle browser.
+- `api/_chat.js` memvalidasi input, membatasi **20 permintaan / 10 menit / IP**, dan memanggil
+  Gemini dengan system prompt yang melarang menjawab di luar data portofolio.
+- Saat `npm run dev`, `scripts/vite-plugin-assistant-api.js` menjalankan logika yang sama di
+  Vite, jadi fitur ini bisa diuji tanpa `vercel dev`.
+
+### Batasan yang disengaja
+
+- Pertanyaan di luar portofolio ditolak dengan sopan.
+- Angka, metrik, sertifikasi, organisasi, klien, dan pengalaman kerja tidak dikarang. Bila
+  datanya tidak ada, asisten mengatakan belum dicantumkan dan mengarahkan ke kontak.
+- Jangan menambahkan data pribadi sensitif ke `knowledge.js` atau `cv.js` — model akan
+  membacanya. Pertanyaan pengunjung juga dikirim ke Google Gemini untuk diproses.
+- Rate limit berbasis memori hanya berlaku per instance serverless. Untuk pembatasan yang
+  lebih kuat, gunakan penyimpanan bersama (mis. Upstash Redis) atau batas kuota di Google AI Studio.
+
+### Jika bermasalah
+
+| Gejala | Penyebab umum |
+|---|---|
+| `503` | `GEMINI_API_KEY` belum diatur atau ditolak |
+| `429` | Kuota Gemini habis, atau rate limit lokal tercapai |
+| Model tidak ditemukan | Set `GEMINI_MODEL` ke model yang tersedia di akun Anda |
+
 ## Aksesibilitas
 
 - Fokus keyboard terlihat di semua elemen interaktif: aturan global `:focus-visible` di `index.css` plus ring pada komponen.
 - Modal studi kasus dan drawer mobile memakai focus trap, bisa ditutup dengan Escape, dan mengembalikan fokus ke tombol pemicu.
 - Semua animasi berhenti saat `prefers-reduced-motion: reduce`; preloader juga dilewati.
 - Form kontak: label terhubung ke input, status pengiriman diumumkan lewat `role="status"` + `aria-live`, tombol dinonaktifkan selama mengirim, dan honeypot `botcheck` aktif.
+- Asisten AI: panel memakai `role="dialog"` dengan judul, fokus pindah ke input saat dibuka, Escape menutup dan mengembalikan fokus ke tombol pembuka, balasan diumumkan lewat `aria-live`, dan tombol kembali-ke-atas dinonaktifkan saat panel terbuka.
 
 > Access key Web3Forms ada di `src/components/Contact.jsx` (normal untuk layanan ini).
 > Batasi domain pengirim di dashboard Web3Forms agar key tidak disalahgunakan pihak lain.
@@ -130,7 +182,9 @@ sesuai, supaya section ini tidak berhenti pada riwayat pendidikan saja.
 1. Import repo ini di Vercel.
 2. Framework preset: **Vite** (terdeteksi otomatis).
 3. Build command: `npm run build` · Output directory: `dist`.
-4. `public/404.html` otomatis disajikan Vercel untuk URL yang tidak dikenal — tidak perlu konfigurasi tambahan.
+4. Tambahkan environment variable `GEMINI_API_KEY` agar asisten AI aktif
+   (lihat bagian [Asisten AI](#asisten-ai)).
+5. `public/404.html` otomatis disajikan Vercel untuk URL yang tidak dikenal — tidak perlu konfigurasi tambahan.
 
 Setiap push ke `main` akan menjadi production deployment; branch lain menghasilkan preview URL.
 

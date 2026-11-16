@@ -2,150 +2,20 @@ import sekolahImg from '../assets/projects/sekolah.webp';
 import kafeImg from '../assets/Mockup Cafe.png';
 import portfolioImg from '../assets/projects/portfolio.webp';
 import sppImg from '../assets/Mockup spp.png';
+import { projectFacts } from './projectsCore.js';
 
-export const projects = [
-    {
-        id: '01',
-        slug: 'website-sekolah',
-        title: 'Website Sekolah MAN 2 Kota Tasikmalaya',
-        category: 'Landing Page',
-        year: '2026',
-        role: 'Frontend Developer',
-        summary: 'Website sekolah 10 halaman untuk profil, akademik, fasilitas, alumni, karier, dan penerimaan murid baru.',
-        tech: ['HTML', 'CSS', 'JavaScript'],
-        image: sekolahImg,
-        imageAlt: 'Tangkapan layar beranda website MAN 2 Kota Tasikmalaya dengan hero foto siswa dan navigasi utama.',
-        imageNote: null,
-        github: 'https://github.com/adprjshdq/website_sekolah_man2.git',
-        live: 'https://adiprajawebsekolah.vercel.app/',
-        sections: [
-            {
-                label: 'Latar belakang',
-                body: 'Informasi sekolah tersebar dan sulit diakses calon siswa. Dibutuhkan satu kanal resmi yang memuat profil, akademik, fasilitas, alumni, karier, sampai alur penerimaan murid baru.',
-            },
-            {
-                label: 'Yang saya kerjakan',
-                body: 'Membangun 10 halaman statis dari nol tanpa framework CSS: beranda dengan carousel, profil, akademik, fasilitas, galeri, alumni, karier, kontak, dan penerimaan. Header, footer, dan tipografi dibuat konsisten di seluruh halaman, lalu diuji di ukuran layar kecil.',
-            },
-            {
-                label: 'Tantangan & solusi',
-                body: 'Tanpa sistem komponen, perubahan pada navigasi harus diterapkan manual di setiap file. Saya menyatukan gaya di satu stylesheet dan memakai ulang potongan markup yang sama, sehingga perubahan kecil tidak memecah tampilan antar halaman.',
-            },
-        ],
-        features: [
-            'Beranda dengan carousel',
-            '10 halaman konten',
-            'Navigasi responsif',
-            'Formulir kontak',
-            'Formulir penerimaan murid',
-        ],
-    },
-    {
-        id: '02',
-        slug: 'sistem-kafe',
-        title: 'Sistem Manajemen Kafe',
-        category: 'Web Application',
-        year: '2026',
-        role: 'Fullstack Developer',
-        summary: 'Aplikasi kasir dan dapur: menu, kategori, transaksi, pembayaran, meja, pengguna, dan Kitchen Display System.',
-        tech: ['React', 'Laravel', 'MySQL'],
-        image: kafeImg,
-        imageAlt: 'Tangkapan layar dasbor Aroma Cafe Management System: ringkasan omzet, pesanan, antrean dapur, dan keterisian meja.',
-        imageNote: null,
-        github: 'https://github.com/adprjshdq/System-Cafe-Management.git',
-        live: null,
-        sections: [
-            {
-                label: 'Latar belakang',
-                body: 'Kasir dan dapur bekerja dari catatan yang berbeda, sehingga status pesanan mudah tertukar dan sulit dilacak saat jam sibuk. Dibutuhkan satu sistem yang menyatukan menu, transaksi, dan alur pesanan.',
-            },
-            {
-                label: 'Yang saya kerjakan',
-                body: 'Merancang skema basis data untuk menu, kategori, transaksi, item pesanan, meja, dan pengguna, lalu membangun modul CRUD, proses pemesanan, pembayaran, serta Kitchen Display System dengan React di sisi tampilan dan Laravel untuk API dan basis data.',
-            },
-            {
-                label: 'Tantangan & solusi',
-                body: 'Satu pesanan bisa berisi banyak item, dan statusnya harus terbaca sama oleh kasir maupun dapur. Saya memisahkan tabel pesanan dan item pesanan, lalu menjadikan status pesanan satu sumber kebenaran yang dipakai kedua tampilan.',
-            },
-        ],
-        features: [
-            'Manajemen menu & kategori',
-            'Transaksi & pembayaran',
-            'Kitchen Display System',
-            'Manajemen meja & pengguna',
-            'Pemantauan status pesanan',
-        ],
-    },
-    {
-        id: '03',
-        slug: 'portfolio',
-        title: 'Personal Portfolio Website',
-        category: 'Frontend & UI Design',
-        year: '2026',
-        role: 'Design & Frontend',
-        summary: 'Website portofolio bergaya editorial minimalis yang Anda baca sekarang, lengkap dengan halaman studi kasus.',
-        tech: ['React', 'Tailwind CSS', 'Vite'],
-        image: portfolioImg,
-        imageAlt: 'Tangkapan layar beranda portofolio Adipraja dengan tipografi editorial dan tombol aksi.',
-        imageNote: null,
-        github: 'https://github.com/adprjshdq/My-Website.git',
-        live: 'https://adiprajashdq.vercel.app/',
-        sections: [
-            {
-                label: 'Latar belakang',
-                body: 'Portofolio adalah tempat pertama orang menilai cara saya bekerja. Saya ingin identitas visual sendiri, bukan template, sekaligus wadah yang jujur menampilkan proses di balik setiap proyek.',
-            },
-            {
-                label: 'Yang saya kerjakan',
-                body: 'Merancang dan membangun situs dari nol: layout editorial dengan aksen lime, animasi masuk, scroll reveal per section, navigasi aktif, preloader, modal studi kasus, form kontak lewat Web3Forms, dan build Vite.',
-            },
-            {
-                label: 'Tantangan & solusi',
-                body: 'Animasi tidak boleh mengorbankan aksesibilitas. Semua gerakan dihentikan saat pengunjung memilih kurangi gerak, drawer mobile dan modal memakai focus trap, tombol bisa dijangkau keyboard, dan konten tetap terbaca tanpa animasi.',
-            },
-        ],
-        features: [
-            'Desain editorial responsif',
-            'Scroll reveal & navigasi aktif',
-            'Modal studi kasus',
-            'Form kontak tanpa backend',
-            'Dukungan prefers-reduced-motion',
-        ],
-    },
-    {
-        id: '04',
-        slug: 'sistem-spp',
-        title: 'Sistem Pembayaran SPP Sekolah',
-        category: 'Web Application',
-        year: '2026',
-        role: 'Fullstack Developer',
-        summary: 'Pengelolaan tahun ajaran, tarif, tagihan, pembayaran, dan laporan SPP dengan pembayaran online Midtrans.',
-        tech: ['Laravel', 'Tailwind CSS', 'MySQL'],
-        image: sppImg,
-        imageAlt: 'Tangkapan layar dasbor EduPay SPP: ringkasan keuangan, jumlah siswa aktif, dan persentase kelunasan per kelas.',
-        imageNote: null,
-        github: 'https://github.com/adprjshdq/sistem-pembayaran-spp-sekolah.git',
-        live: null,
-        sections: [
-            {
-                label: 'Latar belakang',
-                body: 'Pembayaran SPP yang dicatat manual menyulitkan sekolah melacak tunggakan per siswa dan menyusun laporan per tahun ajaran. Orang tua juga harus datang ke sekolah untuk membayar.',
-            },
-            {
-                label: 'Yang saya kerjakan',
-                body: 'Membangun aplikasi Laravel untuk mengelola tahun ajaran, kelas, tarif, siswa, tagihan, pembayaran, dan laporan. Siswa dapat melihat tunggakan, membayar lewat Midtrans, lalu mengunduh atau mencetak kwitansi.',
-            },
-            {
-                label: 'Tantangan & solusi',
-                body: 'Nominal tagihan bergantung pada tarif per tahun ajaran dan kelas, sedangkan status pembayaran berasal dari penyedia pembayaran. Saya memisahkan data tagihan dan pembayaran, lalu memperbarui status tagihan hanya setelah pembayaran terkonfirmasi.',
-            },
-        ],
-        features: [
-            'Tahun ajaran, kelas & tarif',
-            'Tagihan otomatis per siswa',
-            'Pembayaran online Midtrans',
-            'Kwitansi unduh & cetak',
-            'Laporan pembayaran',
-        ],
-    },
-];
+/**
+ * Gambar per proyek. Teksnya ada di `projectsCore.js` supaya bisa dipakai
+ * serverless function tanpa mengimpor aset gambar.
+ */
+const covers = {
+    'website-sekolah': sekolahImg,
+    'sistem-kafe': kafeImg,
+    portfolio: portfolioImg,
+    'sistem-spp': sppImg,
+};
+
+export const projects = projectFacts.map((project) => ({
+    ...project,
+    image: covers[project.slug],
+}));

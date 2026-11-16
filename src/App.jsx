@@ -8,6 +8,7 @@ import Expertise from './components/Expertise';
 import Journey from './components/Journey';
 import Contact from './components/Contact';
 import BackToTop from './components/BackToTop';
+import Assistant from './components/Assistant';
 import Preloader from './components/Preloader';
 import useScrollReveal from './hooks/useScrollReveal';
 
@@ -70,6 +71,7 @@ function App() {
                 <Journey />
                 <Contact />
                 <BackToTop />
+                <Assistant />
             </div>
             {loading && <Preloader onReveal={handleReveal} onComplete={handleComplete} />}
         </>
