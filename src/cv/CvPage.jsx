@@ -197,11 +197,6 @@ export default function CvPage() {
                     <span>{cv.name}</span>
                 </footer>
             </article>
-
-            <p className="no-print mx-auto mt-4 w-[210mm] max-w-full px-5 pb-8 font-mono text-[10px] leading-relaxed text-neutral-500 sm:px-0">
-                Tips: klik <strong className="text-neutral-700">Cetak / Simpan PDF</strong>, pilih tujuan
-                &ldquo;Save as PDF&rdquo;, ukuran A4, dan margin default. Hasilnya satu halaman tanpa toolbar ini.
-            </p>
         </div>
     );
 }

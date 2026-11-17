@@ -1,12 +1,3 @@
-/**
- * Membuat public/cv/Adipraja-Shidqi-CV.pdf langsung dari src/data/cv.js.
- *
- *   npm run cv:pdf
- *
- * Skrip ini juga otomatis dijalankan sebelum `npm run dev` dan `npm run build`
- * (lihat "predev"/"prebuild" di package.json), jadi PDF tidak pernah tertinggal
- * dari isi halaman /cv/.
- */
 import { statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { Document, Link, Page, StyleSheet, Text, View, renderToFile } from '@react-pdf/renderer';

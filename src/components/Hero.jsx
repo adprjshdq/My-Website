@@ -16,7 +16,7 @@ export default function Hero() {
                             <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500/60 motion-safe:animate-ping" />
                             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" />
                         </span>
-                        tetetoet
+                        Active Student
                     </span>
                 </div>
 
