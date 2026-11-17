@@ -142,6 +142,13 @@ async function askGemini(messages, apiKey, modelName) {
         generationConfig.thinkingConfig = { thinkingBudget: 0 };
     }
 
+    // Model 3.x tidak menerima thinkingBudget, tetapi menerima thinkingLevel.
+    // Dengan "low", waktu jawab turun sekitar 30-40% dan risiko melewati batas
+    // waktu serverless (penyebab 504) jauh lebih kecil.
+    if (model.startsWith('gemini-3')) {
+        generationConfig.thinkingConfig = { thinkingLevel: 'low' };
+    }
+
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
