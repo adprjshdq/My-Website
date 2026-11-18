@@ -25,11 +25,11 @@ export default function About() {
                 <div className="md:col-span-2 space-y-6 text-neutral-700 text-base md:text-lg font-light leading-relaxed">
 
                     <p data-reveal style={{ '--reveal-delay': '80ms' }}>
-                        Mahasiswa Teknik Informatika Universitas Perjuangan Tasikmalaya yang antusias dalam pengembangan web. Berfokus pada perancangan antarmuka yang bersih dan interaktif, serta memiliki ketertarikan kuat pada rekayasa perangkat lunak end-to-end. CEK BRO
+                        Mahasiswa Teknik Informatika Universitas Perjuangan Tasikmalaya yang antusias dalam pengembangan web. Berfokus pada perancangan antarmuka yang bersih dan interaktif, serta memiliki ketertarikan kuat pada rekayasa perangkat lunak end-to-end.
                     </p>
 
                     <p data-reveal style={{ '--reveal-delay': '160ms' }}>
-                        Sebagai mahasiswa Teknik Informatika yang sedang mendalami jalur full-stack, saya aktif mengeksplorasi ekosistem <span className="font-semibold text-neutral-900"></span>. Melalui berbagai proyek akademik maupun mandiri, saya terbiasa merancang aplikasi web dari tahap konsep dasar hingga fungsional.
+                        Sebagai mahasiswa Teknik Informatika yang sedang mendalami jalur full-stack, saya aktif mengeksplorasi ekosistem<span className="font-semibold text-neutral-900"></span>. Melalui berbagai proyek akademik maupun mandiri, saya terbiasa merancang aplikasi web dari tahap konsep dasar hingga fungsional.
                     </p>
 
                     {/* Kartu Info Singkat / Poin Keunggulan */}
