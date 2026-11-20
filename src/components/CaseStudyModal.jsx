@@ -185,7 +185,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-neutral-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
                         >
-                            Kode di GitHub <span aria-hidden="true">↗</span>
+                            GitHub <span aria-hidden="true">↗</span>
                         </a>
                         {project.live && (
                             <a
@@ -194,7 +194,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 rounded-full border border-neutral-900/25 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-900 transition-colors hover:bg-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
                             >
-                                Buka demo <span aria-hidden="true">↗</span>
+                                Live <span aria-hidden="true">↗</span>
                             </a>
                         )}
                     </div>

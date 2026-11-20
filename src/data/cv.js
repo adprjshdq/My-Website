@@ -1,15 +1,3 @@
-/**
- * Isi CV. Ini satu-satunya sumber data untuk halaman /cv/ dan PDF di
- * public/cv/Adipraja-Shidqi-CV.pdf.
- *
- * Setelah mengubah file ini, PDF dibuat otomatis:
- *   - `npm run dev`   → dibuat saat start, lalu diperbarui setiap file ini disimpan
- *   - `npm run build` → dijalankan sebelum build (termasuk deploy Vercel)
- *   - `npm run cv:pdf` → bila ingin memperbarui manual tanpa build
- *
- * Jangan menulis angka, sertifikasi, atau organisasi yang belum benar-benar
- * Anda miliki — CV yang jujur lebih mudah dipertanggungjawabkan saat interview.
- */
 export const cv = {
     updated: 'November 2026',
     name: 'Adipraja Shidqi Apriliano',
@@ -39,11 +27,8 @@ export const cv = {
         },
     ],
 
-    // Opsional. Section baru hanya muncul kalau array berisi minimal satu entri.
-    // Contoh: { period: '2025 – sekarang', role: 'Anggota Divisi Web', place: 'Nama Organisasi' }
     organizations: [],
 
-    // Contoh: { year: '2025', name: 'Nama Sertifikat', issuer: 'Penerbit' }
     certifications: [],
 
     skills: [

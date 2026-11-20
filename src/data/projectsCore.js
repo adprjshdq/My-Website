@@ -1,17 +1,9 @@
-/**
- * Data teks proyek, tanpa gambar.
- *
- * Dipisahkan dari `projects.js` supaya serverless function (asisten AI) bisa
- * membaca isi proyek tanpa ikut mengimpor file .webp/.png yang tidak bisa
- * dibaca Node. `projects.js` menggabungkan data ini dengan gambarnya untuk
- * kebutuhan tampilan.
- */
 export const projectFacts = [
     {
         id: '01',
         slug: 'website-sekolah',
         title: 'Website Sekolah MAN 2 Kota Tasikmalaya',
-        category: 'Landing Page',
+        category: 'Multi Page Website',
         year: '2026',
         role: 'Frontend Developer',
         summary: 'Website sekolah 10 halaman untuk profil, akademik, fasilitas, alumni, karier, dan penerimaan murid baru.',

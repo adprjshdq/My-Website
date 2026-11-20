@@ -4,10 +4,6 @@ import portfolioImg from '../assets/projects/portfolio.webp';
 import sppImg from '../assets/Mockup spp.png';
 import { projectFacts } from './projectsCore.js';
 
-/**
- * Gambar per proyek. Teksnya ada di `projectsCore.js` supaya bisa dipakai
- * serverless function tanpa mengimpor aset gambar.
- */
 const covers = {
     'website-sekolah': sekolahImg,
     'sistem-kafe': kafeImg,

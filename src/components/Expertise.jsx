@@ -11,7 +11,7 @@ export default function Expertise() {
             number: "02",
             title: "Backend Development",
             description: "Merancang arsitektur sisi server, pengelolaan basis data, dan pengembangan logika aplikasi yang aman serta terstruktur.",
-            skills: ["Node.js", "Laravel Framework", "PHP", "MySQL", "RESTful APIs"]
+            skills: ["Node.js", "Express.js","Laravel", "PHP", "MySQL", "REST API"]
         },
         {
             number: "03",

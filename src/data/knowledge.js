@@ -2,13 +2,6 @@ import { cv } from './cv.js';
 import { milestones } from './journey.js';
 import { projectFacts } from './projectsCore.js';
 
-/**
- * Knowledge base untuk asisten AI.
- *
- * Semua fakta diambil dari data yang juga dipakai halaman portofolio, CV, dan
- * PDF. Jangan menambahkan angka, sertifikasi, organisasi, atau pengalaman yang
- * tidak benar-benar dimiliki — asisten akan menganggap semuanya fakta.
- */
 export function buildKnowledgeBase() {
     const lines = [];
 
