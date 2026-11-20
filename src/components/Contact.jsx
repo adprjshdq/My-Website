@@ -70,7 +70,7 @@ export default function Contact() {
                 <div data-reveal className="flex flex-col justify-between space-y-10">
                     <div>
                         <span className="text-xs font-mono tracking-widest text-neutral-400 uppercase">
-              // 05. GET IN TOUCH
+              // Contact me
                         </span>
                         <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-tight mt-3 mb-6">
                             Let's build something amazing <span className='block text-lime text-4xl md:text-5xl font-extrabold uppercase tracking-tight mt-3 mb-6'>together.</span>

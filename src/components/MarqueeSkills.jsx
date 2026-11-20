@@ -4,7 +4,7 @@ export default function MarqueeSkills() {
     const skills = [
         "HTML, CSS, JAVASCRIPT",
         "•",
-        "REACT.JS",
+        "REACT",
         "•",
         "TAILWIND CSS",
         "•",

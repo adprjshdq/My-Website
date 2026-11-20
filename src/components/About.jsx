@@ -7,7 +7,7 @@ export default function About() {
                 {/* Kolom Judul Kiri */}
                 <div data-reveal>
                     <span className="text-xs font-mono tracking-widest uppercase text-neutral-500">
-                        // 01. ABOUT ME
+                        // ABOUT ME
                     </span>
 
                     <h2 className="text-3xl md:text-4xl font-extrabold uppercase tracking-tight mt-2">

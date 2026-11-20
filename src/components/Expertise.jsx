@@ -27,7 +27,7 @@ export default function Expertise() {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
                 <div data-reveal>
                     <span className="text-xs font-mono tracking-widest uppercase text-neutral-500">
-            // 03. TECHNICAL SKILLS
+            // TECHNICAL SKILLS
                     </span>
                     <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">
                         My Technical <br></br><span className="text-lime text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">Expertise.</span>

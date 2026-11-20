@@ -7,7 +7,7 @@ export default function Journey() {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
                 <div data-reveal>
                     <span className="text-xs font-mono tracking-widest uppercase text-neutral-500">
-                        // 04. TIMELINE & EXPERIENCE
+                        //  TIMELINE & EXPERIENCE
                     </span>
                     <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">
                         The Journey <br /><span className="text-lime text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">so far.</span>

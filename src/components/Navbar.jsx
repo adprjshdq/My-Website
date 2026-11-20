@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import ScrollProgress from './ScrollProgress';
 import MobileMenu from './MobileMenu';
 import useActiveSection from '../hooks/useActiveSection';
+import profilePhoto from '../assets/ft-gtg.png';
 
 const NAV_ITEMS = [
     { id: 'about', label: 'ABOUT' },
@@ -41,13 +42,15 @@ export default function Navbar() {
                 className="w-full px-6 md:px-16 py-6 flex items-center justify-between sticky top-0 bg-cream/80 backdrop-blur-md z-50"
             >
                 {/* 1. Logo & Subtitle Kiri */}
-                <div className="flex flex-col">
-                    <a href="#" className="font-bold tracking-wider text-sm md:text-base uppercase rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-4 focus-visible:ring-offset-cream">
-                        ADIPRAJA<span className="text-neutral-400"> S.A</span>
-                    </a>
-                    <span className="text-[10px] md:text-xs text-neutral-500 font-mono tracking-tight">
-                        WEB DEVELOPMENT
-                    </span>
+                <div className="flex items-center gap-3">
+                    <div className="flex flex-col">
+                        <a href="#" className="font-bold tracking-wider text-sm md:text-base uppercase rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-4 focus-visible:ring-offset-cream">
+                            ADIPRAJA
+                        </a>
+                        <span className="text-[10px] md:text-xs text-neutral-500 font-mono tracking-tight">
+                            WEB DEVELOPMENT
+                        </span>
+                    </div>
                 </div>
 
                 {/* 2. Menu Navigasi Tengah (desktop) */}
@@ -107,7 +110,7 @@ export default function Navbar() {
 
                 {/* 4. Progress bar scroll (menempel di tepi bawah header) */}
                 <ScrollProgress />
-            </header>
+            </header >
 
             <MobileMenu
                 id="mobile-menu"

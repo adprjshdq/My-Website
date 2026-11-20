@@ -18,7 +18,7 @@ export default function Projects() {
             {/* Header Bagian Projects */}
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6">
                 <div data-reveal>
-                    <span className="text-xs font-mono tracking-widest uppercase text-neutral-500"> // 02. SELECTED WORK </span>
+                    <span className="text-xs font-mono tracking-widest uppercase text-neutral-500"> // MY PROJECTS </span>
                     <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2"> These Are My <span className='block text-lime text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2'>Projects.</span></h2>
                 </div>
                 <p data-reveal style={{ '--reveal-delay': '100ms' }} className="text-neutral-600 text-sm md:text-base max-w-md font-light">

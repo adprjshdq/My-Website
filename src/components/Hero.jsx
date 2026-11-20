@@ -1,86 +1,104 @@
-import fotoAdipraja from '../assets/tecnic.webp';
+import fotoAdipraja from '../assets/foto-hero.png';
 
 export default function Hero() {
     return (
-        <section className="px-6 md:px-16 pt-12 pb-16 md:pt-16 md:pb-24 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12">
-            {/* Bagian Teks Kiri */}
-            <div className="space-y-6 max-w-2xl">
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 animate-fade-up opacity-0 [animation-delay:200ms]">
-                    <span className="text-xs font-mono tracking-widest uppercase bg-lime text-neutral-800 px-3.5 py-1.5 rounded-full inline-block">
-                        // Student Informatics
-                    </span>
+        <section className="relative overflow-hidden px-6 pt-2 pb-12 md:px-12 md:pt-6 md:pb-20 max-w-7xl mx-auto">
+            {/* Layer 1: Teks besar PORTFOLIO di latar belakang */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none select-none text-center leading-none"
+            >
+                <span className="text-lime block text-[min(13.5vw,165px)] font-black tracking-tight uppercase text-emerald-600/90">
+                    PORTOFOLIO
+                </span>
+            </div>
+            <div aria-hidden="true"
+                className="pointer-events-none absolute -bottom-10 left-1/2 z-0 h-48 w-4/5 -translate-x-1/2 rounded-full bg-gradient-to-b from-lime via-lime-300/35 to-transparent blur-2xl">
+                </div>
 
-                    {/* Status ketersediaan: memberi sinyal jelas bagi perekrut/klien */}
-                    <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-neutral-600 sm:text-[11px]">
+            {/* Area utama gabungan foto & elemen informasi */}
+            <div className="relative mt-3 lg:-mt-25 grid grid-cols-1 lg:grid-cols-12 items-center gap-8">
+                {/* Kolom Kiri: Sapaan, Nama, Status & Deskripsi */}
+                <div className="z-20 space-y-4 lg:col-span-4 text-left animate-fade-up opacity-0 [animation-delay:200ms]">
+                    <div className="space-y-1">
+                        <p className="font-serif italic text-2xl md:text-3xl text-lime">
+                            Hai, saya
+                        </p>
+                        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900">
+                            Adipraja Shidqi Apriliano
+                        </h1>
+                    </div>
+
+                    <div className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-3.5 py-1.5 text-xs font-medium text-white shadow-sm">
                         <span className="relative flex h-2 w-2" aria-hidden="true">
-                            <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500/60 motion-safe:animate-ping" />
-                            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-600" />
+                            <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/70 motion-safe:animate-ping" />
+                            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                         </span>
-                        Active Student
-                    </span>
+                        Student Teknik Informatika • Universitas perjuangan
+                    </div>
+
+                    <p className="text-sm md:text-base text-neutral-600 leading-relaxed max-w-md">
+                        Berfokus pada perancangan dan pengembangan aplikasi web yang dinamis, modern, serta interaktif dengan kualitas rekayasa end-to-end yang solid.
+                    </p>
+
+                    <div className="flex flex-wrap gap-2.5 pt-2">
+                        <a
+                            href="#projects"
+                            className="bg-lime text-neutral-900 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-lime-deep transition shadow-sm flex items-center gap-1.5"
+                        >
+                            PROJECTS<span aria-hidden="true">↓</span>
+                        </a>
+                        <a
+                            href="#contact"
+                            className="border border-neutral-400 text-neutral-900 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-neutral-900 hover:text-cream transition"
+                        >
+                            CONTACT ME
+                        </a>
+                        <a
+                            href="/cv/Adipraja-Shidqi-CV.pdf"
+                            download="Adipraja-Shidqi-CV.pdf"
+                            aria-label="Unduh CV Adipraja Shidqi dalam format PDF"
+                            className="border border-neutral-900/30 text-neutral-900 px-4 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-neutral-900 hover:text-cream transition"
+                        >
+                            UNDUH CV ↓
+                        </a>
+                    </div>
                 </div>
 
-                <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight uppercase leading-[1.1] animate-fade-up opacity-0 [animation-delay:400ms]">
+                {/* Kolom Tengah: Foto utama menumpuk di depan teks PORTFOLIO */}
+                <div className="z-10 lg:col-span-4 flex flex-col items-center justify-end animate-fade-up opacity-0 [animation-delay:400ms]">
+                    <div className="relative flex w-[300px] items-end justify-center sm:w-[360px] md:w-[400px]">
+                        <div aria-hidden="true" className="pointer-events-none absolute inset-x-2 bottom-2 z-0 h-80 w-80 md:h-130 md:w-121 rounded-full bg-gradient-to-tr from-lime via-lime to-lime-200/30 blur-3xl"></div>
+                        <img
+                            src={fotoAdipraja}
+                            alt="Foto Adipraja Shidqi Apriliano"
+                            className="h-auto w-full drop-shadow-[0_2px_30px_rgba(0,0,0,0.2)] md:translate-x-13"
+                        />
+                    </div>
+                </div>
 
-                    {/* Text Reveal Animation */}
-                    <span className="inline-block overflow-hidden align-bottom">
-                        <span className="inline-block opacity-0 animate-[textReveal_900ms_cubic-bezier(0.16,1,0.3,1)_forwards] [animation-delay:500ms]">
-                            Interactive
-                        </span>
-                    </span>{' '}
+                {/* Kolom Kanan: Floating badge / highlight keahlian */}
+                <div className="z-20 lg:col-span-4 flex flex-col items-start lg:items-end gap-4 animate-fade-up opacity-0 [animation-delay:600ms]">
+                    <div className="rounded-2xl bg-neutral-900 px-4 py-3 text-white shadow-lg max-w-xs w-full lg:w-auto">
+                        <div className="flex items-center gap-2 text-xs font-semibold text-lime">
+                            <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                            Fullstack Web Development
+                        </div>
+                        <p className="mt-1 text-xs text-neutral-300">
+                            React • Tailwind CSS • Laravel • MySQL
+                        </p>
+                    </div>
 
-                    <span className="inline-block overflow-hidden align-bottom">
-                        <span className="inline-block font-serif italic font-normal text-neutral-500 opacity-0 animate-[textReveal_900ms_cubic-bezier(0.16,1,0.3,1)_forwards] [animation-delay:700ms]">
-                            Fullstack
-                        </span>
-                    </span>{' '}
-
-                    <span className="inline-block overflow-hidden align-bottom">
-                        <span className="inline-block opacity-0 animate-[textReveal_900ms_cubic-bezier(0.16,1,0.3,1)_forwards] [animation-delay:900ms]">
-                            Enthusiast.
-                        </span>
-                    </span>
-                </h1>
-
-                <p className="border-t text-neutral-600 text-lg md:text-xl font-light leading-relaxed animate-fade-up opacity-0 [animation-delay:600ms]">
-                    Halo! Saya <span className="font-semibold text-neutral-900">Adipraja</span>. Berfokus pada perancangan dan pengembangan aplikasi web yang dinamis, modern, serta interaktif dengan kualitas rekayasa end-to-end yang solid.
-                </p>
-
-                <div className="flex flex-wrap gap-4 pt-4 animate-fade-up opacity-0 [animation-delay:800ms]">
-                    {/* Tombol Utama dengan Warna Hijau Lime ala Video Referensi */}
-                    <a
-                        href="#projects"
-                        className="bg-lime text-neutral-900 px-6 py-3.5 rounded-full text-xs font-semibold tracking-wider hover:bg-lime-deep transition shadow-md flex items-center gap-2 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/50 focus-visible:ring-offset-4 focus-visible:ring-offset-cream"
-                    >
-                        VIEW PROJECTS <span aria-hidden="true">↓</span>
-                    </a>
-                    <a
-                        href="#contact"
-                        className="border border-neutral-400 text-neutral-900 px-6 py-3.5 rounded-full text-xs font-semibold tracking-wider hover:bg-neutral-900 hover:text-cream transition hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/50 focus-visible:ring-offset-4 focus-visible:ring-offset-cream"
-                    >
-                        CONTACT ME
-                    </a>
-                    <a
-                        href="/cv/Adipraja-Shidqi-CV.pdf"
-                        download="Adipraja-Shidqi-CV.pdf"
-                        aria-label="Unduh CV Adipraja Shidqi dalam format PDF"
-                        className="border border-neutral-900/30 text-neutral-900 px-6 py-3.5 rounded-full text-xs font-semibold tracking-wider hover:bg-neutral-900 hover:text-cream transition hover:scale-105 flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/50 focus-visible:ring-offset-4 focus-visible:ring-offset-cream"
-                    >
-                        DOWNLOAD CV <span aria-hidden="true">↓</span>
-                    </a>
+                    <div className="rounded-2xl border border-neutral-200 bg-white/95 backdrop-blur px-5 py-4 shadow-md max-w-xs w-full lg:w-auto lg:text-center">
+                        <p className="text-sm font-bold text-black">
+                            Web Development &amp; UI
+                        </p>
+                        <p className="text-xs text-neutral-500 mt-0.5">
+                            End-to-End Architecture &amp; Interactive Apps
+                        </p>
+                    </div>
                 </div>
             </div>
-
-            {/* Bagian Visual / Foto Profil Kanan */}
-            <div className="w-full md:w-auto flex justify-center animate-fade-up opacity-0 [animation-delay:500ms]">
-                <div className="w-72 h-96 md:w-80 md:h-[420px] bg-neutral-200 rounded-2xl shadow-2xl overflow-hidden border border-neutral-300 relative flex items-center justify-center group hover:scale-[1.02] transition duration-500">
-                    <img
-                        src={fotoAdipraja}
-                        alt="Foto Adipraja Shidqi Apriliano"
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition duration-700"
-                    />
-                </div>
-            </div>
-        </section>
+        </section >
     );
 }
