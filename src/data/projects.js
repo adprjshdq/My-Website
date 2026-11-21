@@ -1,7 +1,7 @@
 import sekolahImg from '../assets/projects/sekolah.webp';
 import kafeImg from '../assets/dashboard.png';
 import portfolioImg from '../assets/projects/portfolio.webp';
-import sppImg from '../assets/Mockup spp.png';
+import sppImg from '../assets/pembayaranSPP.png';
 import { projectFacts } from './projectsCore.js';
 
 const covers = {
