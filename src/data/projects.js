@@ -1,6 +1,6 @@
 import sekolahImg from '../assets/projects/sekolah.webp';
 import kafeImg from '../assets/dashboard.png';
-import portfolioImg from '../assets/projects/portfolio.webp';
+import portfolioImg from '../assets/porto.png';
 import sppImg from '../assets/pembayaranSPP.png';
 import { projectFacts } from './projectsCore.js';
 
