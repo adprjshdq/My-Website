@@ -30,7 +30,7 @@ export default function Expertise() {
             // TECHNICAL SKILLS
                     </span>
                     <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">
-                        My Technical <br></br><span className="text-lime text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">Expertise.</span>
+                        Technical <br></br><span className="text-lime text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">Expertise.</span>
                     </h2>
                 </div>
                 <p data-reveal style={{ '--reveal-delay': '100ms' }} className="text-neutral-600 text-sm md:text-base max-w-md font-light">

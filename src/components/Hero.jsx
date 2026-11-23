@@ -46,7 +46,7 @@ export default function Hero() {
                             href="#projects"
                             className="bg-lime text-neutral-900 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-lime-deep transition shadow-sm flex items-center gap-1.5"
                         >
-                            PROJECTS<span aria-hidden="true">↓</span>
+                            PROJECT<span aria-hidden="true">↓</span>
                         </a>
                         <a
                             href="#contact"

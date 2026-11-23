@@ -10,7 +10,7 @@ export default function Journey() {
                         //  TIMELINE & EXPERIENCE
                     </span>
                     <h2 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">
-                        The Journey <br /><span className="text-lime text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">so far.</span>
+                        Journey <br /><span className="text-lime text-3xl md:text-5xl font-extrabold uppercase tracking-tight mt-2">so far.</span>
                     </h2>
                 </div>
                 <p data-reveal style={{ '--reveal-delay': '100ms' }} className="text-neutral-600 text-sm md:text-base max-w-md font-light">

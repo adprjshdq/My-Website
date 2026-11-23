@@ -10,6 +10,7 @@ import Contact from './components/Contact';
 import BackToTop from './components/BackToTop';
 import Assistant from './components/Assistant';
 import Preloader from './components/Preloader';
+import MouseFollower from './components/MouseFollower';
 import useScrollReveal from './hooks/useScrollReveal';
 
 const INTRO_KEY = 'portfolio:intro-shown';
@@ -73,6 +74,7 @@ function App() {
                 <BackToTop />
                 <Assistant />
             </div>
+            <MouseFollower enabled={!loading} />
             {loading && <Preloader onReveal={handleReveal} onComplete={handleComplete} />}
         </>
     );

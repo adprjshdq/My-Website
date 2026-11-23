@@ -124,11 +124,28 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                 </div>
 
                 <div className="overflow-y-auto overscroll-contain px-5 pb-8 md:px-8">
-                    <img
-                        src={project.image}
-                        alt={project.imageAlt}
-                        className="mt-5 w-full rounded-xl border border-neutral-300 bg-cream"
-                    />
+                    {project.image ? (
+                        <img
+                            src={project.image}
+                            alt={project.imageAlt}
+                            className="mt-5 w-full rounded-xl border border-neutral-300 bg-cream"
+                        />
+                    ) : (
+                        <div
+                            aria-hidden="true"
+                            className="mt-5 flex aspect-[16/10] w-full flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-neutral-300 bg-cream px-6 text-center"
+                        >
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                                Pratinjau segera hadir
+                            </span>
+                            <span className="max-w-[26ch] text-2xl font-extrabold uppercase leading-none tracking-tight text-neutral-900">
+                                {project.title}
+                            </span>
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                                {project.tech.join(' · ')}
+                            </span>
+                        </div>
+                    )}
 
                     <p id={descId} className="mt-5 text-sm font-light leading-relaxed text-neutral-600 md:text-base">
                         {project.summary}

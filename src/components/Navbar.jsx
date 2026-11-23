@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import ScrollProgress from './ScrollProgress';
 import MobileMenu from './MobileMenu';
 import useActiveSection from '../hooks/useActiveSection';
-import profilePhoto from '../assets/ft-gtg.png';
 
 const NAV_ITEMS = [
     { id: 'about', label: 'ABOUT' },

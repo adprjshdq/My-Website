@@ -9,6 +9,8 @@ Personal portfolio website untuk menampilkan profil, keahlian teknis, proyek, da
 - Scroll reveal per section (IntersectionObserver) dengan stagger antar elemen.
 - Active navigation + scroll progress bar di header.
 - Kartu proyek dengan pratinjau gambar dan **modal studi kasus** (fokus terjebak, tutup lewat Escape/backdrop, fokus kembali ke tombol pembuka).
+- **Pencarian proyek real-time + filter kategori** — menjangkau judul, ringkasan, teknologi, fitur, dan isi studi kasus.
+- Mouse follower dekoratif (glow lime + ring) yang hanya aktif di perangkat berpointer presisi.
 - Badge ketersediaan ("Open to internship & freelance") di Hero.
 - Responsif mobile-first, termasuk penanganan `prefers-reduced-motion`.
 - Form kontak fungsional lewat Web3Forms (tanpa backend sendiri).
@@ -74,20 +76,35 @@ public/
 | Item | Lokasi | Keterangan |
 |---|---|---|
 | Domain | `index.html`, `cv/index.html`, `public/robots.txt`, `public/sitemap.xml`, `public/og-image.png` | Domain produksi saat ini `https://adiprajashdq.vercel.app`. Bila domain berubah, ganti di kelima tempat itu. |
-| Pratinjau proyek | `src/assets/projects/*.webp` | Ukuran ideal 1440×900 (rasio 16:10). |
+| Pratinjau proyek | `src/assets/projects/<slug>.webp` | Ukuran ideal 1440×900 (rasio 16:10). Nama file harus sama dengan `slug` proyek. |
 | CV | `src/data/cv.js` + `scripts/generate-cv-pdf.jsx` | Isi CV diubah di `cv.js`; halaman `/cv/` dan PDF di `public/cv/` sama-sama berasal dari data itu. PDF dibuat otomatis saat `npm run dev` / `npm run build`. |
 | Preview sosial | `public/og-image.png` | Ukuran 1200×630. Ganti bila nama/role berubah. |
 | `lastmod` sitemap | `public/sitemap.xml` | Perbarui tanggalnya setiap kali konten utama berubah. |
 
 > Tombol **Buka demo** (di kartu maupun modal) hanya muncul bila `live` pada
-> `src/data/projects.js` berisi URL asli. Isi `live: null` selama demo belum publik.
+> `src/data/projectsCore.js` berisi URL asli. Isi `live: null` selama demo belum publik.
 
 ### Menambah atau memperbarui proyek
 
-1. Simpan screenshot 1440×900 di `src/assets/projects/` lalu daftarkan gambarnya di objek `covers` pada `src/data/projects.js`.
-2. Isi teksnya (`title`, `summary`, `tech`, `role`, `year`, `sections`, `features`) di `src/data/projectsCore.js`.
-3. Bila gambar masih mockup (bukan screenshot asli), isi `imageNote: 'Mockup UI'` agar pengunjung tahu.
+Halaman Projects menampilkan maksimal **4 proyek** (`MAX_PROJECTS` di
+`src/data/projects.js`). Proyek dengan `featured: false` tetap tersimpan di data,
+tetapi tidak ditampilkan.
+
+1. Simpan screenshot 1440×900 di `src/assets/projects/` dengan nama sesuai `slug`
+   (contoh: `barbershop-booking.webp`). Gambar dikenali otomatis dari nama file.
+2. Isi teksnya (`title`, `slug`, `summary`, `tech`, `role`, `year`, `sections`, `features`)
+   di `src/data/projectsCore.js`. Gunakan `slug` huruf kecil dan tanda hubung.
+3. Bila gambar masih mockup (bukan screenshot asli), isi `imageNote: 'Mockup UI'`
+   agar pengunjung tahu. Selama gambar belum ada, kartu menampilkan placeholder
+   "Pratinjau segera hadir".
 4. Set `live: null` bila belum ada demo publik.
+5. Untuk menukar proyek yang tampil, set `featured: false` pada proyek yang ingin
+   disembunyikan, atau ubah urutan objeknya — yang diambil adalah 4 proyek pertama.
+
+Pencarian dan filter kategori di section Projects membaca data itu secara otomatis —
+tidak ada daftar kata kunci terpisah yang perlu diperbarui. Kata kunci dicocokkan ke
+`title`, `category`, `role`, `year`, `summary`, `tech`, `features`, dan seluruh
+`sections` (termasuk isi studi kasus).
 
 ### Mengubah CV
 
@@ -171,6 +188,7 @@ Opsional: isi `GEMINI_MODEL` untuk mengganti model (default `gemini-3.5-flash`).
 - Fokus keyboard terlihat di semua elemen interaktif: aturan global `:focus-visible` di `index.css` plus ring pada komponen.
 - Modal studi kasus dan drawer mobile memakai focus trap, bisa ditutup dengan Escape, dan mengembalikan fokus ke tombol pemicu.
 - Semua animasi berhenti saat `prefers-reduced-motion: reduce`; preloader juga dilewati.
+- Mouse follower tidak menangkap klik (`pointer-events-none`), tidak aktif di layar sentuh, dan dimatikan saat `prefers-reduced-motion`.
 - Form kontak: label terhubung ke input, status pengiriman diumumkan lewat `role="status"` + `aria-live`, tombol dinonaktifkan selama mengirim, dan honeypot `botcheck` aktif.
 - Asisten AI: panel memakai `role="dialog"` dengan judul, fokus pindah ke input saat dibuka, Escape menutup dan mengembalikan fokus ke tombol pembuka, balasan diumumkan lewat `aria-live`, dan tombol kembali-ke-atas dinonaktifkan saat panel terbuka.
 
