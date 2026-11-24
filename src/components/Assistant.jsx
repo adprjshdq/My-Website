@@ -1,15 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useLang } from '../i18n/useLang.js';
 
 const MAX_INPUT = 500;
 const MAX_HISTORY = 10;
 const REQUEST_TIMEOUT_MS = 30000;
-
-const SUGGESTIONS = [
-    'Proyek apa saja yang pernah dibuat?',
-    'Teknologi apa yang dikuasai?',
-    'Ceritakan proyek Sistem Manajemen Kafe.',
-    'Bagaimana cara menghubungi Adipraja?',
-];
 
 const FOCUS_RING =
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream';
@@ -26,6 +20,7 @@ function prefersReducedMotion() {
  * pengunjung mendapat pesan yang jelas dan diarahkan ke form kontak.
  */
 export default function Assistant() {
+    const { lang, t } = useLang();
     const [open, setOpen] = useState(false);
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
@@ -144,6 +139,7 @@ export default function Assistant() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     messages: nextMessages.slice(-MAX_HISTORY),
+                    lang,
                 }),
                 signal: controller.signal,
             });
@@ -152,16 +148,16 @@ export default function Assistant() {
 
             if (!response.ok) {
                 if (response.status === 503) {
-                    throw new Error('Asisten belum aktif saat ini. Silakan hubungi lewat form kontak atau email.');
+                    throw new Error(t.assistant.errors.notConfigured);
                 }
                 if (response.status === 429) {
-                    throw new Error('Terlalu banyak pertanyaan. Tunggu beberapa menit lalu coba lagi.');
+                    throw new Error(t.assistant.errors.rateLimited);
                 }
-                throw new Error(data?.error || 'Asisten sedang bermasalah. Silakan coba lagi.');
+                throw new Error(data?.error || t.assistant.errors.generic);
             }
 
             if (!data?.reply) {
-                throw new Error('Asisten tidak mengirim jawaban. Silakan coba lagi.');
+                throw new Error(t.assistant.errors.empty);
             }
 
             setMessages((current) => [...current, { role: 'assistant', content: data.reply }]);
@@ -172,9 +168,9 @@ export default function Assistant() {
 
             if (!canceled) {
                 if (caught.name === 'AbortError') {
-                    setError('Waktu tunggu habis. Silakan coba lagi.');
+                    setError(t.assistant.errors.timeout);
                 } else {
-                    setError(caught.message || 'Asisten sedang bermasalah. Silakan coba lagi.');
+                    setError(caught.message || t.assistant.errors.generic);
                 }
             }
         } finally {
@@ -206,7 +202,7 @@ export default function Assistant() {
                 onClick={() => setOpen(true)}
                 aria-expanded={open}
                 aria-controls="assistant-panel"
-                aria-label="Buka asisten AI portofolio"
+                aria-label={t.assistant.launcherAria}
                 inert={launcherHidden}
                 className={`fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 items-center justify-center gap-2 rounded-full bg-neutral-900 text-cream shadow-lg ring-1 ring-cream/25 transition-all duration-300 hover:bg-lime hover:text-neutral-900 motion-reduce:transition-none sm:w-auto sm:px-4 md:bottom-8 md:right-8 ${FOCUS_RING} ${launcherHidden ? 'pointer-events-none translate-y-3 opacity-0' : 'translate-y-0 opacity-100'
                     }`}
@@ -225,7 +221,7 @@ export default function Assistant() {
                     <path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" />
                 </svg>
                 <span className="hidden font-mono text-[11px] uppercase tracking-widest sm:inline">
-                    Tanya AI
+                    {t.assistant.launcher}
                 </span>
             </button>
 
@@ -241,13 +237,13 @@ export default function Assistant() {
                     <div className="flex items-start justify-between gap-3 bg-neutral-900 px-4 py-3.5 text-neutral-100">
                         <div className="min-w-0">
                             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-lime">
-                                // AI Assistant
+                                {t.assistant.kicker}
                             </p>
                             <h2 id="assistant-title" className="mt-0.5 text-sm font-semibold tracking-tight">
-                                Tanya seputar portofolio
+                                {t.assistant.title}
                             </h2>
                             <p className="mt-0.5 text-[11px] text-neutral-400">
-                                Dijawab dari isi situs ini
+                                {t.assistant.subtitle}
                             </p>
                         </div>
 
@@ -258,13 +254,13 @@ export default function Assistant() {
                                     onClick={resetConversation}
                                     className="rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-neutral-400 transition hover:text-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
                                 >
-                                    Baru
+                                    {t.assistant.newChat}
                                 </button>
                             )}
                             <button
                                 type="button"
                                 onClick={closePanel}
-                                aria-label="Tutup asisten"
+                                aria-label={t.assistant.close}
                                 className="inline-flex h-8 w-8 items-center justify-center rounded-full text-neutral-400 transition hover:bg-neutral-800 hover:text-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
                             >
                                 <svg
@@ -292,14 +288,13 @@ export default function Assistant() {
                         {messages.length === 0 && (
                             <div className="space-y-3">
                                 <p className="text-sm leading-relaxed text-neutral-700">
-                                    Halo! Saya asisten AI di portofolio ini. Saya bisa menjelaskan
-                                    proyek, keahlian, pendidikan, dan cara menghubungi Adipraja.
+                                    {t.assistant.welcome}
                                 </p>
                                 <p className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
-                                    Coba tanya
+                                    {t.assistant.tryAsking}
                                 </p>
                                 <div className="flex flex-wrap gap-2">
-                                    {SUGGESTIONS.map((suggestion) => (
+                                    {t.assistant.suggestions.map((suggestion) => (
                                         <button
                                             key={suggestion}
                                             type="button"
@@ -328,7 +323,7 @@ export default function Assistant() {
                                             : 'rounded-bl-md border border-neutral-300 bg-white text-neutral-800'
                                             }`}
                                     >
-                                        {!isUser && <span className="sr-only">Asisten: </span>}
+                                        {!isUser && <span className="sr-only">{t.assistant.assistantPrefix}</span>}
                                         {message.content}
                                     </p>
                                 </div>
@@ -338,7 +333,7 @@ export default function Assistant() {
                         {pending && (
                             <div className="flex justify-start">
                                 <span className="inline-flex items-center gap-1.5 rounded-2xl rounded-bl-md border border-neutral-300 bg-white px-3.5 py-2.5">
-                                    <span className="sr-only">Asisten sedang mengetik…</span>
+                                    <span className="sr-only">{t.assistant.typing}</span>
                                     {[0, 1, 2].map((dot) => (
                                         <span
                                             key={dot}
@@ -366,7 +361,7 @@ export default function Assistant() {
                     <form onSubmit={onSubmit} className="border-t border-neutral-300 bg-sand p-3">
                         <div className="flex items-center gap-2">
                             <label htmlFor="assistant-input" className="sr-only">
-                                Pertanyaan untuk asisten
+                                {t.assistant.inputLabel}
                             </label>
                             <input
                                 id="assistant-input"
@@ -376,13 +371,13 @@ export default function Assistant() {
                                 onChange={(event) => setInput(event.target.value)}
                                 maxLength={MAX_INPUT}
                                 autoComplete="off"
-                                placeholder="Tulis pertanyaan…"
+                                placeholder={t.assistant.inputPlaceholder}
                                 className="min-w-0 flex-1 rounded-xl border border-neutral-300 bg-cream px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-500 transition focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
                             />
                             <button
                                 type="submit"
                                 disabled={!input.trim() || pending}
-                                aria-label="Kirim pertanyaan"
+                                aria-label={t.assistant.send}
                                 className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neutral-900 text-cream transition hover:bg-lime hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-sand disabled:cursor-not-allowed disabled:opacity-40"
                             >
                                 <svg
@@ -400,8 +395,7 @@ export default function Assistant() {
                             </button>
                         </div>
                         <p className="mt-2 text-[10px] leading-relaxed text-neutral-500">
-                            Dijawab AI (Gemini) dari data portofolio dan bisa keliru. Untuk
-                            memastikan, gunakan form kontak.
+                            {t.assistant.disclaimer}
                         </p>
                     </form>
                 </section>

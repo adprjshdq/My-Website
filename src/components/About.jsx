@@ -1,5 +1,8 @@
+import { useLang } from '../i18n/useLang.js';
 
 export default function About() {
+    const { t } = useLang();
+
     return (
         <section id="about" className="py-16 md:py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-neutral-300">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
@@ -7,16 +10,16 @@ export default function About() {
                 {/* Kolom Judul Kiri */}
                 <div data-reveal>
                     <span className="text-xs font-mono tracking-widest uppercase text-neutral-500">
-                        // ABOUT ME
+                        {t.about.kicker}
                     </span>
 
                     <h2 className="text-3xl md:text-4xl font-extrabold uppercase tracking-tight mt-2">
                         <span className="block">
-                            Adipraja - Student
+                            {t.about.titleLine1}
                         </span>
 
                         <span className="block text-lime md:text-4xl font-extrabold uppercase tracking-tight mt-0">
-                            Informatics
+                            {t.about.titleLine2}
                         </span>
                     </h2>
                 </div>
@@ -24,13 +27,15 @@ export default function About() {
                 {/* Kolom Deskripsi Kanan (2 Kolom di layar besar) */}
                 <div className="md:col-span-2 space-y-6 text-neutral-700 text-base md:text-lg font-light leading-relaxed">
 
-                    <p data-reveal style={{ '--reveal-delay': '80ms' }}>
-                        Saya adalah Mahasiswa Teknik Informatika Universitas Perjuangan Tasikmalaya yang antusias dalam pengembangan web. Berfokus pada perancangan antarmuka yang bersih dan interaktif, serta memiliki ketertarikan kuat pada rekayasa perangkat lunak end-to-end.
-                    </p>
-
-                    <p data-reveal style={{ '--reveal-delay': '160ms' }}>
-                        Sebagai mahasiswa Teknik Informatika yang sedang mendalami jalur full-stack, saya aktif mengeksplorasi ekosistem<span className="font-semibold text-neutral-900"></span>. Melalui berbagai proyek akademik maupun mandiri, saya terbiasa merancang aplikasi web dari tahap konsep dasar hingga fungsional.
-                    </p>
+                    {t.about.paragraphs.map((paragraph, index) => (
+                        <p
+                            key={paragraph.slice(0, 24)}
+                            data-reveal
+                            style={{ '--reveal-delay': `${80 + index * 80}ms` }}
+                        >
+                            {paragraph}
+                        </p>
+                    ))}
 
                     {/* Kartu Info Singkat / Poin Keunggulan */}
                     <div
@@ -40,18 +45,18 @@ export default function About() {
                     >
 
                         <div>
-                            <span className="block text-neutral-400">KAMPUS</span>
-                            <span className="font-semibold text-neutral-900">Universitas Perjuangan Tasikmalaya</span>
+                            <span className="block text-neutral-400">{t.about.campusLabel}</span>
+                            <span className="font-semibold text-neutral-900">{t.about.campusValue}</span>
                         </div>
 
                         <div>
-                            <span className="block text-neutral-400">FOKUS</span>
-                            <span className="font-semibold text-neutral-900">Fullstack Dev</span>
+                            <span className="block text-neutral-400">{t.about.focusLabel}</span>
+                            <span className="font-semibold text-neutral-900">{t.about.focusValue}</span>
                         </div>
 
                         <div>
-                            <span className="block text-neutral-400">STATUS</span>
-                            <span className="font-semibold text-emerald-600">Active Student</span>
+                            <span className="block text-neutral-400">{t.about.statusLabel}</span>
+                            <span className="font-semibold text-emerald-600">{t.about.statusValue}</span>
                         </div>
 
                     </div>

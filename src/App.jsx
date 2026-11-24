@@ -11,6 +11,7 @@ import BackToTop from './components/BackToTop';
 import Assistant from './components/Assistant';
 import Preloader from './components/Preloader';
 import MouseFollower from './components/MouseFollower';
+import { LanguageProvider } from './i18n/LanguageProvider.jsx';
 import useScrollReveal from './hooks/useScrollReveal';
 
 const INTRO_KEY = 'portfolio:intro-shown';
@@ -59,7 +60,7 @@ function App() {
     useScrollReveal(revealed);
 
     return (
-        <>
+        <LanguageProvider>
             <div
                 className={`bg-cream text-neutral-900 min-h-screen font-sans selection:bg-neutral-900 selection:text-white ${revealed ? '' : 'is-loading'}`}
             >
@@ -76,7 +77,7 @@ function App() {
             </div>
             <MouseFollower enabled={!loading} />
             {loading && <Preloader onReveal={handleReveal} onComplete={handleComplete} />}
-        </>
+        </LanguageProvider>
     );
 }
 

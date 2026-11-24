@@ -1,6 +1,11 @@
 import fotoAdipraja from '../assets/foto-hero.png';
+import { getCv } from '../data/cv.js';
+import { useLang } from '../i18n/useLang.js';
 
 export default function Hero() {
+    const { lang, t } = useLang();
+    const data = getCv(lang);
+
     return (
         <section className="relative overflow-hidden px-6 pt-2 pb-12 md:px-12 md:pt-6 md:pb-20 max-w-7xl mx-auto">
             {/* Layer 1: Teks besar PORTFOLIO di latar belakang */}
@@ -9,7 +14,7 @@ export default function Hero() {
                 className="pointer-events-none select-none text-center leading-none"
             >
                 <span className="text-lime block text-[min(13.5vw,165px)] font-black tracking-tight uppercase text-emerald-600/90">
-                    PORTOFOLIO
+                    {t.hero.backdrop}
                 </span>
             </div>
             <div aria-hidden="true"
@@ -22,7 +27,7 @@ export default function Hero() {
                 <div className="z-20 space-y-4 lg:col-span-4 text-left animate-fade-up opacity-0 [animation-delay:200ms]">
                     <div className="space-y-1">
                         <p className="font-serif italic text-2xl md:text-3xl text-lime">
-                            Hai, saya
+                            {t.hero.greeting}
                         </p>
                         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900">
                             Adipraja Shidqi Apriliano
@@ -34,11 +39,11 @@ export default function Hero() {
                             <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400/70 motion-safe:animate-ping" />
                             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                         </span>
-                        Student Teknik Informatika • Universitas perjuangan
+                        {t.hero.badge}
                     </div>
 
                     <p className="text-sm md:text-base text-neutral-600 leading-relaxed max-w-md">
-                        Berfokus pada perancangan dan pengembangan aplikasi web yang dinamis, modern, serta interaktif dengan kualitas rekayasa end-to-end yang solid.
+                        {t.hero.description}
                     </p>
 
                     <div className="flex flex-wrap gap-2.5 pt-2">
@@ -46,21 +51,21 @@ export default function Hero() {
                             href="#projects"
                             className="bg-lime text-neutral-900 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-lime-deep transition shadow-sm flex items-center gap-1.5"
                         >
-                            PROJECT<span aria-hidden="true">↓</span>
+                            {t.hero.projectsCta}<span aria-hidden="true">↓</span>
                         </a>
                         <a
                             href="#contact"
                             className="border border-neutral-400 text-neutral-900 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-neutral-900 hover:text-cream transition"
                         >
-                            CONTACT ME
+                            {t.hero.contactCta}
                         </a>
                         <a
-                            href="/cv/Adipraja-Shidqi-CV.pdf"
-                            download="Adipraja-Shidqi-CV.pdf"
-                            aria-label="Unduh CV Adipraja Shidqi dalam format PDF"
+                            href={data.pdfPath}
+                            download={t.cv.pdfFileName}
+                            aria-label={t.hero.cvAria}
                             className="border border-neutral-900/30 text-neutral-900 px-4 py-2.5 rounded-full text-xs font-semibold tracking-wider hover:bg-neutral-900 hover:text-cream transition"
                         >
-                            UNDUH CV ↓
+                            {t.hero.cvCta}
                         </a>
                     </div>
                 </div>
@@ -71,7 +76,7 @@ export default function Hero() {
                         <div aria-hidden="true" className="pointer-events-none absolute inset-x-2 bottom-2 z-0 h-80 w-80 md:h-130 md:w-121 rounded-full bg-gradient-to-tr from-lime via-lime to-lime-200/30 blur-3xl"></div>
                         <img
                             src={fotoAdipraja}
-                            alt="Foto Adipraja Shidqi Apriliano"
+                            alt={t.hero.photoAlt}
                             className="h-auto w-full drop-shadow-[0_2px_30px_rgba(0,0,0,0.2)] md:translate-x-13"
                         />
                     </div>
@@ -82,19 +87,19 @@ export default function Hero() {
                     <div className="rounded-2xl bg-neutral-900 px-4 py-3 text-white shadow-lg max-w-xs w-full lg:w-auto">
                         <div className="flex items-center gap-2 text-xs font-semibold text-lime">
                             <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                            Fullstack Web Development
+                            {t.hero.stackTitle}
                         </div>
                         <p className="mt-1 text-xs text-neutral-300">
-                            React • Tailwind CSS • Laravel • MySQL
+                            {t.hero.stackTech}
                         </p>
                     </div>
 
                     <div className="rounded-2xl border border-neutral-200 bg-white/95 backdrop-blur px-5 py-4 shadow-md max-w-xs w-full lg:w-auto lg:text-center">
                         <p className="text-sm font-bold text-black">
-                            Web Development &amp; UI
+                            {t.hero.focusTitle}
                         </p>
                         <p className="text-xs text-neutral-500 mt-0.5">
-                            End-to-End Architecture &amp; Interactive Apps
+                            {t.hero.focusSubtitle}
                         </p>
                     </div>
                 </div>

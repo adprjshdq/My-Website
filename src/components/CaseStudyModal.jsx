@@ -1,7 +1,9 @@
 import { useEffect, useId, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { useLang } from '../i18n/useLang.js';
 
 export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
+    const { t } = useLang();
     const panelRef = useRef(null);
     const titleId = useId();
     const descId = useId();
@@ -114,7 +116,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                     <button
                         type="button"
                         onClick={onClose}
-                        aria-label="Tutup studi kasus"
+                        aria-label={t.caseStudy.close}
                         className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
                     >
                         <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -136,7 +138,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                             className="mt-5 flex aspect-[16/10] w-full flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-neutral-300 bg-cream px-6 text-center"
                         >
                             <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
-                                Pratinjau segera hadir
+                                {t.caseStudy.previewSoon}
                             </span>
                             <span className="max-w-[26ch] text-2xl font-extrabold uppercase leading-none tracking-tight text-neutral-900">
                                 {project.title}
@@ -153,15 +155,15 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
 
                     <dl className="mt-6 grid grid-cols-2 gap-4 border-y border-neutral-300 py-4 font-mono text-[11px] md:grid-cols-3">
                         <div>
-                            <dt className="uppercase tracking-widest text-neutral-400">Peran</dt>
+                            <dt className="uppercase tracking-widest text-neutral-400">{t.caseStudy.role}</dt>
                             <dd className="mt-1 font-sans text-sm font-semibold text-neutral-900">{project.role}</dd>
                         </div>
                         <div>
-                            <dt className="uppercase tracking-widest text-neutral-400">Tahun</dt>
+                            <dt className="uppercase tracking-widest text-neutral-400">{t.caseStudy.year}</dt>
                             <dd className="mt-1 font-sans text-sm font-semibold text-neutral-900">{project.year}</dd>
                         </div>
                         <div className="col-span-2 md:col-span-1">
-                            <dt className="uppercase tracking-widest text-neutral-400">Stack</dt>
+                            <dt className="uppercase tracking-widest text-neutral-400">{t.caseStudy.stack}</dt>
                             <dd className="mt-1 font-sans text-sm font-semibold text-neutral-900">
                                 {project.tech.join(' · ')}
                             </dd>
@@ -183,7 +185,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
 
                     <div className="mt-7">
                         <h3 className="font-mono text-[11px] uppercase tracking-widest text-neutral-500">
-                            // Fitur utama
+                            // {t.caseStudy.features}
                         </h3>
                         <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
                             {project.features.map((feature) => (
@@ -211,7 +213,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 rounded-full border border-neutral-900/25 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-900 transition-colors hover:bg-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
                             >
-                                Live <span aria-hidden="true">↗</span>
+                                {t.caseStudy.live} <span aria-hidden="true">↗</span>
                             </a>
                         )}
                     </div>

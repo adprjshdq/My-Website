@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLang } from '../i18n/useLang.js';
 
 export default function Preloader({ onReveal, onComplete }) {
+    const { t } = useLang();
     const [progress, setProgress] = useState(0);
     const [isHiding, setIsHiding] = useState(false);
 
@@ -50,13 +52,13 @@ export default function Preloader({ onReveal, onComplete }) {
             {/* Baris Atas */}
             <div className="flex justify-between items-center font-mono text-[11px] tracking-widest text-neutral-400 uppercase">
                 <span>ADIPRAJA</span>
-                <span>PORTOFOLIO • 2026</span>
+                <span>{t.preloader.brand}</span>
             </div>
 
             {/* Bagian Tengah: Teks & Progress Bar */}
             <div className="max-w-xl w-full">
-                <span className="font-mono text-xs tracking-widest text-lime block mb-2"> // INITIALIZING </span>
-                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight uppercase mb-6">LOADING<span className="text-lime">...</span></h2>
+                <span className="font-mono text-xs tracking-widest text-lime block mb-2"> {t.preloader.kicker} </span>
+                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight uppercase mb-6">{t.preloader.title}<span className="text-lime">...</span></h2>
 
                 {/* Garis Progress Bar */}
                 <div className="w-full h-[2px] bg-neutral-800 overflow-hidden">
@@ -70,7 +72,7 @@ export default function Preloader({ onReveal, onComplete }) {
             {/* Baris Bawah: Tagline & Angka Persentase */}
             <div className="flex justify-between items-end">
                 <span className="font-mono text-[11px] tracking-widest text-neutral-500 uppercase">
-                    SYSTEM LOGIC & EXPERIENCES
+                    {t.preloader.tagline}
                 </span>
                 <span className="font-mono text-3xl md:text-5xl font-bold text-lime">
                     {progress}%

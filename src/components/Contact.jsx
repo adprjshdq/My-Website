@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLang } from '../i18n/useLang.js';
 
 const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 // Access key Web3Forms untuk portofolio ini. Batasi domain pengirim di dashboard Web3Forms.
@@ -11,8 +12,9 @@ const LINK_CLASS =
     'rounded transition hover:text-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-4 focus-visible:ring-offset-neutral-900';
 
 export default function Contact() {
+    const { t } = useLang();
     const [sending, setSending] = useState(false);
-    const [status, setStatus] = useState({ tone: 'idle', message: '' });
+    const [status, setStatus] = useState('idle');
 
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -21,11 +23,11 @@ export default function Contact() {
         const form = event.currentTarget;
         const formData = new FormData(form);
         formData.append('access_key', ACCESS_KEY);
-        formData.append('subject', 'Pesan baru dari portofolio adiprajashdq.vercel.app');
-        formData.append('from_name', 'Portofolio Adipraja');
+        formData.append('subject', t.contact.formSubject);
+        formData.append('from_name', t.contact.formFromName);
 
         setSending(true);
-        setStatus({ tone: 'sending', message: 'Mengirim pesan…' });
+        setStatus('sending');
 
         try {
             const response = await fetch(FORM_ENDPOINT, {
@@ -34,31 +36,22 @@ export default function Contact() {
             });
 
             if (response.ok) {
-                setStatus({
-                    tone: 'success',
-                    message: 'Pesan terkirim. Terima kasih sudah menghubungi!',
-                });
+                setStatus('success');
                 form.reset();
             } else {
-                setStatus({
-                    tone: 'error',
-                    message: 'Pesan gagal dikirim. Silakan coba lagi beberapa saat lagi.',
-                });
+                setStatus('error');
             }
         } catch {
-            setStatus({
-                tone: 'error',
-                message: 'Koneksi bermasalah. Periksa jaringan Anda lalu coba lagi.',
-            });
+            setStatus('network');
         } finally {
             setSending(false);
         }
     };
 
     const statusColor =
-        status.tone === 'success'
+        status === 'success'
             ? 'text-lime'
-            : status.tone === 'error'
+            : status === 'error' || status === 'network'
                 ? 'text-red-300'
                 : 'text-neutral-400';
 
@@ -70,19 +63,19 @@ export default function Contact() {
                 <div data-reveal className="flex flex-col justify-between space-y-10">
                     <div>
                         <span className="text-xs font-mono tracking-widest text-neutral-400 uppercase">
-              // Contact me
+                            {t.contact.kicker}
                         </span>
                         <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-tight mt-3 mb-6">
-                            Let's build something amazing <span className='block text-lime text-4xl md:text-5xl font-extrabold uppercase tracking-tight mt-3 mb-6'>together.</span>
+                            {t.contact.titleLine1} <span className='block text-lime text-4xl md:text-5xl font-extrabold uppercase tracking-tight mt-3 mb-6'>{t.contact.titleLine2}</span>
                         </h2>
                         <p className="text-neutral-400 text-base font-light max-w-md leading-relaxed">
-                            Punya proyek menarik, tawaran kolaborasi, atau ingin berdiskusi seputar pengembangan web? Pintu saya selalu terbuka untuk Anda.
+                            {t.contact.intro}
                         </p>
                     </div>
 
                     <div className="space-y-6">
                         <div>
-                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">DIRECT EMAIL</span>
+                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">{t.contact.emailLabel}</span>
                             <a
                                 href="mailto:shidqiadipraja@gmail.com"
                                 className={`${LINK_CLASS} text-xl md:text-2xl font-semibold underline underline-offset-4`}
@@ -92,9 +85,9 @@ export default function Contact() {
                         </div>
 
                         <div>
-                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">CURRENT BASE</span>
+                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">{t.contact.locationLabel}</span>
                             <p className="text-lg font-light text-neutral-300">
-                                TASIKMALAYA, JAWA BARAT, INDONESIA
+                                {t.contact.locationValue}
                             </p>
                         </div>
 
@@ -128,7 +121,7 @@ export default function Contact() {
                                 href="/cv/"
                                 className={`${LINK_CLASS} tracking-wider uppercase`}
                             >
-                                CV / Resume ↗
+                                {t.contact.cvLink}
                             </a>
                         </div>
                     </div>
@@ -139,7 +132,7 @@ export default function Contact() {
                     <form onSubmit={onSubmit} aria-busy={sending} className="space-y-5">
                         <div>
                             <label htmlFor="contact-name" className="block text-xs font-mono text-neutral-400 uppercase mb-2">
-                                Nama Lengkap
+                                {t.contact.nameLabel}
                             </label>
                             <input
                                 id="contact-name"
@@ -147,14 +140,14 @@ export default function Contact() {
                                 name="name"
                                 required
                                 autoComplete="name"
-                                placeholder="Masukkan nama Anda"
+                                placeholder={t.contact.namePlaceholder}
                                 className={FIELD_CLASS}
                             />
                         </div>
 
                         <div>
                             <label htmlFor="contact-email" className="block text-xs font-mono text-neutral-400 uppercase mb-2">
-                                Alamat Email
+                                {t.contact.emailFieldLabel}
                             </label>
                             <input
                                 id="contact-email"
@@ -162,21 +155,21 @@ export default function Contact() {
                                 name="email"
                                 required
                                 autoComplete="email"
-                                placeholder="nama@email.com"
+                                placeholder={t.contact.emailPlaceholder}
                                 className={FIELD_CLASS}
                             />
                         </div>
 
                         <div>
                             <label htmlFor="contact-message" className="block text-xs font-mono text-neutral-400 uppercase mb-2">
-                                Pesan
+                                {t.contact.messageLabel}
                             </label>
                             <textarea
                                 id="contact-message"
                                 name="message"
                                 rows="4"
                                 required
-                                placeholder="Tuliskan pesan atau detail proyek Anda..."
+                                placeholder={t.contact.messagePlaceholder}
                                 className={`${FIELD_CLASS} resize-none`}
                             ></textarea>
                         </div>
@@ -197,10 +190,10 @@ export default function Contact() {
                             className="w-full bg-lime text-neutral-900 font-semibold text-xs tracking-wider uppercase py-3.5 rounded-xl transition hover:bg-lime-deep cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             {sending ? (
-                                'Mengirim…'
+                                t.contact.sending
                             ) : (
                                 <>
-                                    Kirim Pesan
+                                    {t.contact.submit}
                                     <svg aria-hidden="true" viewBox="0 0 24 24" className="ml-1.5 inline-block h-3 w-3 -translate-y-px" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7V17" />
                                     </svg>
@@ -214,7 +207,7 @@ export default function Contact() {
                             aria-live="polite"
                             className={`min-h-5 pt-2 text-center font-mono text-xs ${statusColor}`}
                         >
-                            {status.message}
+                            {status === 'idle' ? '' : t.contact.status[status]}
                         </p>
                     </form>
                 </div>
@@ -223,8 +216,8 @@ export default function Contact() {
 
             {/* Hak Cipta / Copyright Bawah */}
             <div className="max-w-7xl mx-auto pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-neutral-500 gap-4">
-                <p>© {new Date().getFullYear()} development by adipraja.</p>
-                <p>Built with React + Tailwind CSS</p>
+                <p>{t.contact.copyright(new Date().getFullYear())}</p>
+                <p>{t.contact.builtWith}</p>
             </div>
         </footer>
     );

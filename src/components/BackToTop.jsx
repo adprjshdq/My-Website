@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLang } from '../i18n/useLang.js';
 
 /**
  * Tombol "kembali ke atas".
@@ -8,6 +9,7 @@ import { useEffect, useRef, useState } from 'react';
  * ujung bawah, dan di layar kecil tombol ini menutupi input form.
  */
 export default function BackToTop() {
+    const { t } = useLang();
     const [visible, setVisible] = useState(false);
     const [assistantOpen, setAssistantOpen] = useState(false);
     const visibleRef = useRef(false);
@@ -71,7 +73,7 @@ export default function BackToTop() {
             type="button"
             onClick={handleClick}
             inert={!shown}
-            aria-label="Kembali ke atas"
+            aria-label={t.backToTop}
             className={`group fixed bottom-24 right-6 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full bg-neutral-900 text-cream shadow-lg ring-1 ring-cream/25 transition-all duration-300 hover:bg-lime hover:text-neutral-900 motion-reduce:transition-none md:bottom-28 md:right-8 md:h-12 md:w-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${shown ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0'
                 }`}
         >

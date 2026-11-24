@@ -73,6 +73,73 @@ export const cv = {
         },
     ],
 
-    // File PDF yang diunduh pengunjung. Ganti isinya dengan hasil print halaman ini.
+    // File PDF yang diunduh pengunjung. Dibuat oleh scripts/generate-cv-pdf.jsx.
     pdfPath: '/cv/Adipraja-Shidqi-CV.pdf',
 };
+
+export const cvEn = {
+    updated: 'November 2026',
+    name: 'Adipraja Shidqi Apriliano',
+    role: 'Fullstack Web Developer',
+    location: 'Tasikmalaya, West Java, Indonesia',
+    email: 'shidqiadipraja@gmail.com',
+
+    links: cv.links,
+
+    profile:
+        'Informatics Engineering student at Universitas Perjuangan Tasikmalaya with a strong interest in fullstack web development. Experienced in building applications from interface design (React + Tailwind CSS) to APIs and databases (Laravel + MySQL) through academic and independent projects.',
+
+    education: [
+        {
+            period: '2024 – present',
+            degree: 'Bachelor of Informatics Engineering',
+            school: 'Universitas Perjuangan Tasikmalaya',
+        },
+        {
+            period: '2021 – 2024',
+            degree: 'Senior High School',
+            school: 'MAN 2 Kota Tasikmalaya',
+        },
+    ],
+
+    organizations: [],
+
+    certifications: [],
+
+    skills: cv.skills,
+
+    projects: [
+        {
+            title: 'Web-Based Cafe Management System',
+            tech: ['Laravel', 'MySQL', 'React'],
+            description:
+                'Menu, category, sales transaction, ordering, payment, table, and user management, plus order monitoring through a Kitchen Display System.',
+        },
+        {
+            title: 'School Tuition Payment System',
+            tech: ['Laravel', 'MySQL', 'Tailwind CSS', 'Midtrans'],
+            description:
+                'Admins manage academic years, classes, rates, students, bills, payments, and reports; students view arrears, pay online via Midtrans, and download receipts.',
+        },
+        {
+            title: 'MAN 2 Kota Tasikmalaya School Website',
+            tech: ['HTML', 'CSS', 'JavaScript'],
+            description:
+                'A responsive, interactive school landing page serving as the school information channel.',
+        },
+        {
+            title: 'Personal Portfolio Website',
+            tech: ['React', 'Tailwind CSS', 'Vite'],
+            description:
+                'A minimalist editorial portfolio with scroll-reveal animations, active navigation, and a working contact form.',
+        },
+    ],
+
+    pdfPath: '/cv/Adipraja-Shidqi-CV-EN.pdf',
+};
+
+const cvsByLang = { id: cv, en: cvEn };
+
+export function getCv(lang) {
+    return cvsByLang[lang] ?? cvEn;
+}

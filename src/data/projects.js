@@ -1,7 +1,9 @@
 import { projectFacts } from './projectsCore.js';
+import { projectFactsEn } from './projectsCore.en.js';
 
 /* Halaman Projects sengaja dibatasi agar tetap ringkas. Untuk menampilkan proyek
-   lain, ubah `featured: false` di projectsCore.js atau urutan datanya. */
+   lain, ubah `featured: false` di projectsCore.js / projectsCore.en.js atau
+   urutan datanya. */
 const MAX_PROJECTS = 4;
 
 /* Pratinjau diambil otomatis dari src/assets/projects/<slug>.<ext>, jadi proyek
@@ -18,11 +20,20 @@ const covers = Object.fromEntries(
     ])
 );
 
-export const projects = projectFacts
-    .filter((project) => project.featured !== false)
-    .slice(0, MAX_PROJECTS)
-    .map((project, index) => ({
-        ...project,
-        id: String(index + 1).padStart(2, '0'),
-        image: covers[project.slug],
-    }));
+const factsByLang = {
+    id: projectFacts,
+    en: projectFactsEn,
+};
+
+export function getProjects(lang) {
+    const facts = factsByLang[lang] ?? projectFactsEn;
+
+    return facts
+        .filter((project) => project.featured !== false)
+        .slice(0, MAX_PROJECTS)
+        .map((project, index) => ({
+            ...project,
+            id: String(index + 1).padStart(2, '0'),
+            image: covers[project.slug],
+        }));
+}

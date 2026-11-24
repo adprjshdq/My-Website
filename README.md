@@ -17,6 +17,7 @@ Personal portfolio website untuk menampilkan profil, keahlian teknis, proyek, da
 - Form kontak fungsional lewat Web3Forms (tanpa backend sendiri).
 - Halaman CV `/cv/` berbasis React dengan tata letak A4, tombol cetak/simpan PDF, dan tautan unduh PDF.
 - **Asisten AI** mengambang untuk menjawab pertanyaan seputar profil, proyek, keahlian, dan kontak — dibatasi pada data portofolio.
+- **Dua bahasa (EN/ID)** — situs dibuka dalam bahasa Inggris; tombol `ID | ENG` di navbar (desktop dan drawer mobile) serta di halaman CV mengganti seluruh teks, isi proyek, timeline, CV, dan bahasa jawaban asisten AI.
 - Halaman 404 khusus (`public/404.html`) untuk URL yang tidak dikenal.
 
 ## Teknologi
@@ -26,8 +27,45 @@ Personal portfolio website untuk menampilkan profil, keahlian teknis, proyek, da
 | UI | React 19, Tailwind CSS v4 |
 | Build | Vite 8, `@tailwindcss/vite` |
 | Lint | ESLint 10 + plugin React Hooks / Refresh |
-| PDF CV | `@react-pdf/renderer` + `tsx` (dev) — generate `public/cv/*.pdf` dari data CV |
+| PDF CV | `@react-pdf/renderer` + `tsx` (dev) — generate `public/cv/*.pdf` (ID & EN) dari data CV |
 | Asisten AI | Google Gemini (`gemini-3.5-flash`) lewat Vercel Function `api/chat.js` |
+
+## Menjalankan & memeriksa
+
+```bash
+npm run dev     # dev server (sekaligus membuat ulang PDF CV)
+npm run build   # build produksi ke dist/
+npm run check   # lint + build dalam satu perintah
+npm run preview # coba hasil build secara lokal
+```
+
+`npm run check` adalah pemeriksaan tercepat sebelum commit/push: ESLint harus bersih dan
+build harus selesai tanpa error. Build juga otomatis menjalankan `npm run cv:pdf`, jadi
+kedua PDF CV ikut diperbarui.
+
+## Bahasa (ID / EN)
+
+Situs dibuka dalam **bahasa Inggris** (default). Tombol `ID | ENG` di navbar, drawer
+mobile, dan toolbar halaman `/cv/` mengganti seluruh bahasa tanpa reload:
+
+- Teks antarmuka: `src/i18n/ui.js` — semua label, tombol, aria-label, dan pesan status.
+- Isi proyek: `src/data/projectsCore.js` (ID) dan `src/data/projectsCore.en.js` (EN).
+- Timeline: `src/data/journey.js` (`milestones` dan `milestonesEn`).
+- CV: `src/data/cv.js` (`cv` dan `cvEn`).
+- Jawaban asisten AI: `api/_chat.js` memakai `payload.lang` untuk memilih system prompt
+  dan knowledge base dari `src/data/knowledge.js`.
+
+Pilihan bahasa disimpan di `sessionStorage` (`portfolio:lang`), jadi reload di tab yang
+sama tetap memakai bahasa terakhir, tetapi kunjungan baru selalu mulai dari bahasa Inggris.
+Ubah `DEFAULT_LANG` di `src/i18n/ui.js` bila ingin default bahasa Indonesia, atau ganti
+penyimpanan ke `localStorage` di `src/i18n/LanguageProvider.jsx` agar pilihan diingat
+permanen.
+
+> ID section (`#about`, `#projects`, `#expertise`, `#journey`, `#contact`) sengaja tetap
+> bahasa Inggris dan tidak ikut diterjemahkan, supaya anchor dan menu aktif tetap bekerja.
+
+Kedua bahasa adalah sumber konten terpisah: saat menambah proyek, entri harus ditambahkan
+di kedua file `projectsCore*.js` dengan `slug` dan `categoryKey` yang sama.
 
 ## Palet warna
 
@@ -53,12 +91,14 @@ api/
 cv/
   index.html    # entry halaman CV (Vite multi-page), disajikan di /cv/
 scripts/
-  generate-cv-pdf.jsx  # membuat PDF CV dari src/data/cv.js
+  generate-cv-pdf.jsx  # membuat PDF CV bahasa Indonesia & Inggris dari src/data/cv.js
   vite-plugin-assistant-api.js  # menjalankan /api/chat saat npm run dev
 src/
   components/   # Navbar, Hero, Projects, CaseStudyModal, Expertise, Journey, Contact, Assistant, dll
   cv/           # CvPage.jsx + main.jsx + cv.css (aturan cetak A4)
-  data/         # projectsCore.js (teks proyek), projects.js (+gambar), journey.js, cv.js, knowledge.js
+  data/         # projectsCore.js + projectsCore.en.js (teks proyek), projects.js (+gambar),
+                # journey.js, cv.js, knowledge.js — tiap file punya versi ID dan EN
+  i18n/         # ui.js (kamus teks antarmuka), LanguageProvider.jsx, useLang.js
   hooks/        # useScrollReveal, useActiveSection
   assets/       # gambar yang di-import lewat bundler (projects/ untuk pratinjau proyek)
   index.css     # Tailwind + keyframes + scroll reveal + pengaman overflow
@@ -78,7 +118,7 @@ public/
 |---|---|---|
 | Domain | `index.html`, `cv/index.html`, `public/robots.txt`, `public/sitemap.xml`, `public/og-image.png` | Domain produksi saat ini `https://adiprajashdq.vercel.app`. Bila domain berubah, ganti di kelima tempat itu. |
 | Pratinjau proyek | `src/assets/projects/<slug>.webp` | Ukuran ideal 1440×900 (rasio 16:10). Nama file harus sama dengan `slug` proyek. |
-| CV | `src/data/cv.js` + `scripts/generate-cv-pdf.jsx` | Isi CV diubah di `cv.js`; halaman `/cv/` dan PDF di `public/cv/` sama-sama berasal dari data itu. PDF dibuat otomatis saat `npm run dev` / `npm run build`. |
+| CV | `src/data/cv.js` + `scripts/generate-cv-pdf.jsx` | Isi CV diubah di `cv.js` (objek `cv` untuk bahasa Indonesia, `cvEn` untuk Inggris); halaman `/cv/` dan kedua PDF di `public/cv/` berasal dari data itu. PDF dibuat otomatis saat `npm run dev` / `npm run build`. |
 | Preview sosial | `public/og-image.png` | Ukuran 1200×630. Ganti bila nama/role berubah. |
 | `lastmod` sitemap | `public/sitemap.xml` | Perbarui tanggalnya setiap kali konten utama berubah. |
 
@@ -93,8 +133,10 @@ tetapi tidak ditampilkan.
 
 1. Simpan screenshot 1440×900 di `src/assets/projects/` dengan nama sesuai `slug`
    (contoh: `barbershop-booking.webp`). Gambar dikenali otomatis dari nama file.
-2. Isi teksnya (`title`, `slug`, `summary`, `tech`, `role`, `year`, `sections`, `features`)
-   di `src/data/projectsCore.js`. Gunakan `slug` huruf kecil dan tanda hubung.
+2. Isi teksnya (`title`, `slug`, `summary`, `tech`, `role`, `year`, `sections`, `features`,
+   `category`, `categoryKey`) di `src/data/projectsCore.js`, lalu salin terjemahannya ke
+   `src/data/projectsCore.en.js`. Gunakan `slug` huruf kecil dan tanda hubung, dan
+   `categoryKey` yang sama di kedua bahasa (`multi-page`, `web-app`, `frontend-ui`).
 3. Bila gambar masih mockup (bukan screenshot asli), isi `imageNote: 'Mockup UI'`
    agar pengunjung tahu. Selama gambar belum ada, kartu menampilkan placeholder
    "Pratinjau segera hadir".
@@ -113,20 +155,27 @@ sampul. Jumlah proyek di tab folder (`// 04 PROYEK`) mengikuti panjang data.
 
 ### Mengubah CV
 
-Semua teks CV ada di **`src/data/cv.js`** (nama, profil, pendidikan, keahlian, proyek, tautan).
-Halaman `/cv/` dan PDF di `public/cv/Adipraja-Shidqi-CV.pdf` sama-sama dibuat dari file itu.
+Semua teks CV ada di **`src/data/cv.js`**: objek `cv` untuk bahasa Indonesia dan `cvEn`
+untuk bahasa Inggris (nama, profil, pendidikan, keahlian, proyek, tautan). Halaman `/cv/`
+mengikuti bahasa yang dipilih, dan dua PDF di `public/cv/` dibuat dari file yang sama.
+Label section dan nama file PDF ada di `src/i18n/ui.js` (`cv.sections`, `pdfFileName`).
 
-1. Edit `src/data/cv.js`.
+1. Edit `src/data/cv.js` — perbarui `cv` **dan** `cvEn` agar isi kedua bahasa tetap sama.
 2. Tambah entri dengan menambahkan objek ke array `projects`, `education`, atau `skills`.
    Untuk organisasi dan sertifikasi, isi `organizations` / `certifications` — section-nya
    muncul otomatis begitu array tidak kosong (tidak perlu mengubah JSX).
-3. Buka `http://localhost:5173/cv/` untuk melihat halaman CV.
+3. Buka `http://localhost:5173/cv/` untuk melihat halaman CV, lalu coba toggle `ID | ENG`.
 
 PDF **tidak perlu dicetak manual**. Skrip `scripts/generate-cv-pdf.jsx` dijalankan otomatis
 lewat `predev` dan `prebuild`, jadi `npm run dev` dan `npm run build` selalu memperbarui
-`public/cv/Adipraja-Shidqi-CV.pdf` dari data terbaru. Saat dev server berjalan, perubahan
-`cv.js` juga langsung memicu pembuatan ulang PDF (plugin di `vite.config.js`). Ingin
-memperbarui tanpa build?
+kedua berkas:
+
+- `public/cv/Adipraja-Shidqi-CV.pdf` — versi bahasa Indonesia.
+- `public/cv/Adipraja-Shidqi-CV-EN.pdf` — versi bahasa Inggris.
+
+Tombol unduh di Hero dan halaman `/cv/` menunjuk ke berkas sesuai bahasa aktif. Saat dev
+server berjalan, perubahan `cv.js` juga langsung memicu pembuatan ulang PDF (plugin di
+`vite.config.js`). Ingin memperbarui tanpa build?
 
 ```bash
 npm run cv:pdf
@@ -139,7 +188,8 @@ Tidak perlu Python atau library tambahan. Jangan lupa perbarui `updated` di `cv.
 
 ### Mengisi timeline Journey
 
-Urutan entri ada di `src/data/journey.js`. Riwayat SD/SMP sengaja tidak ditampilkan.
+Urutan entri ada di `src/data/journey.js`: `milestones` untuk bahasa Indonesia dan
+`milestonesEn` untuk bahasa Inggris. Riwayat SD/SMP sengaja tidak ditampilkan.
 Tambahkan organisasi, kepanitiaan, atau sertifikasi sebagai objek baru dengan `kind` yang
 sesuai, supaya section ini tidak berhenti pada riwayat pendidikan saja.
 
@@ -147,7 +197,8 @@ sesuai, supaya section ini tidak berhenti pada riwayat pendidikan saja.
 
 Widget **Tanya AI** di kanan bawah menjawab pertanyaan pengunjung tentang isi portofolio.
 Jawabannya dibatasi pada knowledge base di `src/data/knowledge.js`, yang dirangkai otomatis
-dari `cv.js`, `journey.js`, dan `projectsCore.js` — jadi isi proyek tidak perlu disalin dua kali.
+dari `cv.js`, `journey.js`, dan `projectsCore*.js` (versi ID maupun EN) — jadi isi proyek
+tidak perlu disalin dua kali.
 
 ### Setup
 
@@ -162,11 +213,13 @@ Opsional: isi `GEMINI_MODEL` untuk mengganti model (default `gemini-3.5-flash`).
 
 ### Cara kerja
 
-- `src/components/Assistant.jsx` mengirim maksimal 10 pesan terakhir ke `POST /api/chat`.
+- `src/components/Assistant.jsx` mengirim maksimal 10 pesan terakhir ke `POST /api/chat`
+  beserta `lang` yang sedang aktif.
 - `api/chat.js` adalah Vercel Function; API key hanya dibaca di server dan tidak pernah
   masuk ke bundle browser.
 - `api/_chat.js` memvalidasi input, membatasi **20 permintaan / 10 menit / IP**, dan memanggil
-  Gemini dengan system prompt yang melarang menjawab di luar data portofolio.
+  Gemini dengan system prompt yang melarang menjawab di luar data portofolio. Prompt dan
+  pesan error tersedia dalam dua bahasa; `payload.lang` (`'id'` / `'en'`) memilihnya.
 - Saat `npm run dev`, `scripts/vite-plugin-assistant-api.js` menjalankan logika yang sama di
   Vite, jadi fitur ini bisa diuji tanpa `vercel dev`.
 

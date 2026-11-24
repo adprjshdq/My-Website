@@ -1,16 +1,22 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import ScrollProgress from './ScrollProgress';
 import MobileMenu from './MobileMenu';
+import LanguageToggle from './LanguageToggle';
 import useActiveSection from '../hooks/useActiveSection';
+import { useLang } from '../i18n/useLang.js';
 
+/* id section sengaja tetap bahasa Inggris dan tidak ikut berubah saat bahasa
+   diganti, supaya anchor serta indikator menu aktif tetap bekerja. */
 const NAV_ITEMS = [
-    { id: 'about', label: 'ABOUT' },
-    { id: 'projects', label: 'WORK' },
-    { id: 'expertise', label: 'EXPERTISE' },
-    { id: 'journey', label: 'JOURNEY' },
+    { id: 'about', key: 'about' },
+    { id: 'projects', key: 'projects' },
+    { id: 'expertise', key: 'expertise' },
+    { id: 'journey', key: 'journey' },
 ];
 
 export default function Navbar() {
+    const { t } = useLang();
+
     // 'contact' ikut dipantau supaya tidak ada menu yang tetap terlihat aktif
     // saat pengunjung sudah berada di area footer/kontak.
     const active = useActiveSection([...NAV_ITEMS.map((item) => item.id), 'contact']);
@@ -19,6 +25,8 @@ export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleRef = useRef(null);
     const closeMenu = useCallback(() => setMenuOpen(false), []);
+
+    const items = NAV_ITEMS.map((item) => ({ ...item, label: t.nav[item.key] }));
 
     // Tutup drawer otomatis ketika layar melebar ke ukuran desktop,
     // supaya tidak ada dua navigasi aktif sekaligus.
@@ -47,17 +55,17 @@ export default function Navbar() {
                             ADIPRAJA
                         </a>
                         <span className="text-[10px] md:text-xs text-neutral-500 font-mono tracking-tight">
-                            WEB DEVELOPMENT
+                            {t.nav.brandSub}
                         </span>
                     </div>
                 </div>
 
                 {/* 2. Menu Navigasi Tengah (desktop) */}
                 <nav
-                    aria-label="Navigasi utama"
+                    aria-label={t.nav.mainLabel}
                     className="hidden md:flex items-center space-x-8 text-xs font-medium tracking-widest"
                 >
-                    {NAV_ITEMS.map(({ id, label }) => {
+                    {items.map(({ id, label }) => {
                         const isActive = active === id;
 
                         return (
@@ -80,14 +88,16 @@ export default function Navbar() {
                 </nav>
 
                 {/* 3. Tombol Kanan */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3 md:gap-4">
+                    <LanguageToggle />
+
                     <a
                         href="#contact"
                         aria-current={isContact ? 'location' : undefined}
                         className={`hidden md:flex bg-lime text-black text-xs font-medium tracking-wider px-5 py-2.5 rounded-full hover:bg-lime-deep transition items-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/50 focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${isContact ? 'ring-2 ring-neutral-900/30 ring-offset-2 ring-offset-cream' : ''
                             }`}
                     >
-                        LET'S TALK <span className="text-sm">→</span>
+                        {t.nav.contact} <span className="text-sm">→</span>
                     </a>
 
                     <button
@@ -97,7 +107,7 @@ export default function Navbar() {
                         aria-expanded={menuOpen}
                         aria-controls="mobile-menu"
                         aria-haspopup="dialog"
-                        aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
+                        aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
                         className="md:hidden relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors before:absolute before:-inset-1 before:content-[''] hover:bg-neutral-900 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
                     >
                         <span aria-hidden="true" className="flex flex-col items-end gap-[5px]">
@@ -115,7 +125,7 @@ export default function Navbar() {
                 id="mobile-menu"
                 open={menuOpen}
                 onClose={closeMenu}
-                items={NAV_ITEMS}
+                items={items}
                 active={active}
                 returnFocusRef={toggleRef}
             />

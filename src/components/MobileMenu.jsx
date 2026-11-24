@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import LanguageToggle from './LanguageToggle';
+import { useLang } from '../i18n/useLang.js';
 
 const CONTACT = {
     email: 'shidqiadipraja@gmail.com',
@@ -12,6 +14,7 @@ const CONTACT = {
  * keturunan `position: fixed` — drawer akan ikut terpotong di dalam header.
  */
 export default function MobileMenu({ id, open, onClose, items, active, returnFocusRef }) {
+    const { t } = useLang();
     const panelRef = useRef(null);
 
     // Kunci scroll halaman selama drawer terbuka.
@@ -131,7 +134,7 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                 ref={panelRef}
                 role="dialog"
                 aria-modal="true"
-                aria-label="Menu navigasi"
+                aria-label={t.nav.menuLabel}
                 tabIndex={-1}
                 className={`absolute right-0 top-0 flex h-full w-[min(20rem,85vw)] flex-col bg-cream shadow-2xl outline-none transition-transform duration-300 ease-out motion-reduce:transition-none ${open ? 'translate-x-0' : 'translate-x-full'
                     }`}
@@ -142,14 +145,14 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                             ADIPRAJA<span className="text-neutral-400"> S.A</span>
                         </span>
                         <span className="font-mono text-[10px] tracking-tight text-neutral-500">
-                            WEB DEVELOPMENT
+                            {t.nav.brandSub}
                         </span>
                     </div>
 
                     <button
                         type="button"
                         onClick={onClose}
-                        aria-label="Tutup menu"
+                        aria-label={t.nav.closeMenu}
                         className="bg-lime inline-flex h-11 w-11 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40"
                     >
                         <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
@@ -158,9 +161,9 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                     </button>
                 </div>
 
-                <nav aria-label="Navigasi mobile" className="flex-1 overflow-y-auto px-6 pb-4 pt-6">
+                <nav aria-label={t.nav.mobileLabel} className="flex-1 overflow-y-auto px-6 pb-4 pt-6">
                     <span aria-hidden="true" className="mb-1 block font-mono text-[10px] uppercase tracking-widest text-neutral-400">
-                        // MENU
+                        {t.nav.menu}
                     </span>
                     <ul>
                         {items.map(({ id: sectionId, label }, index) => {
@@ -198,6 +201,8 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                 </nav>
 
                 <div className="space-y-4 border-t border-neutral-300 px-6 py-6">
+                    <LanguageToggle />
+
                     <a
                         href="#contact"
                         onClick={(event) => handleNavigate(event, 'contact')}
@@ -205,7 +210,7 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                         className={`flex items-center justify-between rounded-full bg-lime px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-black transition-colors hover:bg-lime-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 ${isContact ? 'ring-2 ring-neutral-900/30 ring-offset-2 ring-offset-cream' : ''
                             }`}
                     >
-                        LET'S TALK
+                        {t.nav.contact}
                         <span aria-hidden="true" className="text-sm">→</span>
                     </a>
 

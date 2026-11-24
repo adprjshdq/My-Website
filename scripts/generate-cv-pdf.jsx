@@ -1,9 +1,43 @@
 import { statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { Document, Link, Page, StyleSheet, Text, View, renderToFile } from '@react-pdf/renderer';
-import { cv } from '../src/data/cv.js';
+import { cv, cvEn } from '../src/data/cv.js';
 
-const OUT = fileURLToPath(new URL('../public/cv/Adipraja-Shidqi-CV.pdf', import.meta.url));
+const OUTPUTS = [
+    {
+        lang: 'id',
+        data: cv,
+        out: fileURLToPath(new URL('../public/cv/Adipraja-Shidqi-CV.pdf', import.meta.url)),
+    },
+    {
+        lang: 'en',
+        data: cvEn,
+        out: fileURLToPath(new URL('../public/cv/Adipraja-Shidqi-CV-EN.pdf', import.meta.url)),
+    },
+];
+
+const LABELS = {
+    id: {
+        updated: (date) => `Diperbarui ${date}`,
+        profile: 'Profil',
+        projects: 'Proyek Pilihan',
+        education: 'Pendidikan',
+        organizations: 'Organisasi',
+        certifications: 'Sertifikasi',
+        skills: 'Keahlian',
+        contact: 'Kontak',
+    },
+    en: {
+        updated: (date) => `Updated ${date}`,
+        profile: 'Profile',
+        projects: 'Selected Projects',
+        education: 'Education',
+        organizations: 'Organizations',
+        certifications: 'Certifications',
+        skills: 'Skills',
+        contact: 'Contact',
+    },
+};
 
 // Font standar PDF (Helvetica) memakai encoding lama, jadi karakter tipografis
 // seperti "–" atau "·" bisa rusak saat teks disalin/dibaca ATS. PDF memakai
@@ -113,36 +147,38 @@ function Section({ title, children }) {
     );
 }
 
-function CvDocument() {
+function CvDocument({ data, lang }) {
+    const labels = LABELS[lang];
+
     return (
         <Document
-            title={`CV - ${cv.name}`}
-            author={cv.name}
+            title={`CV - ${data.name}`}
+            author={data.name}
             subject="Curriculum Vitae"
             creator="adiprajashdq.vercel.app"
-            language="id"
+            language={lang}
         >
             <Page size="A4" style={s.page} wrap>
                 <View style={s.kickerRow}>
                     <Text style={s.kicker}>// Curriculum Vitae</Text>
-                    <Text style={s.kicker}>Diperbarui {clean(cv.updated)}</Text>
+                    <Text style={s.kicker}>{labels.updated(clean(data.updated))}</Text>
                 </View>
 
-                <Text style={s.name}>{cv.name}</Text>
+                <Text style={s.name}>{data.name}</Text>
 
                 <View style={s.roleRow}>
-                    <Text style={s.role}>{cv.role}</Text>
+                    <Text style={s.role}>{data.role}</Text>
                 </View>
 
                 <View style={s.metaRow}>
-                    <Text style={s.meta}>{cv.location}</Text>
-                    <Link src={`mailto:${cv.email}`} style={s.link}>
-                        {cv.email}
+                    <Text style={s.meta}>{data.location}</Text>
+                    <Link src={`mailto:${data.email}`} style={s.link}>
+                        {data.email}
                     </Link>
                 </View>
 
                 <View style={s.metaRow}>
-                    {cv.links.map((link) => (
+                    {data.links.map((link) => (
                         <Link key={link.href} src={link.href} style={s.link}>
                             {link.label}
                         </Link>
@@ -153,12 +189,12 @@ function CvDocument() {
 
                 <View style={s.columns}>
                     <View style={s.colLeft}>
-                        <Section title="Profil">
-                            <Text style={s.paragraph}>{cv.profile}</Text>
+                        <Section title={labels.profile}>
+                            <Text style={s.paragraph}>{data.profile}</Text>
                         </Section>
 
-                        <Section title="Proyek Pilihan">
-                            {cv.projects.map((project) => (
+                        <Section title={labels.projects}>
+                            {data.projects.map((project) => (
                                 <View key={project.title} style={s.item} wrap={false}>
                                     <Text style={s.itemTitle}>{project.title}</Text>
                                     <Text style={s.itemMeta}>{project.tech.join(' / ')}</Text>
@@ -169,8 +205,8 @@ function CvDocument() {
                     </View>
 
                     <View style={s.colRight}>
-                        <Section title="Pendidikan">
-                            {cv.education.map((item) => (
+                        <Section title={labels.education}>
+                            {data.education.map((item) => (
                                 <View key={item.degree} style={s.item} wrap={false}>
                                     <Text style={s.period}>{clean(item.period)}</Text>
                                     <Text style={s.degree}>{item.degree}</Text>
@@ -179,9 +215,9 @@ function CvDocument() {
                             ))}
                         </Section>
 
-                        {cv.organizations.length > 0 && (
-                            <Section title="Organisasi">
-                                {cv.organizations.map((item) => (
+                        {data.organizations.length > 0 && (
+                            <Section title={labels.organizations}>
+                                {data.organizations.map((item) => (
                                     <View key={`${item.period}-${item.role}`} style={s.item} wrap={false}>
                                         <Text style={s.period}>{clean(item.period)}</Text>
                                         <Text style={s.degree}>{item.role}</Text>
@@ -191,9 +227,9 @@ function CvDocument() {
                             </Section>
                         )}
 
-                        {cv.certifications.length > 0 && (
-                            <Section title="Sertifikasi">
-                                {cv.certifications.map((item) => (
+                        {data.certifications.length > 0 && (
+                            <Section title={labels.certifications}>
+                                {data.certifications.map((item) => (
                                     <View key={item.name} style={s.item} wrap={false}>
                                         <Text style={s.period}>{item.year}</Text>
                                         <Text style={s.degree}>{item.name}</Text>
@@ -203,8 +239,8 @@ function CvDocument() {
                             </Section>
                         )}
 
-                        <Section title="Keahlian">
-                            {cv.skills.map((group) => (
+                        <Section title={labels.skills}>
+                            {data.skills.map((group) => (
                                 <View key={group.label} style={s.skillGroup} wrap={false}>
                                     <Text style={s.skillLabel}>{group.label}</Text>
                                     <Text style={s.skillText}>{group.items.join(' / ')}</Text>
@@ -212,16 +248,16 @@ function CvDocument() {
                             ))}
                         </Section>
 
-                        <Section title="Kontak">
-                            <Text style={s.skillText}>{cv.email}</Text>
-                            <Text style={s.skillText}>{cv.location}</Text>
+                        <Section title={labels.contact}>
+                            <Text style={s.skillText}>{data.email}</Text>
+                            <Text style={s.skillText}>{data.location}</Text>
                         </Section>
                     </View>
                 </View>
 
                 <View style={s.footer} fixed>
                     <Text style={s.footerText}>Portofolio: adiprajashdq.vercel.app</Text>
-                    <Text style={s.footerText}>{cv.name}</Text>
+                    <Text style={s.footerText}>{data.name}</Text>
                 </View>
             </Page>
         </Document>
@@ -229,9 +265,11 @@ function CvDocument() {
 }
 
 try {
-    await renderToFile(<CvDocument />, OUT);
-    const { size } = statSync(OUT);
-    console.log(`CV PDF dibuat: ${OUT} (${(size / 1024).toFixed(1)} KB)`);
+    for (const { lang, data, out } of OUTPUTS) {
+        await renderToFile(<CvDocument data={data} lang={lang} />, out);
+        const { size } = statSync(out);
+        console.log(`CV PDF dibuat: ${out} (${(size / 1024).toFixed(1)} KB)`);
+    }
 } catch (error) {
     console.error('Gagal membuat CV PDF:', error);
     process.exitCode = 1;
