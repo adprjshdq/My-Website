@@ -223,7 +223,7 @@ export default function Contact() {
 
             {/* Hak Cipta / Copyright Bawah */}
             <div className="max-w-7xl mx-auto pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-neutral-500 gap-4">
-                <p>© {new Date().getFullYear()} this website is in development by adipraja.</p>
+                <p>© {new Date().getFullYear()} development by adipraja.</p>
                 <p>Built with React + Tailwind CSS</p>
             </div>
         </footer>

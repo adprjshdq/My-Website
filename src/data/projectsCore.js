@@ -2,7 +2,7 @@ export const projectFacts = [
     {
         id: '01',
         slug: 'website-sekolah',
-        title: 'Website Sekolah MAN 2 Kota Tasikmalaya',
+        title: 'Web Sekolah',
         category: 'Multi Page Website',
         year: '2026',
         role: 'Frontend Developer',
@@ -143,7 +143,7 @@ export const projectFacts = [
     {
         id: '05',
         slug: 'barbershop-booking',
-        title: 'BarberBook — Reservasi Barbershop',
+        title: 'Reservasi Barbershop',
         category: 'Web Application',
         year: '2026',
         role: 'Fullstack Developer',

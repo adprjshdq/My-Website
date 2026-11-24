@@ -8,8 +8,9 @@ Personal portfolio website untuk menampilkan profil, keahlian teknis, proyek, da
 - Preloader dengan progress bar — hanya tampil sekali per sesi dan dilewati sepenuhnya saat `prefers-reduced-motion`.
 - Scroll reveal per section (IntersectionObserver) dengan stagger antar elemen.
 - Active navigation + scroll progress bar di header.
+- **Arsip proyek berbentuk folder** — sampul folder harus diklik dulu untuk membuka daftar proyek; animasi buka/tutup menghormati `prefers-reduced-motion`.
 - Kartu proyek dengan pratinjau gambar dan **modal studi kasus** (fokus terjebak, tutup lewat Escape/backdrop, fokus kembali ke tombol pembuka).
-- **Pencarian proyek real-time + filter kategori** — menjangkau judul, ringkasan, teknologi, fitur, dan isi studi kasus.
+- **Pencarian proyek real-time + filter kategori** di dalam folder — menjangkau judul, ringkasan, teknologi, fitur, dan isi studi kasus.
 - Mouse follower dekoratif (glow lime + ring) yang hanya aktif di perangkat berpointer presisi.
 - Badge ketersediaan ("Open to internship & freelance") di Hero.
 - Responsif mobile-first, termasuk penanganan `prefers-reduced-motion`.
@@ -105,6 +106,10 @@ Pencarian dan filter kategori di section Projects membaca data itu secara otomat
 tidak ada daftar kata kunci terpisah yang perlu diperbarui. Kata kunci dicocokkan ke
 `title`, `category`, `role`, `year`, `summary`, `tech`, `features`, dan seluruh
 `sections` (termasuk isi studi kasus).
+
+Folder arsip dimulai dalam keadaan tertutup. Pencarian, filter, dan kartu proyek baru
+bisa diakses setelah folder dibuka; tombol **Tutup folder** mengembalikan fokus ke
+sampul. Jumlah proyek di tab folder (`// 04 PROYEK`) mengikuti panjang data.
 
 ### Mengubah CV
 
