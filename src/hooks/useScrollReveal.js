@@ -23,8 +23,26 @@ export default function useScrollReveal(enabled = true) {
             { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
         );
 
-        elements.forEach((el) => observer.observe(el));
+        const observe = (el) => {
+            if (el instanceof Element && el.matches('[data-reveal]')) {
+                observer.observe(el);
+            }
+            el.querySelectorAll?.('[data-reveal]').forEach((child) => observer.observe(child));
+        };
 
-        return () => observer.disconnect();
+        elements.forEach(observe);
+
+        // Language changes and project filters can mount new reveal elements
+        // after the initial page scan. Observe them too so they do not remain
+        // hidden until a full page refresh.
+        const mutations = new MutationObserver((records) => {
+            records.forEach((record) => record.addedNodes.forEach(observe));
+        });
+        mutations.observe(document.body, { childList: true, subtree: true });
+
+        return () => {
+            mutations.disconnect();
+            observer.disconnect();
+        };
     }, [enabled]);
 }

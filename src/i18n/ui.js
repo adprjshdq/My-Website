@@ -243,7 +243,7 @@ export const ui = {
 
         hero: {
             greeting: 'Hi, I am',
-            badge: 'Informatics Engineering Student • Universitas Perjuangan',
+            badge: 'Informatics Engineering Student • Perjuangan University',
             description:
                 'Focused on designing and building dynamic, modern, and interactive web applications with solid end-to-end engineering quality.',
             projectsCta: 'PROJECTS',
@@ -255,7 +255,7 @@ export const ui = {
             stackTech: 'React • Tailwind CSS • Laravel • MySQL',
             focusTitle: 'Web & UI Development',
             focusSubtitle: 'End-to-end Architecture & Interactive Apps',
-            backdrop: 'PORTFOLIO',
+            backdrop: 'PORTOFOLIO',
         },
 
         about: {
@@ -263,11 +263,11 @@ export const ui = {
             titleLine1: 'Adipraja - Informatics',
             titleLine2: 'Student',
             paragraphs: [
-                'I am an Informatics Engineering student at Universitas Perjuangan Tasikmalaya with a strong enthusiasm for web development. I focus on designing clean, interactive interfaces and have a deep interest in end-to-end software engineering.',
+                'I am an Informatics Engineering student at Perjuangan University Tasikmalaya with a strong enthusiasm for web development. I focus on designing clean, interactive interfaces and have a deep interest in end-to-end software engineering.',
                 'As an Informatics Engineering student currently exploring the full-stack path, I actively explore the web ecosystem. Through academic and independent projects, I am used to designing web applications from the initial concept stage to a working product.',
             ],
             campusLabel: 'CAMPUS',
-            campusValue: 'Universitas Perjuangan Tasikmalaya',
+            campusValue: 'Perjuangan University Tasikmalaya',
             focusLabel: 'FOCUS',
             focusValue: 'Fullstack Dev',
             statusLabel: 'STATUS',
@@ -376,7 +376,7 @@ export const ui = {
                 error: 'The message could not be sent. Please try again in a moment.',
                 network: 'Connection problem. Check your network and try again.',
             },
-            copyright: (year) => `© ${year} Developed by adipraja.`,
+            copyright: (year) => `© ${year} Development by adipraja.`,
             builtWith: 'Built with React + Tailwind CSS',
         },
 
