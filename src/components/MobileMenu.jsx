@@ -97,7 +97,8 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [open]);
 
-    const handleNavigate = (event, sectionId) => {
+    const handleNavigate = (event, sectionId, href) => {
+        if (!href.startsWith('#')) return;
         event.preventDefault();
         onClose();
 
@@ -166,14 +167,14 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                         {t.nav.menu}
                     </span>
                     <ul>
-                        {items.map(({ id: sectionId, label }, index) => {
+                        {items.map(({ id: sectionId, label, href }, index) => {
                             const isActive = active === sectionId;
 
                             return (
                                 <li key={sectionId}>
                                     <a
-                                        href={`#${sectionId}`}
-                                        onClick={(event) => handleNavigate(event, sectionId)}
+                                        href={href}
+                                        onClick={(event) => handleNavigate(event, sectionId, href)}
                                         aria-current={isActive ? 'location' : undefined}
                                         className="group flex items-center gap-4 border-b border-neutral-300/80 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/30 focus-visible:ring-offset-4 focus-visible:ring-offset-cream"
                                     >
@@ -204,8 +205,8 @@ export default function MobileMenu({ id, open, onClose, items, active, returnFoc
                     <LanguageToggle />
 
                     <a
-                        href="#contact"
-                        onClick={(event) => handleNavigate(event, 'contact')}
+                        href={window.location.pathname.replace(/\/$/, '') === '/certificates' ? '/#contact' : '#contact'}
+                        onClick={(event) => handleNavigate(event, 'contact', window.location.pathname.replace(/\/$/, '') === '/certificates' ? '/#contact' : '#contact')}
                         aria-current={isContact ? 'location' : undefined}
                         className={`flex items-center justify-between rounded-full bg-lime px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-black transition-colors hover:bg-lime-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 ${isContact ? 'ring-2 ring-neutral-900/30 ring-offset-2 ring-offset-cream' : ''
                             }`}

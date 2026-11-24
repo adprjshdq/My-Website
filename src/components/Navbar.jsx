@@ -11,6 +11,7 @@ const NAV_ITEMS = [
     { id: 'about', key: 'about' },
     { id: 'projects', key: 'projects' },
     { id: 'expertise', key: 'expertise' },
+    { id: 'certificates', key: 'certificates' },
     { id: 'journey', key: 'journey' },
 ];
 
@@ -19,14 +20,20 @@ export default function Navbar() {
 
     // 'contact' ikut dipantau supaya tidak ada menu yang tetap terlihat aktif
     // saat pengunjung sudah berada di area footer/kontak.
-    const active = useActiveSection([...NAV_ITEMS.map((item) => item.id), 'contact']);
+    const isCertificatesPage = window.location.pathname.replace(/\/$/, '') === '/certificates';
+    const activeSection = useActiveSection([...NAV_ITEMS.filter((item) => item.id !== 'certificates').map((item) => item.id), 'contact']);
+    const active = isCertificatesPage ? 'certificates' : activeSection;
     const isContact = active === 'contact';
 
     const [menuOpen, setMenuOpen] = useState(false);
     const toggleRef = useRef(null);
     const closeMenu = useCallback(() => setMenuOpen(false), []);
 
-    const items = NAV_ITEMS.map((item) => ({ ...item, label: t.nav[item.key] }));
+    const items = NAV_ITEMS.map((item) => ({
+        ...item,
+        label: t.nav[item.key],
+        href: item.id === 'certificates' ? '/certificates' : (isCertificatesPage ? `/#${item.id}` : `#${item.id}`),
+    }));
 
     // Tutup drawer otomatis ketika layar melebar ke ukuran desktop,
     // supaya tidak ada dua navigasi aktif sekaligus.
@@ -51,7 +58,7 @@ export default function Navbar() {
                 {/* 1. Logo & Subtitle Kiri */}
                 <div className="flex items-center gap-3">
                     <div className="flex flex-col">
-                        <a href="#" className="font-bold tracking-wider text-sm md:text-base uppercase rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-4 focus-visible:ring-offset-cream">
+                        <a href="/" className="font-bold tracking-wider text-sm md:text-base uppercase rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-4 focus-visible:ring-offset-cream">
                             ADIPRAJA
                         </a>
                         <span className="text-[10px] md:text-xs text-neutral-500 font-mono tracking-tight">
@@ -71,7 +78,7 @@ export default function Navbar() {
                         return (
                             <a
                                 key={id}
-                                href={`#${id}`}
+                                href={id === 'certificates' ? '/certificates' : (isCertificatesPage ? `/#${id}` : `#${id}`)}
                                 aria-current={isActive ? 'location' : undefined}
                                 className={`group relative rounded-sm py-1 transition-colors hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-4 focus-visible:ring-offset-cream ${isActive ? 'text-neutral-900 font-semibold' : 'text-neutral-600'
                                     }`}
@@ -92,7 +99,7 @@ export default function Navbar() {
                     <LanguageToggle />
 
                     <a
-                        href="#contact"
+                        href={isCertificatesPage ? '/#contact' : '#contact'}
                         aria-current={isContact ? 'location' : undefined}
                         className={`hidden md:flex bg-lime text-black text-xs font-medium tracking-wider px-5 py-2.5 rounded-full hover:bg-lime-deep transition items-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/50 focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${isContact ? 'ring-2 ring-neutral-900/30 ring-offset-2 ring-offset-cream' : ''
                             }`}

@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Expertise from './components/Expertise';
 import Journey from './components/Journey';
 import Contact from './components/Contact';
+import CertificatesPage from './components/CertificatesPage';
 import BackToTop from './components/BackToTop';
 import Assistant from './components/Assistant';
 import Preloader from './components/Preloader';
@@ -47,6 +48,8 @@ function App() {
         }
     }, []);
 
+    const isCertificatesPage = window.location.pathname.replace(/\/$/, '') === '/certificates';
+
     // Cegah halaman di-scroll di balik preloader
     useEffect(() => {
         document.body.style.overflow = loading ? 'hidden' : '';
@@ -64,15 +67,21 @@ function App() {
             <div
                 className={`bg-cream text-neutral-900 min-h-screen font-sans selection:bg-neutral-900 selection:text-white ${revealed ? '' : 'is-loading'}`}
             >
-                <Navbar />
-                <Hero />
-                <MarqueeSkills />
-                <About />
-                <Projects />
-                <Expertise />
-                <Journey />
-                <Contact />
-                <BackToTop />
+                {isCertificatesPage ? (
+                    <CertificatesPage />
+                ) : (
+                    <>
+                        <Navbar />
+                        <Hero />
+                        <MarqueeSkills />
+                        <About />
+                        <Projects />
+                        <Expertise />
+                        <Journey />
+                        <Contact />
+                        <BackToTop />
+                    </>
+                )}
                 <Assistant />
             </div>
             <MouseFollower enabled={!loading} />

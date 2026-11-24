@@ -12,6 +12,7 @@ export const ui = {
             about: 'TENTANG SAYA',
             projects: 'PROYEK',
             expertise: 'KEAHLIAN',
+            certificates: 'SERTIFIKAT',
             journey: 'PERJALANAN SAYA',
             contact: 'AYO BICARA',
             brandSub: 'PENGEMBANGAN WEB',
@@ -82,6 +83,16 @@ export const ui = {
                         'Memanfaatkan perangkat pendukung modern untuk kolaborasi, manajemen versi kode, dan pengujian aplikasi.',
                 },
             ],
+        },
+
+        certificates: {
+            kicker: '// VALIDASI PEMBELAJARAN',
+            titleLine1: 'Sertifikat',
+            titleLine2: ' & Pencapaian.',
+            intro: 'Kumpulan sertifikat dan pencapaian yang mendukung perjalanan saya di bidang teknologi dan pengembangan web.',
+            empty: 'Sertifikat akan ditampilkan di sini.',
+            emptyHint: 'Halaman ini siap dikembangkan. Setiap sertifikat nantinya dapat dilengkapi penerbit, tanggal, keterampilan, dan tautan verifikasi.',
+            back: 'Kembali ke portofolio',
         },
 
         projects: {
@@ -229,6 +240,7 @@ export const ui = {
             about: 'ABOUT ME',
             projects: 'PROJECTS',
             expertise: 'SKILLS',
+            certificates: 'CERTIFICATES',
             journey: 'MY JOURNEY',
             contact: "LET'S TALK",
             brandSub: 'WEB DEVELOPMENT',
@@ -299,6 +311,16 @@ export const ui = {
                         'Using modern supporting tools for collaboration, version control, and application testing.',
                 },
             ],
+        },
+
+        certificates: {
+            kicker: '// LEARNING CREDENTIALS',
+            titleLine1: 'Certificates',
+            titleLine2: ' & Achievements.',
+            intro: 'A collection of certificates and achievements that support my journey in technology and web development.',
+            empty: 'Certificates will appear here.',
+            emptyHint: 'This page is ready to grow. Each certificate can include its issuer, date, skills, and verification link.',
+            back: 'Back to portfolio',
         },
 
         projects: {
