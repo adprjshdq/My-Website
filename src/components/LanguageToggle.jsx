@@ -21,7 +21,7 @@ export default function LanguageToggle({ className = '' }) {
                 return (
                     <span key={option.code} className="inline-flex items-center gap-1">
                         {index > 0 && (
-                            <span aria-hidden="true" className="text-neutral-400">
+                            <span aria-hidden="true" className="text-fg-subtle">
                                 |
                             </span>
                         )}
@@ -30,10 +30,10 @@ export default function LanguageToggle({ className = '' }) {
                             onClick={() => setLang(option.code)}
                             aria-pressed={isActive}
                             title={option.full}
-                            className={`rounded-sm px-0.5 py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${
+                            className={`rounded-sm px-0.5 py-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${
                                 isActive
-                                    ? 'font-bold text-neutral-900'
-                                    : 'text-neutral-400 hover:text-neutral-900'
+                                    ? 'font-bold text-fg'
+                                    : 'text-fg-subtle hover:text-fg'
                             }`}
                         >
                             {option.label}

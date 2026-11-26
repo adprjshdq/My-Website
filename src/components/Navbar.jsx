@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import ScrollProgress from './ScrollProgress';
 import MobileMenu from './MobileMenu';
 import LanguageToggle from './LanguageToggle';
+import ThemeToggle from './ThemeToggle';
 import useActiveSection from '../hooks/useActiveSection';
 import { useLang } from '../i18n/useLang.js';
 
@@ -53,15 +54,15 @@ export default function Navbar() {
         <>
             <header
                 data-active={active || undefined}
-                className="w-full px-6 md:px-16 py-6 flex items-center justify-between sticky top-0 bg-cream/80 backdrop-blur-md z-50"
+                className="w-full px-6 md:px-16 py-6 flex items-center justify-between sticky top-0 bg-canvas/80 backdrop-blur-md z-50"
             >
                 {/* 1. Logo & Subtitle Kiri */}
                 <div className="flex items-center gap-3">
                     <div className="flex flex-col">
-                        <a href="/" className="font-bold tracking-wider text-sm md:text-base uppercase rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-4 focus-visible:ring-offset-cream">
+                        <a href="/" className="font-bold tracking-wider text-sm md:text-base uppercase rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-4 focus-visible:ring-offset-canvas">
                             ADIPRAJA
                         </a>
-                        <span className="text-[10px] md:text-xs text-neutral-500 font-mono tracking-tight">
+                        <span className="text-[10px] md:text-xs text-fg-subtle font-mono tracking-tight">
                             {t.nav.brandSub}
                         </span>
                     </div>
@@ -80,13 +81,13 @@ export default function Navbar() {
                                 key={id}
                                 href={id === 'certificates' ? '/certificates' : (isCertificatesPage ? `/#${id}` : `#${id}`)}
                                 aria-current={isActive ? 'location' : undefined}
-                                className={`group relative rounded-sm py-1 transition-colors hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-4 focus-visible:ring-offset-cream ${isActive ? 'text-neutral-900 font-semibold' : 'text-neutral-600'
+                                className={`group relative rounded-sm py-1 transition-colors hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-4 focus-visible:ring-offset-canvas ${isActive ? 'text-fg font-semibold' : 'text-fg-muted'
                                     }`}
                             >
                                 {label}
                                 <span
                                     aria-hidden="true"
-                                    className={`absolute -bottom-0.5 left-0 h-[2px] w-full origin-left bg-lime transition-transform duration-300 ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                                    className={`absolute -bottom-0.5 left-0 h-[2px] w-full origin-left bg-accent transition-transform duration-300 ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                                         }`}
                                 />
                             </a>
@@ -97,11 +98,12 @@ export default function Navbar() {
                 {/* 3. Tombol Kanan */}
                 <div className="flex items-center gap-3 md:gap-4">
                     <LanguageToggle />
+                    <ThemeToggle className="hidden md:inline-flex" />
 
                     <a
                         href={isCertificatesPage ? '/#contact' : '#contact'}
                         aria-current={isContact ? 'location' : undefined}
-                        className={`hidden md:flex bg-lime text-black text-xs font-medium tracking-wider px-5 py-2.5 rounded-full hover:bg-lime-deep transition items-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/50 focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${isContact ? 'ring-2 ring-neutral-900/30 ring-offset-2 ring-offset-cream' : ''
+                        className={`hidden md:flex bg-accent text-accent-ink text-xs font-medium tracking-wider px-5 py-2.5 rounded-full hover:bg-accent-strong transition items-center gap-2 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/50 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas ${isContact ? 'ring-2 ring-fg/30 ring-offset-2 ring-offset-canvas' : ''
                             }`}
                     >
                         {t.nav.contact} <span className="text-sm">→</span>
@@ -115,7 +117,7 @@ export default function Navbar() {
                         aria-controls="mobile-menu"
                         aria-haspopup="dialog"
                         aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
-                        className="md:hidden relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors before:absolute before:-inset-1 before:content-[''] hover:bg-neutral-900 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                        className="md:hidden relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-fg/15 text-fg transition-colors before:absolute before:-inset-1 before:content-[''] hover:bg-fg hover:text-canvas focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                     >
                         <span aria-hidden="true" className="flex flex-col items-end gap-[5px]">
                             <span className="block h-[1.5px] w-5 bg-current" />

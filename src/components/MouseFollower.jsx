@@ -113,15 +113,15 @@ export default function MouseFollower({ enabled = true }) {
             {/* Glow lime: mengikuti paling lambat, memberi kesan jejak. */}
             <div
                 ref={glowRef}
-                className="absolute left-0 top-0 h-64 w-64 rounded-full bg-lime/20 blur-3xl will-change-transform"
+                className="absolute left-0 top-0 h-64 w-64 rounded-full bg-accent/20 blur-3xl will-change-transform"
             />
 
             {/* Ring: mengikuti lebih cepat dan membesar di atas elemen interaktif. */}
             <div ref={ringRef} className="absolute left-0 top-0 will-change-transform">
                 <div
                     className={`h-9 w-9 rounded-full border transition-[transform,background-color,border-color] duration-300 ease-out ${ringScale} ${active
-                        ? 'border-lime bg-lime/20'
-                        : 'border-lime-deep/80'
+                        ? 'border-accent bg-accent/20'
+                        : 'border-accent/70'
                         }`}
                 />
             </div>

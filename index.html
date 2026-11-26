@@ -13,6 +13,26 @@
     <meta name="theme-color" content="#f4f3ef" />
     <link rel="canonical" href="https://adiprajashdq.vercel.app/" />
 
+    <!-- Pasang tema sebelum React/CSS sempat dilukis, supaya tidak ada kilatan putih saat pengunjung memakai mode gelap. -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('portfolio:theme');
+          var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          var theme = stored === 'dark' || stored === 'light' ? stored : system;
+          var root = document.documentElement;
+
+          root.dataset.theme = theme;
+          root.style.colorScheme = theme;
+
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute('content', theme === 'dark' ? '#0f0f0f' : '#f4f3ef');
+        } catch (e) {
+          /* Storage diblokir: biarkan tema terang bawaan. */
+        }
+      })();
+    </script>
+
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 

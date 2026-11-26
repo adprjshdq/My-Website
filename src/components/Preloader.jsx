@@ -46,24 +46,24 @@ export default function Preloader({ onReveal, onComplete }) {
 
     return (
         <div
-            className={`fixed inset-0 z-50 bg-ink text-white flex flex-col justify-between p-8 md:p-14 transition-transform duration-700 ease-in-out ${isHiding ? '-translate-y-full' : 'translate-y-0'
+            className={`fixed inset-0 z-50 bg-night text-night-fg flex flex-col justify-between p-8 md:p-14 transition-transform duration-700 ease-in-out ${isHiding ? '-translate-y-full' : 'translate-y-0'
                 }`}
         >
             {/* Baris Atas */}
-            <div className="flex justify-between items-center font-mono text-[11px] tracking-widest text-neutral-400 uppercase">
+            <div className="flex justify-between items-center font-mono text-[11px] tracking-widest text-night-muted uppercase">
                 <span>ADIPRAJA</span>
                 <span>{t.preloader.brand}</span>
             </div>
 
             {/* Bagian Tengah: Teks & Progress Bar */}
             <div className="max-w-xl w-full">
-                <span className="font-mono text-xs tracking-widest text-lime block mb-2"> {t.preloader.kicker} </span>
-                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight uppercase mb-6">{t.preloader.title}<span className="text-lime">...</span></h2>
+                <span className="font-mono text-xs tracking-widest text-accent-text block mb-2"> {t.preloader.kicker} </span>
+                <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight uppercase mb-6">{t.preloader.title}<span className="text-accent-text">...</span></h2>
 
                 {/* Garis Progress Bar */}
-                <div className="w-full h-[2px] bg-neutral-800 overflow-hidden">
+                <div className="w-full h-[2px] bg-night-line overflow-hidden">
                     <div
-                        className="h-full bg-lime transition-all duration-100 ease-out"
+                        className="h-full bg-accent transition-all duration-100 ease-out"
                         style={{ width: `${progress}%` }}
                     />
                 </div>
@@ -71,10 +71,10 @@ export default function Preloader({ onReveal, onComplete }) {
 
             {/* Baris Bawah: Tagline & Angka Persentase */}
             <div className="flex justify-between items-end">
-                <span className="font-mono text-[11px] tracking-widest text-neutral-500 uppercase">
+                <span className="font-mono text-[11px] tracking-widest text-night-muted uppercase">
                     {t.preloader.tagline}
                 </span>
-                <span className="font-mono text-3xl md:text-5xl font-bold text-lime">
+                <span className="font-mono text-3xl md:text-5xl font-bold text-accent-text">
                     {progress}%
                 </span>
             </div>

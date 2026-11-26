@@ -88,7 +88,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
             <div
                 aria-hidden="true"
                 onClick={onClose}
-                className="absolute inset-0 bg-neutral-900/60 backdrop-blur-sm animate-[fadeIn_200ms_ease-out]"
+                className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-[fadeIn_200ms_ease-out]"
             />
 
             <div
@@ -98,11 +98,11 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                 aria-labelledby={titleId}
                 aria-describedby={descId}
                 tabIndex={-1}
-                className="relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl bg-cream shadow-2xl outline-none animate-[modalIn_260ms_cubic-bezier(0.16,1,0.3,1)] md:max-h-[88vh] md:max-w-3xl md:rounded-2xl"
+                className="relative flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl bg-canvas shadow-2xl dark:bg-surface outline-none animate-[modalIn_260ms_cubic-bezier(0.16,1,0.3,1)] md:max-h-[88vh] md:max-w-3xl md:rounded-2xl"
             >
-                <div className="flex items-start justify-between gap-4 border-b border-neutral-300 px-5 py-4 md:px-8">
+                <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4 md:px-8">
                     <div className="min-w-0">
-                        <span className="block font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                        <span className="block font-mono text-[10px] uppercase tracking-widest text-fg-subtle">
                             {project.id} / {project.category} · {project.year}
                         </span>
                         <h2
@@ -117,7 +117,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                         type="button"
                         onClick={onClose}
                         aria-label={t.caseStudy.close}
-                        className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-neutral-900/15 text-neutral-900 transition-colors hover:bg-neutral-900 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                        className="mt-1 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-fg/15 text-fg transition-colors hover:bg-fg hover:text-canvas focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                     >
                         <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                             <path d="M6 6l12 12M18 6L6 18" />
@@ -130,41 +130,41 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                         <img
                             src={project.image}
                             alt={project.imageAlt}
-                            className="mt-5 w-full rounded-xl border border-neutral-300 bg-cream"
+                            className="mt-5 w-full rounded-xl border border-line bg-canvas"
                         />
                     ) : (
                         <div
                             aria-hidden="true"
-                            className="mt-5 flex aspect-[16/10] w-full flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-neutral-300 bg-cream px-6 text-center"
+                            className="mt-5 flex aspect-[16/10] w-full flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-line bg-canvas px-6 text-center"
                         >
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-fg-subtle">
                                 {t.caseStudy.previewSoon}
                             </span>
-                            <span className="max-w-[26ch] text-2xl font-extrabold uppercase leading-none tracking-tight text-neutral-900">
+                            <span className="max-w-[26ch] text-2xl font-extrabold uppercase leading-none tracking-tight text-fg">
                                 {project.title}
                             </span>
-                            <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                            <span className="font-mono text-[10px] uppercase tracking-widest text-fg-subtle">
                                 {project.tech.join(' · ')}
                             </span>
                         </div>
                     )}
 
-                    <p id={descId} className="mt-5 text-sm font-light leading-relaxed text-neutral-600 md:text-base">
+                    <p id={descId} className="mt-5 text-sm font-light leading-relaxed text-fg-muted md:text-base">
                         {project.summary}
                     </p>
 
-                    <dl className="mt-6 grid grid-cols-2 gap-4 border-y border-neutral-300 py-4 font-mono text-[11px] md:grid-cols-3">
+                    <dl className="mt-6 grid grid-cols-2 gap-4 border-y border-line py-4 font-mono text-[11px] md:grid-cols-3">
                         <div>
-                            <dt className="uppercase tracking-widest text-neutral-400">{t.caseStudy.role}</dt>
-                            <dd className="mt-1 font-sans text-sm font-semibold text-neutral-900">{project.role}</dd>
+                            <dt className="uppercase tracking-widest text-fg-subtle">{t.caseStudy.role}</dt>
+                            <dd className="mt-1 font-sans text-sm font-semibold text-fg">{project.role}</dd>
                         </div>
                         <div>
-                            <dt className="uppercase tracking-widest text-neutral-400">{t.caseStudy.year}</dt>
-                            <dd className="mt-1 font-sans text-sm font-semibold text-neutral-900">{project.year}</dd>
+                            <dt className="uppercase tracking-widest text-fg-subtle">{t.caseStudy.year}</dt>
+                            <dd className="mt-1 font-sans text-sm font-semibold text-fg">{project.year}</dd>
                         </div>
                         <div className="col-span-2 md:col-span-1">
-                            <dt className="uppercase tracking-widest text-neutral-400">{t.caseStudy.stack}</dt>
-                            <dd className="mt-1 font-sans text-sm font-semibold text-neutral-900">
+                            <dt className="uppercase tracking-widest text-fg-subtle">{t.caseStudy.stack}</dt>
+                            <dd className="mt-1 font-sans text-sm font-semibold text-fg">
                                 {project.tech.join(' · ')}
                             </dd>
                         </div>
@@ -173,10 +173,10 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                     <div className="mt-6 space-y-6">
                         {project.sections.map((section) => (
                             <div key={section.label}>
-                                <h3 className="font-mono text-[11px] uppercase tracking-widest text-neutral-500">
+                                <h3 className="font-mono text-[11px] uppercase tracking-widest text-fg-subtle">
                                     // {section.label}
                                 </h3>
-                                <p className="mt-2 text-sm font-light leading-relaxed text-neutral-700">
+                                <p className="mt-2 text-sm font-light leading-relaxed text-fg-muted">
                                     {section.body}
                                 </p>
                             </div>
@@ -184,25 +184,25 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                     </div>
 
                     <div className="mt-7">
-                        <h3 className="font-mono text-[11px] uppercase tracking-widest text-neutral-500">
+                        <h3 className="font-mono text-[11px] uppercase tracking-widest text-fg-subtle">
                             // {t.caseStudy.features}
                         </h3>
                         <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
                             {project.features.map((feature) => (
-                                <li key={feature} className="flex items-start gap-2 text-sm font-light text-neutral-700">
-                                    <span aria-hidden="true" className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-lime" />
+                                <li key={feature} className="flex items-start gap-2 text-sm font-light text-fg-muted">
+                                    <span aria-hidden="true" className="mt-1.5 block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                                     {feature}
                                 </li>
                             ))}
                         </ul>
                     </div>
 
-                    <div className="mt-8 flex flex-wrap gap-3 border-t border-neutral-300 pt-6">
+                    <div className="mt-8 flex flex-wrap gap-3 border-t border-line pt-6">
                         <a
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white transition-colors hover:bg-neutral-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                            className="inline-flex items-center gap-2 rounded-full bg-fg px-5 py-3 text-xs font-semibold uppercase tracking-wider text-canvas transition-colors hover:bg-fg/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                         >
                             GitHub <span aria-hidden="true">↗</span>
                         </a>
@@ -211,7 +211,7 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                                 href={project.live}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 rounded-full border border-neutral-900/25 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-neutral-900 transition-colors hover:bg-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream"
+                                className="inline-flex items-center gap-2 rounded-full border border-fg/25 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-fg transition-colors hover:bg-accent hover:text-accent-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas"
                             >
                                 {t.caseStudy.live} <span aria-hidden="true">↗</span>
                             </a>

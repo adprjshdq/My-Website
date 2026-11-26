@@ -1,14 +1,87 @@
 @import "tailwindcss";
 
 /* Palet & animasi.
-   Warna merek didaftarkan sebagai token supaya komponen memakai nama
-   (bg-cream, text-lime) dan bukan kode hex yang tersebar di banyak file. */
-@theme {
-  --color-cream: #f4f3ef;
-  --color-sand: #eae8e1;
-  --color-lime: #bef264;
-  --color-lime-deep: #accb52;
-  --color-ink: #141414;
+  Warna memakai token semantik (canvas, surface, fg, line, ...) yang nilainya
+  diganti saat <html data-theme="dark">. Dengan begitu komponen cukup memakai
+  bg-canvas / text-fg dan tidak perlu menulis dark: di setiap elemen.
+*/
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  color-scheme: light;
+
+  --canvas: #f4f3ef;
+  --surface: #ffffff;
+  --surface-muted: #eae8e1;
+  --fg: #141414;
+  --fg-muted: #525252;
+  --fg-subtle: #737373;
+  --line: #d4d4d4;
+
+  /* Permukaan yang memang selalu gelap: preloader, marquee, footer kontak. */
+  --night: #141414;
+  --night-raised: #1f1f1f;
+  --night-fg: #fafafa;
+  --night-muted: #a3a3a3;
+  --night-line: #333333;
+
+  --accent: #bef264;
+  --accent-strong: #accb52;
+  --accent-text: #bef264;
+  --accent-ink: #141414;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas: #0f0f0f;
+  --surface: #171717;
+  --surface-muted: #1f1f1f;
+  --fg: #f4f3ef;
+  --fg-muted: #b5b5b5;
+  --fg-subtle: #8f8f8f;
+  --line: #333333;
+
+  --night: #1a1a1a;
+  --night-raised: #242424;
+  --night-fg: #fafafa;
+  --night-muted: #b5b5b5;
+  --night-line: #3a3a3a;
+
+  --accent: #bef264;
+  --accent-strong: #d9ff8a;
+  --accent-text: #bef264;
+  --accent-ink: #141414;
+}
+
+/* "inline" penting: utilities harus memakai var(--canvas), bukan nilai hasil
+   build, supaya tema bisa berganti saat runtime tanpa reload. */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-line: var(--line);
+
+  --color-night: var(--night);
+  --color-night-raised: var(--night-raised);
+  --color-night-fg: var(--night-fg);
+  --color-night-muted: var(--night-muted);
+  --color-night-line: var(--night-line);
+
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-text: var(--accent-text);
+  --color-accent-ink: var(--accent-ink);
+
+  /* Alias nama lama: kelas yang belum sempat dimigrasi tetap ikut tema. */
+  --color-cream: var(--canvas);
+  --color-sand: var(--surface-muted);
+  --color-lime: var(--accent);
+  --color-lime-deep: var(--accent-strong);
+  --color-ink: var(--night);
 
   --animate-marquee: marquee 20s linear infinite;
   --animate-fade-up: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -94,11 +167,14 @@
     overflow-x: clip;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    background-color: var(--canvas);
   }
 
   body {
     overflow-x: clip;
     overscroll-behavior-x: none;
+    background-color: var(--canvas);
+    color: var(--fg);
   }
 
   /* Jaring pengaman: tidak ada gambar yang boleh melebar melewati layar */

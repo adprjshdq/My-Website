@@ -25,6 +25,12 @@ export const ui = {
             language: 'Pilih bahasa',
         },
 
+        theme: {
+            label: 'Mode gelap',
+            toDark: 'Aktifkan mode gelap',
+            toLight: 'Aktifkan mode terang',
+        },
+
         hero: {
             greeting: 'Hai, saya',
             badge: 'Mahasiswa Teknik Informatika • Universitas Perjuangan',
@@ -251,6 +257,12 @@ export const ui = {
             openMenu: 'Open menu',
             closeMenu: 'Close menu',
             language: 'Select language',
+        },
+
+        theme: {
+            label: 'Dark mode',
+            toDark: 'Switch to dark mode',
+            toLight: 'Switch to light mode',
         },
 
         hero: {

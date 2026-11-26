@@ -6,10 +6,10 @@ const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 const ACCESS_KEY = '7e2ead95-4f52-4f31-9601-44c1be577467';
 
 const FIELD_CLASS =
-    'w-full bg-neutral-900 border border-neutral-700 rounded-xl px-4 py-3 text-base md:text-sm text-neutral-100 placeholder-neutral-500 transition focus:outline-none focus:border-lime focus:ring-2 focus:ring-lime/30';
+    'w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-base md:text-sm text-night-fg placeholder-white/40 transition focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/30';
 
 const LINK_CLASS =
-    'rounded transition hover:text-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-4 focus-visible:ring-offset-neutral-900';
+    'rounded transition hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-night';
 
 export default function Contact() {
     const { t } = useLang();
@@ -50,32 +50,32 @@ export default function Contact() {
 
     const statusColor =
         status === 'success'
-            ? 'text-lime'
+            ? 'text-accent-text'
             : status === 'error' || status === 'network'
                 ? 'text-red-300'
-                : 'text-neutral-400';
+                : 'text-night-muted';
 
     return (
-        <footer id="contact" className="bg-neutral-900 text-neutral-100 pt-16 md:pt-24 pb-12 px-6 md:px-16 border-t border-neutral-800">
+        <footer id="contact" className="bg-night text-night-fg pt-16 md:pt-24 pb-12 px-6 md:px-16 border-t border-night-line">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
 
                 {/* Kolom Kiri: Informasi Kontak & Sosial Media */}
                 <div data-reveal className="flex flex-col justify-between space-y-10">
                     <div>
-                        <span className="text-xs font-mono tracking-widest text-neutral-400 uppercase">
+                        <span className="text-xs font-mono tracking-widest text-night-muted uppercase">
                             {t.contact.kicker}
                         </span>
                         <h2 className="text-4xl md:text-5xl font-extrabold uppercase tracking-tight mt-3 mb-6">
-                            {t.contact.titleLine1} <span className='block text-lime text-4xl md:text-5xl font-extrabold uppercase tracking-tight mt-3 mb-6'>{t.contact.titleLine2}</span>
+                            {t.contact.titleLine1} <span className='block text-accent-text text-4xl md:text-5xl font-extrabold uppercase tracking-tight mt-3 mb-6'>{t.contact.titleLine2}</span>
                         </h2>
-                        <p className="text-neutral-400 text-base font-light max-w-md leading-relaxed">
+                        <p className="text-night-muted text-base font-light max-w-md leading-relaxed">
                             {t.contact.intro}
                         </p>
                     </div>
 
                     <div className="space-y-6">
                         <div>
-                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">{t.contact.emailLabel}</span>
+                            <span className="text-xs font-mono text-night-muted uppercase block mb-1">{t.contact.emailLabel}</span>
                             <a
                                 href="mailto:shidqiadipraja@gmail.com"
                                 className={`${LINK_CLASS} text-xl md:text-2xl font-semibold underline underline-offset-4`}
@@ -85,8 +85,8 @@ export default function Contact() {
                         </div>
 
                         <div>
-                            <span className="text-xs font-mono text-neutral-500 uppercase block mb-1">{t.contact.locationLabel}</span>
-                            <p className="text-lg font-light text-neutral-300">
+                            <span className="text-xs font-mono text-night-muted uppercase block mb-1">{t.contact.locationLabel}</span>
+                            <p className="text-lg font-light text-night-muted">
                                 {t.contact.locationValue}
                             </p>
                         </div>
@@ -128,10 +128,10 @@ export default function Contact() {
                 </div>
 
                 {/* Kolom Kanan: Form Kirim Pesan */}
-                <div data-reveal style={{ '--reveal-delay': '120ms' }} className="bg-neutral-800/50 p-8 rounded-2xl border border-neutral-800">
+                <div data-reveal style={{ '--reveal-delay': '120ms' }} className="bg-white/5 p-8 rounded-2xl border border-white/10">
                     <form onSubmit={onSubmit} aria-busy={sending} className="space-y-5">
                         <div>
-                            <label htmlFor="contact-name" className="block text-xs font-mono text-neutral-400 uppercase mb-2">
+                            <label htmlFor="contact-name" className="block text-xs font-mono text-night-muted uppercase mb-2">
                                 {t.contact.nameLabel}
                             </label>
                             <input
@@ -146,7 +146,7 @@ export default function Contact() {
                         </div>
 
                         <div>
-                            <label htmlFor="contact-email" className="block text-xs font-mono text-neutral-400 uppercase mb-2">
+                            <label htmlFor="contact-email" className="block text-xs font-mono text-night-muted uppercase mb-2">
                                 {t.contact.emailFieldLabel}
                             </label>
                             <input
@@ -161,7 +161,7 @@ export default function Contact() {
                         </div>
 
                         <div>
-                            <label htmlFor="contact-message" className="block text-xs font-mono text-neutral-400 uppercase mb-2">
+                            <label htmlFor="contact-message" className="block text-xs font-mono text-night-muted uppercase mb-2">
                                 {t.contact.messageLabel}
                             </label>
                             <textarea
@@ -187,7 +187,7 @@ export default function Contact() {
                         <button
                             type="submit"
                             disabled={sending}
-                            className="w-full bg-lime text-neutral-900 font-semibold text-xs tracking-wider uppercase py-3.5 rounded-xl transition hover:bg-lime-deep cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900 disabled:cursor-not-allowed disabled:opacity-60"
+                            className="w-full bg-accent text-accent-ink font-semibold text-xs tracking-wider uppercase py-3.5 rounded-xl transition hover:bg-accent-strong cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-night disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             {sending ? (
                                 t.contact.sending
@@ -215,7 +215,7 @@ export default function Contact() {
             </div>
 
             {/* Hak Cipta / Copyright Bawah */}
-            <div className="max-w-7xl mx-auto pt-8 border-t border-neutral-800 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-neutral-500 gap-4">
+            <div className="max-w-7xl mx-auto pt-8 border-t border-night-line flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-night-muted gap-4">
                 <p>{t.contact.copyright(new Date().getFullYear())}</p>
                 <p>{t.contact.builtWith}</p>
             </div>

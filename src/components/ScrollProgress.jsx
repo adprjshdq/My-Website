@@ -35,8 +35,8 @@ export default function ScrollProgress() {
     }, []);
 
     return (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-neutral-900/[0.07]">
-            <div ref={barRef} className="h-full w-full origin-left scale-x-0 bg-neutral-900"/>
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-0 h-[2px] bg-fg/[0.07]">
+            <div ref={barRef} className="h-full w-full origin-left scale-x-0 bg-fg"/>
         </div>
     );
 }

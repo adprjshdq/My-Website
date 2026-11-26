@@ -6,7 +6,7 @@ const MAX_HISTORY = 10;
 const REQUEST_TIMEOUT_MS = 30000;
 
 const FOCUS_RING =
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream';
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas';
 
 function prefersReducedMotion() {
     return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -204,7 +204,7 @@ export default function Assistant() {
                 aria-controls="assistant-panel"
                 aria-label={t.assistant.launcherAria}
                 inert={launcherHidden}
-                className={`fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 items-center justify-center gap-2 rounded-full bg-neutral-900 text-cream shadow-lg ring-1 ring-cream/25 transition-all duration-300 hover:bg-lime hover:text-neutral-900 motion-reduce:transition-none sm:w-auto sm:px-4 md:bottom-8 md:right-8 ${FOCUS_RING} ${launcherHidden ? 'pointer-events-none translate-y-3 opacity-0' : 'translate-y-0 opacity-100'
+                className={`fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 items-center justify-center gap-2 rounded-full bg-fg text-canvas shadow-lg ring-1 ring-canvas/25 transition-all duration-300 hover:bg-accent hover:text-accent-ink motion-reduce:transition-none sm:w-auto sm:px-4 md:bottom-8 md:right-8 ${FOCUS_RING} ${launcherHidden ? 'pointer-events-none translate-y-3 opacity-0' : 'translate-y-0 opacity-100'
                     }`}
             >
                 <svg
@@ -232,17 +232,17 @@ export default function Assistant() {
                     role="dialog"
                     aria-labelledby="assistant-title"
                     onKeyDown={onPanelKeyDown}
-                    className="fixed bottom-4 right-4 z-50 flex h-[min(78dvh,620px)] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-neutral-300 bg-cream shadow-[0_24px_60px_-20px_rgba(20,20,20,0.45)] sm:right-6 md:bottom-8 md:right-8"
+                    className="fixed bottom-4 right-4 z-50 flex h-[min(78dvh,620px)] w-[calc(100vw-2rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-line bg-canvas shadow-[0_24px_60px_-20px_rgba(20,20,20,0.45)] dark:bg-surface dark:shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] sm:right-6 md:bottom-8 md:right-8"
                 >
-                    <div className="flex items-start justify-between gap-3 bg-neutral-900 px-4 py-3.5 text-neutral-100">
+                    <div className="flex items-start justify-between gap-3 bg-night px-4 py-3.5 text-night-fg">
                         <div className="min-w-0">
-                            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-lime">
+                            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent-text">
                                 {t.assistant.kicker}
                             </p>
                             <h2 id="assistant-title" className="mt-0.5 text-sm font-semibold tracking-tight">
                                 {t.assistant.title}
                             </h2>
-                            <p className="mt-0.5 text-[11px] text-neutral-400">
+                            <p className="mt-0.5 text-[11px] text-night-muted">
                                 {t.assistant.subtitle}
                             </p>
                         </div>
@@ -252,7 +252,7 @@ export default function Assistant() {
                                 <button
                                     type="button"
                                     onClick={resetConversation}
-                                    className="rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-neutral-400 transition hover:text-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
+                                    className="rounded-full px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-night-muted transition hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-night"
                                 >
                                     {t.assistant.newChat}
                                 </button>
@@ -261,7 +261,7 @@ export default function Assistant() {
                                 type="button"
                                 onClick={closePanel}
                                 aria-label={t.assistant.close}
-                                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-neutral-400 transition hover:bg-neutral-800 hover:text-lime focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
+                                className="inline-flex h-8 w-8 items-center justify-center rounded-full text-night-muted transition hover:bg-white/10 hover:text-accent-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-night"
                             >
                                 <svg
                                     aria-hidden="true"
@@ -283,14 +283,14 @@ export default function Assistant() {
                         aria-live="polite"
                         aria-relevant="additions text"
                         aria-busy={pending}
-                        className="flex-1 space-y-3 overflow-y-auto bg-cream px-4 py-4"
+                        className="flex-1 space-y-3 overflow-y-auto bg-canvas px-4 py-4"
                     >
                         {messages.length === 0 && (
                             <div className="space-y-3">
-                                <p className="text-sm leading-relaxed text-neutral-700">
+                                <p className="text-sm leading-relaxed text-fg-muted">
                                     {t.assistant.welcome}
                                 </p>
-                                <p className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                                <p className="font-mono text-[10px] uppercase tracking-widest text-fg-subtle">
                                     {t.assistant.tryAsking}
                                 </p>
                                 <div className="flex flex-wrap gap-2">
@@ -300,7 +300,7 @@ export default function Assistant() {
                                             type="button"
                                             onClick={() => sendMessage(suggestion)}
                                             disabled={pending}
-                                            className="rounded-full border border-neutral-300 bg-sand px-3 py-1.5 text-left text-xs leading-snug text-neutral-700 transition hover:border-neutral-900 hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream disabled:cursor-not-allowed disabled:opacity-50"
+                                            className="rounded-full border border-line bg-surface-muted px-3 py-1.5 text-left text-xs leading-snug text-fg-muted transition hover:border-fg hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-2 focus-visible:ring-offset-canvas disabled:cursor-not-allowed disabled:opacity-50"
                                         >
                                             {suggestion}
                                         </button>
@@ -319,8 +319,8 @@ export default function Assistant() {
                                 >
                                     <p
                                         className={`max-w-[88%] whitespace-pre-wrap break-words rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${isUser
-                                            ? 'rounded-br-md bg-neutral-900 text-cream'
-                                            : 'rounded-bl-md border border-neutral-300 bg-white text-neutral-800'
+                                            ? 'rounded-br-md bg-fg text-canvas'
+                                            : 'rounded-bl-md border border-line bg-surface text-fg'
                                             }`}
                                     >
                                         {!isUser && <span className="sr-only">{t.assistant.assistantPrefix}</span>}
@@ -332,13 +332,13 @@ export default function Assistant() {
 
                         {pending && (
                             <div className="flex justify-start">
-                                <span className="inline-flex items-center gap-1.5 rounded-2xl rounded-bl-md border border-neutral-300 bg-white px-3.5 py-2.5">
+                                <span className="inline-flex items-center gap-1.5 rounded-2xl rounded-bl-md border border-line bg-surface px-3.5 py-2.5">
                                     <span className="sr-only">{t.assistant.typing}</span>
                                     {[0, 1, 2].map((dot) => (
                                         <span
                                             key={dot}
                                             aria-hidden="true"
-                                            className="h-1.5 w-1.5 rounded-full bg-neutral-400 motion-safe:animate-pulse"
+                                            className="h-1.5 w-1.5 rounded-full bg-fg-subtle motion-safe:animate-pulse"
                                             style={{ animationDelay: `${dot * 150}ms` }}
                                         />
                                     ))}
@@ -349,7 +349,7 @@ export default function Assistant() {
                         {error && (
                             <p
                                 role="alert"
-                                className="rounded-xl border border-red-300 bg-red-50 px-3 py-2 text-xs leading-relaxed text-red-800"
+                                className="rounded-xl border border-red-300 bg-red-50 px-3 py-2 text-xs leading-relaxed text-red-800 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-200"
                             >
                                 {error}
                             </p>
@@ -358,7 +358,7 @@ export default function Assistant() {
                         <div ref={endRef} />
                     </div>
 
-                    <form onSubmit={onSubmit} className="border-t border-neutral-300 bg-sand p-3">
+                    <form onSubmit={onSubmit} className="border-t border-line bg-surface-muted p-3">
                         <div className="flex items-center gap-2">
                             <label htmlFor="assistant-input" className="sr-only">
                                 {t.assistant.inputLabel}
@@ -372,13 +372,13 @@ export default function Assistant() {
                                 maxLength={MAX_INPUT}
                                 autoComplete="off"
                                 placeholder={t.assistant.inputPlaceholder}
-                                className="min-w-0 flex-1 rounded-xl border border-neutral-300 bg-cream px-3.5 py-2.5 text-sm text-neutral-900 placeholder-neutral-500 transition focus:border-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900/20"
+                                className="min-w-0 flex-1 rounded-xl border border-line bg-canvas px-3.5 py-2.5 text-sm text-fg placeholder-fg-subtle transition focus:border-fg focus:outline-none focus:ring-2 focus:ring-fg/20"
                             />
                             <button
                                 type="submit"
                                 disabled={!input.trim() || pending}
                                 aria-label={t.assistant.send}
-                                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-neutral-900 text-cream transition hover:bg-lime hover:text-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900/40 focus-visible:ring-offset-2 focus-visible:ring-offset-sand disabled:cursor-not-allowed disabled:opacity-40"
+                                className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-fg text-canvas transition hover:bg-accent hover:text-accent-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fg/40 focus-visible:ring-offset-2 focus-visible:ring-offset-surface-muted disabled:cursor-not-allowed disabled:opacity-40"
                             >
                                 <svg
                                     aria-hidden="true"
@@ -394,7 +394,7 @@ export default function Assistant() {
                                 </svg>
                             </button>
                         </div>
-                        <p className="mt-2 text-[10px] leading-relaxed text-neutral-500">
+                        <p className="mt-2 text-[10px] leading-relaxed text-fg-subtle">
                             {t.assistant.disclaimer}
                         </p>
                     </form>
