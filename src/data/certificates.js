@@ -2,10 +2,12 @@
 // Gambar di src/assets perlu di-import seperti di bawah agar ikut diproses Vite.
 import webdev from '../assets/projects/achieve-webdev.webp';
 import javascriptIntermediate from '../assets/projects/achieve-jsI.webp.webp';
-import sqlIntroduction from '../assets/projects/achieve-introductionSQL.webp.webp';
 import pythonIntroduction from '../assets/projects/achieve-introductionpy.webp.webp';
-import introductionJavascript from '../assets/projects/achieve-introductionjs.webp.webp';
 import typeScript from '../assets/projects/achieve-ts.webp.webp';
+import frontend from '../assets/projects/fe-angular.webp';
+import html from '../assets/projects/html-introduction.webp';
+import sqlintermediate from '../assets/projects/sql-intermediate.webp';
+import cssintroduction from '../assets/projects/introduction-css.webp';
 
 export const certificates = [
     {
@@ -16,6 +18,15 @@ export const certificates = [
         image: webdev,
         credentialUrl: '',
         skills: ['HTML', 'CSS', 'JavaScript'],
+    },
+    {
+        id: 'Front-end',
+        title: 'Front-end for Beginners',
+        issuer: 'SOLOLEARN',
+        date: '2026',
+        image: frontend,
+        credentialUrl: '',
+        skills: ['TypeScript'],
     },
     {
         id: 'TypeScript for Beginners',
@@ -30,26 +41,35 @@ export const certificates = [
         id: 'JavaScript Menengah',
         title: 'JavaScript Intermediate',
         issuer: 'SOLOLEARN',
-        date: '2025',
+        date: '2026',
         image: javascriptIntermediate,
         credentialUrl: '',
         skills: ['JavaScript'],
     },
     {
-        id: 'Pengenalan JavaScript',
-        title: 'Introduction JavaScript',
+        id: 'Pengenalan CSS',
+        title: 'Introduction CSS',
         issuer: 'SOLOLEARN',
         date: '2026',
-        image: introductionJavascript,
+        image: cssintroduction,
         credentialUrl: '',
-        skills: ['JavaScript'],
+        skills: ['CSS'],
     },
     {
-        id: 'Pengenalan SQL',
-        title: 'Introduction SQL',
+        id: 'Pengenalan HTMLD',
+        title: 'Introduction HTML',
         issuer: 'SOLOLEARN',
         date: '2026',
-        image: sqlIntroduction,
+        image: html,
+        credentialUrl: '',
+        skills: ['HTML'],
+    },
+    {
+        id: 'SQl Menengah',
+        title: 'SQL Intermediate',
+        issuer: 'SOLOLEARN',
+        date: '2026',
+        image: sqlintermediate,
         credentialUrl: '',
         skills: ['Database SQL'],
     },
