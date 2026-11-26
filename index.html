@@ -18,8 +18,7 @@
       (function () {
         try {
           var stored = localStorage.getItem('portfolio:theme');
-          var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          var theme = stored === 'dark' || stored === 'light' ? stored : system;
+          var theme = stored === 'dark' ? 'dark' : 'light';
           var root = document.documentElement;
 
           root.dataset.theme = theme;

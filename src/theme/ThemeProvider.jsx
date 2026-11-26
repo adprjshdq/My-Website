@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ThemeContext } from './useTheme.js';
 
-/* Dua mode saja: terang dan gelap. Kunjungan pertama mengikuti preferensi OS,
-   lalu pilihan pengunjung disimpan permanen di localStorage. */
+/* Dua mode saja: terang dan gelap. Default selalu terang; setelah pengunjung
+   menekan toggle, pilihannya disimpan permanen di localStorage. */
 const STORAGE_KEY = 'portfolio:theme';
 
 const THEME_COLOR = {
