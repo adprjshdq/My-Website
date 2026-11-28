@@ -182,4 +182,52 @@ export const projectFacts = [
             'Kasir pembayaran tunai',
         ],
     },
+    {
+        id: '06',
+        slug: 'ticket-travel',
+        title: 'NusaExplore',
+        categoryKey: 'web-app',
+        category: 'Aplikasi Web',
+        year: '2026',
+        role: 'Fullstack Developer',
+        summary: 'Pemesanan paket wisata masih lewat DM/WhatsApp: informasi tersebar, harga tidak transparan, bukti bayar manual, dan status pesanan tidak jelas. NusaExplore menyatukan semuanya dalam satu alur digital, dari eksplorasi destinasi hingga e-ticket.',
+        tech: ['Next.js', 'TypeScript', 'Prisma', 'Tailwind CSS'],
+        imageAlt: 'Tangkapan layar NusaExplore: hero "Exploring Nature\'s Beauty, at Labuan Bajo", paket wisata unggulan, dan tampilan mobile dengan peta serta daftar destinasi.',
+        imageNote: null,
+        github: 'https://github.com/adprjshdq/NusaExplore',
+        live: null,
+        sections: [
+            {
+                label: 'Latar belakang',
+                body: 'Pemesanan paket wisata kepulauan masih banyak dilakukan lewat DM Instagram dan WhatsApp: informasi tersebar, harga total baru diketahui setelah chat, bukti transfer dikirim manual, dan status pesanan tidak transparan. Di sisi lain, admin merekap pesanan di spreadsheet dan mengubah konten landing page masih butuh bantuan developer. NusaExplore dibuat untuk menyatukan proses itu ke dalam satu alur digital: traveler menemukan paket, melihat harga secara transparan, memesan, mengunggah bukti bayar, lalu menerima e-ticket; sementara admin dapat memverifikasi pembayaran, mengelola destinasi, dan mengatur konten dari satu dashboard. Intinya: mengurangi bolak-balik chat dan membuat status pemesanan jelas untuk traveler maupun admin.',
+            },
+            {
+                label: 'Yang saya kerjakan',
+                bullets: [
+                    'Merancang alur pengguna, model data (User, Destination, Booking, Wishlist, SiteSetting), dan status booking.',
+                    'Membangun API serta autentikasi: JWT di cookie httpOnly, bcrypt, role guard, dan ownership check.',
+                    'Mengembangkan landing page, pencarian/filter, peta Leaflet, modal booking, dan upload bukti pembayaran.',
+                    'Membangun dashboard customer (pesanan, wishlist, profil, e-ticket) dan admin studio (statistik, verifikasi, CRUD destinasi, CMS, pengguna).',
+                    'Menangani validasi, keamanan upload, responsive layout, empty state, dan QA alur end-to-end.',
+                ],
+            },
+            {
+                label: 'Tantangan & solusi',
+                bullets: [
+                    'Harga bisa dimanipulasi dari client → server menghitung ulang harga dari database.',
+                    'Customer bisa mengubah status sendiri → aturan transisi status + cek role dan kepemilikan data.',
+                    'Upload tanpa cloud storage → whitelist ekstensi/folder, batas ukuran, dan sanitasi path.',
+                    'Login di tengah alur booking → konteks booking dipertahankan setelah autentikasi.',
+                    'Leaflet error saat SSR → komponen peta dimuat dinamis tanpa SSR.',
+                    'Tabel dan modal berat di mobile → card list dan bottom-sheet.',
+                ],
+            },
+        ],
+        features: [
+            'Discovery: pencarian, filter, galeri, dan peta interaktif.',
+            'Booking: pilih tanggal/pax, total otomatis, upload bukti, kode booking.',
+            'Customer: status pesanan, wishlist, profil, dan e-ticket PDF.',
+            'Admin: verifikasi pembayaran, CRUD destinasi, CMS landing page, dan manajemen pengguna.',
+        ],
+    },
 ];

@@ -176,9 +176,27 @@ export default function CaseStudyModal({ project, onClose, returnFocusRef }) {
                                 <h3 className="font-mono text-[11px] uppercase tracking-widest text-fg-subtle">
                                     // {section.label}
                                 </h3>
-                                <p className="mt-2 text-sm font-light leading-relaxed text-fg-muted">
-                                    {section.body}
-                                </p>
+                                {section.body && (
+                                    <p className="mt-2 text-sm font-light leading-relaxed text-fg-muted">
+                                        {section.body}
+                                    </p>
+                                )}
+                                {section.bullets && (
+                                    <ul className="mt-2 space-y-1.5">
+                                        {section.bullets.map((item) => (
+                                            <li
+                                                key={item}
+                                                className="flex items-start gap-2 text-sm font-light leading-relaxed text-fg-muted"
+                                            >
+                                                <span
+                                                    aria-hidden="true"
+                                                    className="mt-2 block h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                                                />
+                                                {item}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                             </div>
                         ))}
                     </div>

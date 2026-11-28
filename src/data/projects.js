@@ -4,7 +4,7 @@ import { projectFactsEn } from './projectsCore.en.js';
 /* Halaman Projects sengaja dibatasi agar tetap ringkas. Untuk menampilkan proyek
    lain, ubah `featured: false` di projectsCore.js / projectsCore.en.js atau
    urutan datanya. */
-const MAX_PROJECTS = 4;
+const MAX_PROJECTS = 5;
 
 /* Pratinjau diambil otomatis dari src/assets/projects/<slug>.<ext>, jadi proyek
    baru cukup menaruh gambar dengan nama sesuai slug tanpa mengubah file ini. */

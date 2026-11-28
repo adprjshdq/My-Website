@@ -194,4 +194,54 @@ export const projectFactsEn = [
             'Cash payment checkout',
         ],
     },
+    {
+        id: '06',
+        slug: 'ticket-travel',
+        title: 'NusaExplore',
+        categoryKey: 'web-app',
+        category: 'Web Application',
+        year: '2026',
+        role: 'Fullstack Developer',
+        summary:
+            'Travel packages are still booked through DMs and WhatsApp: scattered information, unclear pricing, manual payment proofs, and opaque order status. NusaExplore brings it all into one digital flow, from destination discovery to e-ticket.',
+        tech: ['Next.js', 'TypeScript', 'Prisma', 'Tailwind CSS'],
+        imageAlt:
+            'Screenshot of NusaExplore: the "Exploring Nature\'s Beauty, at Labuan Bajo" hero, featured trips, and mobile views with a map and destination list.',
+        imageNote: null,
+        github: 'https://github.com/adprjshdq/NusaExplore',
+        live: null,
+        sections: [
+            {
+                label: 'Background',
+                body: 'Island travel packages are still largely booked through Instagram DMs and WhatsApp: information is scattered, the total price only appears after chatting, transfer receipts are sent manually, and order status is opaque. Meanwhile, admins recap orders in spreadsheets and still need a developer to change landing page content. NusaExplore unifies that process into one digital flow: travelers find a package, see transparent pricing, book, upload payment proof, and receive an e-ticket, while admins verify payments, manage destinations, and edit content from a single dashboard. In short: fewer back-and-forth chats and clear booking status for both travelers and admins.',
+            },
+            {
+                label: 'What I did',
+                bullets: [
+                    'Designed the user flow, data model (User, Destination, Booking, Wishlist, SiteSetting), and booking statuses.',
+                    'Built the API and authentication: JWT in an httpOnly cookie, bcrypt, role guards, and ownership checks.',
+                    'Developed the landing page, search/filters, Leaflet map, booking modal, and payment proof upload.',
+                    'Built the customer dashboard (orders, wishlist, profile, e-ticket) and admin studio (stats, verification, destination CRUD, CMS, users).',
+                    'Handled validation, upload security, responsive layout, empty states, and end-to-end flow QA.',
+                ],
+            },
+            {
+                label: 'Challenges & solutions',
+                bullets: [
+                    'Prices can be manipulated from the client → the server recalculates the price from the database.',
+                    'Customers could change status themselves → explicit status transitions plus role and ownership checks.',
+                    'Uploads without cloud storage → extension/folder allowlist, size limits, and path sanitization.',
+                    'Login in the middle of booking → booking context is preserved after authentication.',
+                    'Leaflet errors during SSR → the map component is loaded dynamically without SSR.',
+                    'Heavy tables and modals on mobile → card lists and bottom sheets.',
+                ],
+            },
+        ],
+        features: [
+            'Discovery: search, filters, gallery, and interactive map.',
+            'Booking: date/pax selection, automatic total, proof upload, booking code.',
+            'Customer: order status, wishlist, profile, and PDF e-ticket.',
+            'Admin: payment verification, destination CRUD, landing page CMS, and user management.',
+        ],
+    },
 ];

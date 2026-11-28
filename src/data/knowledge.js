@@ -132,7 +132,15 @@ export function buildKnowledgeBase(lang = 'en') {
         lines.push(`${c.projectSummary}: ${project.summary}`);
         lines.push(`${c.projectTech}: ${project.tech.join(', ')}`);
         for (const section of project.sections) {
-            lines.push(`${section.label}: ${section.body}`);
+            if (section.body) {
+                lines.push(`${section.label}: ${section.body}`);
+            }
+            if (section.bullets) {
+                lines.push(`${section.label}:`);
+                for (const item of section.bullets) {
+                    lines.push(`- ${item}`);
+                }
+            }
         }
         lines.push(`${c.projectFeatures}: ${project.features.join(', ')}`);
         lines.push(`${c.projectSource}: ${project.github}`);
