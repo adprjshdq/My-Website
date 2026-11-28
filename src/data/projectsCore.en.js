@@ -93,7 +93,7 @@ export const projectFactsEn = [
         featured: false,
         imageNote: null,
         github: 'https://github.com/adprjshdq/My-Website.git',
-        live: 'https://adiprajashdq.vercel.app/',
+        live: 'https://adprjshdq.vercel.app/',
         sections: [
             {
                 label: 'Background',

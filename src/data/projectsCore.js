@@ -85,7 +85,7 @@ export const projectFacts = [
         featured: false,
         imageNote: null,
         github: 'https://github.com/adprjshdq/My-Website.git',
-        live: 'https://adiprajashdq.vercel.app/',
+        live: 'https://adprjshdq.vercel.app/',
         sections: [
             {
                 label: 'Latar belakang',

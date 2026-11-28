@@ -6,7 +6,7 @@ export const cv = {
     email: 'shidqiadipraja@gmail.com',
 
     links: [
-        { label: 'adiprajashdq.vercel.app', href: 'https://adiprajashdq.vercel.app/' },
+        { label: 'adprjshdq.vercel.app', href: 'https://adprjshdq.vercel.app/' },
         { label: 'github.com/adprjshdq', href: 'https://github.com/adprjshdq/' },
         { label: 'linkedin.com/in/adiprajashdq', href: 'https://www.linkedin.com/in/adiprajashdq/' },
     ],

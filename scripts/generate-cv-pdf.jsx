@@ -155,7 +155,7 @@ function CvDocument({ data, lang }) {
             title={`CV - ${data.name}`}
             author={data.name}
             subject="Curriculum Vitae"
-            creator="adiprajashdq.vercel.app"
+            creator="adprjshdq.vercel.app"
             language={lang}
         >
             <Page size="A4" style={s.page} wrap>
@@ -256,7 +256,7 @@ function CvDocument({ data, lang }) {
                 </View>
 
                 <View style={s.footer} fixed>
-                    <Text style={s.footerText}>Portofolio: adiprajashdq.vercel.app</Text>
+                    <Text style={s.footerText}>Portofolio: adprjshdq.vercel.app</Text>
                     <Text style={s.footerText}>{data.name}</Text>
                 </View>
             </Page>

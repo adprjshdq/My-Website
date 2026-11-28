@@ -168,7 +168,7 @@ export const ui = {
             messagePlaceholder: 'Tuliskan pesan atau detail proyek Anda...',
             submit: 'Kirim Pesan',
             sending: 'Mengirim…',
-            formSubject: 'Pesan baru dari portofolio adiprajashdq.vercel.app',
+            formSubject: 'Pesan baru dari portofolio adprjshdq.vercel.app',
             formFromName: 'Portofolio Adipraja',
             status: {
                 sending: 'Mengirim pesan…',
@@ -402,7 +402,7 @@ export const ui = {
             messagePlaceholder: 'Write your message or project details...',
             submit: 'Send Message',
             sending: 'Sending…',
-            formSubject: 'New message from the adiprajashdq.vercel.app portfolio',
+            formSubject: 'New message from the adprjshdq.vercel.app portfolio',
             formFromName: 'Adipraja Portfolio',
             status: {
                 sending: 'Sending message…',

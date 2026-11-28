@@ -202,7 +202,7 @@ export default function CvPage() {
                 </div>
 
                 <footer className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-neutral-300 pt-3 font-mono text-[6.5pt] uppercase tracking-[0.18em] text-neutral-500">
-                    <span>Portofolio: adiprajashdq.vercel.app</span>
+                    <span>Portofolio: adprjshdq.vercel.app</span>
                     <span>{data.name}</span>
                 </footer>
             </article>

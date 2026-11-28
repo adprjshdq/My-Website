@@ -116,7 +116,7 @@ public/
 
 | Item | Lokasi | Keterangan |
 |---|---|---|
-| Domain | `index.html`, `cv/index.html`, `public/robots.txt`, `public/sitemap.xml`, `public/og-image.png` | Domain produksi saat ini `https://adiprajashdq.vercel.app`. Bila domain berubah, ganti di kelima tempat itu. |
+| Domain | `index.html`, `cv/index.html`, `public/robots.txt`, `public/sitemap.xml`, `public/og-image.png` | Domain produksi saat ini `https://adprjshdq.vercel.app`. Bila domain berubah, ganti di kelima tempat itu. |
 | Pratinjau proyek | `src/assets/projects/<slug>.webp` | Ukuran ideal 1440×900 (rasio 16:10). Nama file harus sama dengan `slug` proyek. |
 | CV | `src/data/cv.js` + `scripts/generate-cv-pdf.jsx` | Isi CV diubah di `cv.js` (objek `cv` untuk bahasa Indonesia, `cvEn` untuk Inggris); halaman `/cv/` dan kedua PDF di `public/cv/` berasal dari data itu. PDF dibuat otomatis saat `npm run dev` / `npm run build`. |
 | Preview sosial | `public/og-image.png` | Ukuran 1200×630. Ganti bila nama/role berubah. |

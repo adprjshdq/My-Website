@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://adiprajashdq.vercel.app/sitemap.xml
+Sitemap: https://adprjshdq.vercel.app/sitemap.xml
